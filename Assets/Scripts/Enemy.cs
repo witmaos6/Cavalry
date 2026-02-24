@@ -157,4 +157,9 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SetTargetTransform(Transform newTargetTransform)
+    {
+        player = newTargetTransform;
+    }
 }

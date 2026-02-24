@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
     public float dashCooldown = 1.0f;
     private bool canDash = true;
 
+    [Header("Dummy Settings")]
+    public float dummyCooldown = 1.0f;
+    public GameObject dummy;
+    private bool canDummy = true;
+
     [Header("Stat Settings")]
     public float hp = 10;
     private bool isDead = false;
@@ -64,6 +69,8 @@ public class PlayerController : MonoBehaviour
             Attack();
 
             Dash();
+
+            Dummy();
         }
     }
 
@@ -160,6 +167,26 @@ public class PlayerController : MonoBehaviour
         canDash = true;
 
         rb.linearDamping = originDamping;
+    }
+
+    void Dummy()
+    {
+        if (!canDummy)
+            return;
+
+        if(Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            Instantiate(dummy, pointer.transform.position, pointer.transform.rotation);
+
+            StartCoroutine(DummyCoolDown());
+        }
+    }
+
+    IEnumerator DummyCoolDown()
+    {
+        canDummy = false;
+        yield return new WaitForSeconds(dummyCooldown);
+        canDummy = true;
     }
 
     public void TakeDamage(float damage)
