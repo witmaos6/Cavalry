@@ -1351,7 +1351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0a5fb00ee57d1f45a513583107b2402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rjsgml_FollowPlayer
-  player: {fileID: 0}
+  player: {fileID: 879277745}
   offSet: {x: 0, y: 0, z: -0.1}
 --- !u!1 &694658386
 GameObject:
@@ -1364,6 +1364,7 @@ GameObject:
   - component: {fileID: 694658389}
   - component: {fileID: 694658388}
   - component: {fileID: 694658387}
+  - component: {fileID: 694658390}
   m_Layer: 0
   m_Name: Left
   m_TagString: Untagged
@@ -1464,7 +1465,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1491,6 +1492,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1267571297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &694658390
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 694658386}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &763594380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,6 +1530,7 @@ GameObject:
   - component: {fileID: 763594383}
   - component: {fileID: 763594382}
   - component: {fileID: 763594381}
+  - component: {fileID: 763594384}
   m_Layer: 0
   m_Name: Top
   m_TagString: Untagged
@@ -1602,7 +1631,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1629,6 +1658,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1267571297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!50 &763594384
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763594380}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1711,12 +1767,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rjsgml_PlayerController
   moveSpeed: 10
-  xRange: 24
-  yRange: 24
   arrowPrefab: {fileID: 3756822853310665861, guid: 51e051e9120857745a6bd8175867271c, type: 3}
   firePoint: {fileID: 118166892}
   pointer: {fileID: 1400752782}
   fireRate: 1
+  dashAmount: 10
+  dashCooldown: 1
   hp: 10
   hpSlider: {fileID: 299081185}
 --- !u!61 &879277747
@@ -1749,7 +1805,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -1854,7 +1910,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 1
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -1867,7 +1923,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &882459646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2429,6 +2485,7 @@ GameObject:
   - component: {fileID: 1101937700}
   - component: {fileID: 1101937699}
   - component: {fileID: 1101937698}
+  - component: {fileID: 1101937701}
   m_Layer: 0
   m_Name: Bottom
   m_TagString: Untagged
@@ -2529,7 +2586,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2556,6 +2613,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1267571297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!50 &1101937701
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101937697}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &1267571296
 GameObject:
   m_ObjectHideFlags: 0
@@ -3376,6 +3460,7 @@ GameObject:
   - component: {fileID: 2131206212}
   - component: {fileID: 2131206211}
   - component: {fileID: 2131206210}
+  - component: {fileID: 2131206213}
   m_Layer: 0
   m_Name: Right
   m_TagString: Untagged
@@ -3476,7 +3561,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -3503,6 +3588,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1267571297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &2131206213
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131206209}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

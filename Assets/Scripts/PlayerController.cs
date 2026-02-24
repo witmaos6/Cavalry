@@ -8,8 +8,6 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed = 5.0f;
-    public float xRange = 10.0f;
-    public float yRange = 10.0f;
     private Vector2 lastMoveDir;
 
     private Rigidbody2D rb;
@@ -22,6 +20,11 @@ public class PlayerController : MonoBehaviour
     private bool canAttack = true;
     private float chargeTimer = 0;
     private float maxChargeTime = 1.5f;
+
+    [Header("Dash Settings")]
+    public float dashAmount = 10.0f;
+    public float dashCooldown = 1.0f;
+    private bool canDash = true;
 
     [Header("Stat Settings")]
     public float hp = 10;
@@ -59,6 +62,8 @@ public class PlayerController : MonoBehaviour
             Movement();
 
             Attack();
+
+            Dash();
         }
     }
 
@@ -77,10 +82,7 @@ public class PlayerController : MonoBehaviour
         }
         Vector3 nextPosition = transform.position + (Vector3)(lastMoveDir * moveSpeed * Time.deltaTime);
 
-        float clampedX = Mathf.Clamp(nextPosition.x, -xRange, xRange);
-        float clampedY = Mathf.Clamp(nextPosition.y, -yRange, yRange);
-
-        transform.position = new Vector3(clampedX, clampedY, 0.0f);
+        transform.position = nextPosition;
     }
 
     void Attack()
@@ -131,6 +133,33 @@ public class PlayerController : MonoBehaviour
 
         canAttack = true;
         pointer.SetCooldown(false);
+    }
+
+    void Dash()
+    {
+        if (!canDash)
+            return;
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(transform.up * dashAmount, ForceMode2D.Impulse);
+
+            StartCoroutine(DashCooldownTimer());
+        }
+    }
+
+    IEnumerator DashCooldownTimer()
+    {
+        float originDamping = rb.linearDamping;
+        rb.linearDamping = 10.0f;
+
+        canDash = false;
+
+        yield return new WaitForSeconds(dashCooldown);
+
+        canDash = true;
+
+        rb.linearDamping = originDamping;
     }
 
     public void TakeDamage(float damage)
