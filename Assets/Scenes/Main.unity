@@ -1032,9 +1032,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Rjsgml_SpawnManager
   enemySpawnList:
   - enemyPrefab: {fileID: 1881503341338650333, guid: 895cc34e6cd84bf429da39faf8307b8b, type: 3}
-    weight: 3
+    weight: 0
   - enemyPrefab: {fileID: 1881503341338650333, guid: b455f9d206e6c6443a1a98d3c8e5d8fb, type: 3}
-    weight: 1
+    weight: 0
   - enemyPrefab: {fileID: 903235414405071913, guid: 455b06447c8ddb94ba23772a6376157c, type: 3}
     weight: 1
   spawnRate: 2
@@ -1747,7 +1747,8 @@ GameObject:
   - component: {fileID: 879277747}
   - component: {fileID: 879277746}
   - component: {fileID: 879277750}
-  m_Layer: 0
+  - component: {fileID: 879277751}
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1926,6 +1927,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &879277751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879277745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a848273d2d3a51e4ebe0f37dfef7d755, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Guard
+  shield: {fileID: 3707197127480617344, guid: 7a8f0308c7bb60840ab3dee568208b29, type: 3}
+  guardTime: 1
+  offset: 2
+  guardCoolDown: 3
 --- !u!1 &882459646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2688,7 +2705,7 @@ GameObject:
   - component: {fileID: 1400752784}
   - component: {fileID: 1400752783}
   - component: {fileID: 1400752782}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3146,7 +3163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1895488974}
   - component: {fileID: 1895488975}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
