@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7020848995906809581}
   - component: {fileID: 1885517594142106264}
   - component: {fileID: -8319141108360653810}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RangeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4457032863895963414}
   - component: {fileID: 6747670308774042047}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

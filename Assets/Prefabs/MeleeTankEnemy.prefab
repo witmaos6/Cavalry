@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5735641532423233557}
   - component: {fileID: 2625987940437518536}
   - component: {fileID: -2793487238189260315}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MeleeTankEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3135919421786545076}
   - component: {fileID: 4792139839551789597}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

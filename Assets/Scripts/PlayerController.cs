@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
             Dash();
 
-            Dummy();
+            SpawnDummy();
         }
     }
 
@@ -169,14 +169,22 @@ public class PlayerController : MonoBehaviour
         rb.linearDamping = originDamping;
     }
 
-    void Dummy()
+    void SpawnDummy()
     {
         if (!canDummy)
             return;
 
         if(Input.GetKeyDown(KeyCode.LeftShift))
         {
-            Instantiate(dummy, pointer.transform.position, pointer.transform.rotation);
+            GameObject spawnedDummy = Instantiate(dummy, pointer.transform.position, pointer.transform.rotation);
+            if(spawnedDummy != null)
+            {
+                Dummy dummyComp = spawnedDummy.GetComponent<Dummy>();
+                if(dummyComp != null)
+                {
+                    dummyComp.SetOwner(gameObject);
+                }
+            }
 
             StartCoroutine(DummyCoolDown());
         }

@@ -1773,6 +1773,8 @@ MonoBehaviour:
   fireRate: 1
   dashAmount: 10
   dashCooldown: 1
+  dummyCooldown: 1
+  dummy: {fileID: 1660226635801135379, guid: 09ba8a9f28e757b4fae35a566a19c6cf, type: 3}
   hp: 10
   hpSlider: {fileID: 299081185}
 --- !u!61 &879277747
