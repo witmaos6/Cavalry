@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5735641532423233557}
   - component: {fileID: 3155647267867605682}
   - component: {fileID: -4130517008043816102}
+  - component: {fileID: -8365548945884156807}
   m_Layer: 6
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -113,10 +114,6 @@ MonoBehaviour:
   attackRange: 1.5
   attackRate: 1
   damage: 1
-  bulletPrefabs: {fileID: 0}
-  weaponTransform: {fileID: 3135919421786545076}
-  stabDistance: 0.5
-  stabSpeed: 10
 --- !u!61 &3155647267867605682
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -190,6 +187,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-8365548945884156807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881503341338650333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a7f89e7617286044ad05aa19d8272c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMeleeAttack
+  weight: 1
+  damage: 1
+  weaponTransform: {fileID: 3135919421786545076}
+  stabDistance: 1
+  stabSpeed: 10
 --- !u!1 &5597000408630790583
 GameObject:
   m_ObjectHideFlags: 0

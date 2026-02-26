@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7020848995906809581}
   - component: {fileID: 1885517594142106264}
   - component: {fileID: -8319141108360653810}
+  - component: {fileID: -1444346973164214542}
   m_Layer: 6
   m_Name: RangeEnemy
   m_TagString: Enemy
@@ -113,10 +114,6 @@ MonoBehaviour:
   attackRange: 7
   attackRate: 2
   damage: 1
-  bulletPrefabs: {fileID: 6754999010799585638, guid: 7a9c14d566b384c49947d8ce47ed609b, type: 3}
-  weaponTransform: {fileID: 4457032863895963414}
-  stabDistance: 0.5
-  stabSpeed: 10
 --- !u!61 &1885517594142106264
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -190,6 +187,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-1444346973164214542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903235414405071913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c92dc7aac2edb3468fc501f31b82265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyRangeAttack
+  weight: 1
+  damage: 1
+  bulletPrefabs: {fileID: 6754999010799585638, guid: 7a9c14d566b384c49947d8ce47ed609b, type: 3}
 --- !u!1 &5074700735689249557
 GameObject:
   m_ObjectHideFlags: 0

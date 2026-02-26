@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using UnityEngine;
 
@@ -18,16 +19,11 @@ public class Enemy : MonoBehaviour
 
     private Transform player;
 
-    [Header("Range Enemy Settings")]
-    public GameObject bulletPrefabs;
-
-    [Header("Melee Enemy Settings")]
-    public Transform weaponTransform;
-    public float stabDistance = 0.5f;
-    public float stabSpeed = 10f;
-
     private bool isDead = false;
     private bool canAttack = true;
+
+    private EnemyAttackBase[] attackList;
+    private float attackTotalRate = 0f;
 
     private void Awake()
     {
@@ -38,6 +34,13 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         originHP = (int)hp;
+
+        attackList = GetComponentsInChildren<EnemyAttackBase>();
+
+        foreach (EnemyAttackBase attack in attackList)
+        {
+            attackTotalRate += attack.weight;
+        }
     }
 
     // Update is called once per frame
@@ -84,57 +87,22 @@ public class Enemy : MonoBehaviour
 
     void Attack()
     {
-        if(type == AttackType.Melee)
+        float randomAttackValue = Random.Range(0f, attackTotalRate);
+        float currentSum = 0;
+
+        foreach (EnemyAttackBase attack in attackList)
         {
-            if(weaponTransform != null)
+            currentSum += attack.weight;
+            if(randomAttackValue <= currentSum)
             {
-                StartCoroutine(StabRoutine());
+                attack.Attack();
+                break;
             }
-        }
-        else if(type == AttackType.Range)
-        {
-            Instantiate(bulletPrefabs, transform.position, transform.rotation);
         }
 
         StartCoroutine(AttackCooldown());
     }
-    IEnumerator StabRoutine()
-    {
-        Vector3 originalPos = weaponTransform.localPosition;
-        Vector3 targetPos = originalPos + Vector3.up * stabDistance;
-
-        float t = 0;
-        while (t < 1.0f)
-        {
-            t += Time.deltaTime * stabSpeed;
-            weaponTransform.localPosition = Vector3.Lerp(originalPos, targetPos, t);
-            yield return null;
-        }
-
-        if(player != null)
-        {
-            float distance = Vector2.Distance(transform.position, player.position);
-            if(distance <= attackRange + stabDistance)
-            {
-                PlayerController playerController = player.GetComponent<PlayerController>();
-                if(playerController != null)
-                {
-                    playerController.TakeDamage(1);
-                }
-            }
-        }
-
-        t = 0;
-        while (t < 1.0f)
-        {
-            t += Time.deltaTime * stabSpeed * 0.5f;
-            weaponTransform.localPosition = Vector3.Lerp(targetPos, originalPos, t);
-            yield return null;
-        }
-
-        weaponTransform.localPosition = originalPos;
-    }
-
+    
     IEnumerator AttackCooldown()
     {
         canAttack = false;
@@ -156,6 +124,11 @@ public class Enemy : MonoBehaviour
 
             Destroy(gameObject);
         }
+    }
+
+    public Transform GetCurrentTarget()
+    {
+        return player;
     }
 
     public void SetTargetTransform(Transform newTargetTransform)

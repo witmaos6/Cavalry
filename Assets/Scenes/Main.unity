@@ -1032,9 +1032,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Rjsgml_SpawnManager
   enemySpawnList:
   - enemyPrefab: {fileID: 1881503341338650333, guid: 895cc34e6cd84bf429da39faf8307b8b, type: 3}
-    weight: 0
+    weight: 1
   - enemyPrefab: {fileID: 1881503341338650333, guid: b455f9d206e6c6443a1a98d3c8e5d8fb, type: 3}
-    weight: 0
+    weight: 1
   - enemyPrefab: {fileID: 903235414405071913, guid: 455b06447c8ddb94ba23772a6376157c, type: 3}
     weight: 1
   spawnRate: 2
@@ -1773,7 +1773,7 @@ MonoBehaviour:
   firePoint: {fileID: 118166892}
   pointer: {fileID: 1400752782}
   fireRate: 1
-  dashAmount: 10
+  dashAmount: 30
   dashCooldown: 1
   dummyCooldown: 1
   dummy: {fileID: 1660226635801135379, guid: 09ba8a9f28e757b4fae35a566a19c6cf, type: 3}
@@ -1959,7 +1959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Reflection
   hwando: {fileID: 3707197127480617344, guid: 76f3859efa44fbd419dc02d048d8921e, type: 3}
   reflectionCoolDown: 1
-  reflectionTime: 1
+  reflectionTime: 0.3
   offset: 2
 --- !u!1 &882459646
 GameObject:
