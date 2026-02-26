@@ -14,29 +14,27 @@ public class Guard : MonoBehaviour
 
     void Start()
     {
-        
     }
 
     void Update()
     {
-        if (!GameManager.Instance.isGameActive)
-        {
-            return;
-        }
-        if (canGuard)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                currentShield = Instantiate(shield);
-
-                StartCoroutine(ShieldLifetime());
-                StartCoroutine(GuardCooldown());
-            }
-        }
-        if(currentShield != null)
+        if (currentShield != null)
         {
             RotateShieldTowardMouse();
         }
+    }
+
+    public bool ActivateGuard()
+    {
+        if (!canGuard)
+            return false;
+
+        currentShield = Instantiate(shield);
+
+        StartCoroutine(ShieldLifetime());
+        StartCoroutine(GuardCooldown());
+
+        return true;
     }
 
     IEnumerator GuardCooldown()
@@ -50,6 +48,12 @@ public class Guard : MonoBehaviour
     {
         yield return new WaitForSeconds(guardTime);
         Destroy(currentShield);
+
+        PlayerController playerController = GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.ResetActivateHwando();
+        }
     }
 
     void RotateShieldTowardMouse()

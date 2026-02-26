@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public enum HwandoType {Guard, Reflection }
+
     [Header("Movement Settings")]
     public float moveSpeed = 5.0f;
     private Vector2 lastMoveDir;
@@ -31,6 +33,12 @@ public class PlayerController : MonoBehaviour
     public GameObject dummy;
     private bool canDummy = true;
 
+    [Header("Hwando Settings")]
+    public HwandoType hwandoType = HwandoType.Guard;
+    private Guard guard;
+    private Reflection reflection;
+    private bool activateHwando = false;
+
     [Header("Stat Settings")]
     public float hp = 10;
     private bool isDead = false;
@@ -43,6 +51,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        guard = GetComponent<Guard>();
+        reflection = GetComponent<Reflection>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -66,11 +76,16 @@ public class PlayerController : MonoBehaviour
         {
             Movement();
 
-            Attack();
+            if (!activateHwando)
+            {
+                Attack();
+            }
 
             Dash();
 
             SpawnDummy();
+
+            ActivateHwando();
         }
     }
 
@@ -195,6 +210,26 @@ public class PlayerController : MonoBehaviour
         canDummy = false;
         yield return new WaitForSeconds(dummyCooldown);
         canDummy = true;
+    }
+
+    void ActivateHwando()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (hwandoType == HwandoType.Guard)
+            {
+                activateHwando = guard.ActivateGuard();
+            }
+            else if (hwandoType == HwandoType.Reflection)
+            {
+                activateHwando = reflection.ActivateReflection();
+            }
+        }
+    }
+
+    public void ResetActivateHwando()
+    {
+        activateHwando = false;
     }
 
     public void TakeDamage(float damage)
