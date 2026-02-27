@@ -8,15 +8,13 @@ public class EnemyMeleeAttack : EnemyAttackBase
     public float stabSpeed = 10f;
     private float attackRange = 1.5f;
 
-    private Transform player;
-
     public override void Attack()
     {
         Enemy enemy = GetComponent<Enemy>();
-        if (enemy != null)
+        player = GetPlayerTarget();
+        if (enemy != null && player != null)
         {
             attackRange = enemy.attackRange;
-            player = enemy.GetCurrentTarget();
             StartCoroutine(StabRoutine());
         }
     }

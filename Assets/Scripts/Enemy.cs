@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public enum AttackType { Melee, Range }
+    public enum AttackType { Melee, Range } // To do: 삭제 예정
 
     [Header("Enemy Settings")]
     public AttackType type = AttackType.Melee;

@@ -58,7 +58,12 @@ public class Dummy : MonoBehaviour
             }
         }
 
-        for(int i = 0; i < 8; i++)
+        DrawDebugBoundary();
+    }
+
+    void DrawDebugBoundary()
+    {
+        for (int i = 0; i < 8; i++)
         {
             float angle = i * 45f * Mathf.Deg2Rad;
             Vector3 dir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
