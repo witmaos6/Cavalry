@@ -112,7 +112,7 @@ MonoBehaviour:
   hp: 10
   moveSpeed: 6
   attackRange: 13
-  attackRate: 2
+  attackRate: 4
   damage: 1
 --- !u!61 &1885517594142106264
 BoxCollider2D:

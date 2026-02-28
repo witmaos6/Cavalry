@@ -45,7 +45,7 @@ public class EnemyBullet : MonoBehaviour
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if(enemy != null)
             {
-                enemy.TakeDamage(10);
+                enemy.TakeDamage(5);
 
                 Destroy(gameObject);
             }
