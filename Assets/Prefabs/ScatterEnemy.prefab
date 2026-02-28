@@ -202,7 +202,7 @@ MonoBehaviour:
   weight: 1
   damage: 1
   bulletPrefab: {fileID: 6754999010799585638, guid: 7a9c14d566b384c49947d8ce47ed609b, type: 3}
-  bulletCount: 3
+  bulletCount: 2
   spreadAngle: 30
 --- !u!1 &5074700735689249557
 GameObject:

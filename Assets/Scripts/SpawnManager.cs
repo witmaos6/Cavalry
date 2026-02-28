@@ -2,34 +2,37 @@ using NUnit.Framework;
 using System.Collections;
 using UnityEngine;
 
+
+
 public class SpawnManager : MonoBehaviour
 {
-    [System.Serializable]
-    public struct EnemySpawnData
-    {
-        public EnemySpawnData(GameObject enemy, int inWeight)
-        {
-            enemyPrefab = enemy;
-            weight = inWeight;
-        }
-        public GameObject enemyPrefab;
-        public int weight;
-    }
-
     [Header("Spawn Settings")]
-    public EnemySpawnData[] enemySpawnList;
     public float spawnRate = 2.0f;
     public float spawnRange = 24.0f;
-    public int maxEnemyCount = 10;
 
     private int totalWeight;
+    private StageManager stageManager;
+    private StageInfo currentStage;
+
+    public int stageWave = 0;
+    private int currentSpawnEnemy = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        foreach(var data in enemySpawnList)
+        stageManager = GetComponent<StageManager>();
+        if(stageManager != null)
         {
-            totalWeight += data.weight;
+            // To do: 스테이지 선택하면 그 스테이지 정보를 가져오는 것으로 변경
+            currentStage = stageManager.stageList[stageWave];
+        }
+
+        if(currentStage != null)
+        {
+            foreach (var data in currentStage.enemySpawnDatas)
+            {
+                totalWeight += data.weight;
+            }
         }
     }
 
@@ -38,29 +41,30 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnRoutine());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     IEnumerator SpawnRoutine()
     {
         while(GameManager.Instance.isGameActive)
         {
             yield return new WaitForSeconds(spawnRate);
 
-            int currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-            if(currentEnemyCount < maxEnemyCount)
+            if(currentSpawnEnemy < currentStage.waveDatas[stageWave].nrToSpawn)
             {
-                SpawnEnemy();
+                int currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+                if (currentEnemyCount < currentStage.waveDatas[stageWave].spawnLimit)
+                {
+                    SpawnEnemy();
+                }
+            }
+            else
+            {
+                break;
             }
         }
     }
 
     void SpawnEnemy()
     {
-        if (enemySpawnList.Length == 0)
+        if (currentStage.enemySpawnDatas.Length == 0)
             return;
 
         if (!GameManager.Instance.isGameActive)
@@ -71,7 +75,7 @@ public class SpawnManager : MonoBehaviour
         GameObject selectedEnemy = null;
 
         int currentWeightSum = 0;
-        foreach (var data in enemySpawnList)
+        foreach (var data in currentStage.enemySpawnDatas)
         {
             currentWeightSum += data.weight;
             if (randomNumber < currentWeightSum)
@@ -96,6 +100,7 @@ public class SpawnManager : MonoBehaviour
         if (selectedEnemy != null)
         {
             Instantiate(selectedEnemy, spawnPos, Quaternion.identity);
+            currentSpawnEnemy++;
         }
     }
 }
