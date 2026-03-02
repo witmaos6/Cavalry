@@ -8,8 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("UI Panels")]
-    public Button gameStartButton;
-    public Button gameRestartButton;
+    public GameObject gameReadyPanel;
+    public GameObject gameOverPanel;
+    public GameObject gameClearPanel;
 
     [Header("Score Settings")]
     public TextMeshProUGUI scoreText;
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = true;
         Cursor.visible = false;
-        gameStartButton.gameObject.SetActive(false);
+        gameReadyPanel.SetActive(false);
 
         SpawnManager spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         if(spawnManager != null )
@@ -48,13 +49,20 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = false;
         Cursor.visible = true;
-        gameRestartButton.gameObject.SetActive(true);
+        gameOverPanel.gameObject.SetActive(true);
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach(GameObject enemy in enemies)
         {
             Destroy(enemy);
         }
+    }
+
+    public void GameClear()
+    {
+        isGameActive = false;
+        Cursor.visible = true;
+        gameClearPanel.gameObject.SetActive(true);
     }
 
     public void RestartGame()
@@ -65,15 +73,11 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameRestartButton.gameObject.SetActive(false);
+        gameReadyPanel.gameObject.SetActive(true);
+        gameOverPanel.gameObject.SetActive(false);
+        gameClearPanel.gameObject.SetActive(false);
         score = 0;
-        scoreText.gameObject.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        scoreText.gameObject.SetActive(false);        
     }
 
     public void AddScore(int amount)
@@ -89,4 +93,17 @@ public class GameManager : MonoBehaviour
             scoreText.text = "Score: " + score;
         }
     }
+
+    public void NextStage()
+    {
+        Debug.Log("다음 스테이지로");
+        // To do: 다음스테이지를 시작하는 기능 구현
+    }
+
+    public void StageSelect()
+    {
+        Debug.Log("스테이지 선택 화면으로 가는 기능 구현");
+        // To do: 스테이지 선택 화면으로 가는 기능 구현
+    }
+
 }

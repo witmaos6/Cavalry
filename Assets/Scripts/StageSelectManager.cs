@@ -24,7 +24,7 @@ public class StageSelectManager : MonoBehaviour
         }
 
         GameData data = saveDataProcessor.LoadGame();
-        int availableStages = 20;//Mathf.Min(data.clearStage + 1, maxTotalStage);
+        int availableStages = Mathf.Min(data.clearStage + 1, maxTotalStage);
 
         for(int i = availableStages; i >= 1; i--)
         {

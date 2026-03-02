@@ -133,7 +133,11 @@ public class SpawnManager : MonoBehaviour
                     saveData.SaveGame(gameData);
                 }
             }
-            // To do: 스테이지 클리어 UI 출력
+            GameManager gameManager = GameManager.Instance;
+            if (gameManager != null)
+            {
+                gameManager.GameClear();
+            }
 
             CancelInvoke("StageClearCheck");
         }

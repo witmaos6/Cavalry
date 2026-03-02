@@ -45,6 +45,11 @@ public class StageManager : MonoBehaviour
     public StageInfo GetCurrentStage()
     {
         Debug.Log($"{currentStageNum} Start");
+        if(currentStageNum == 0)
+        {
+            // 임시 기능
+            return stageList[0];
+        }
         return stageList[currentStageNum - 1];
     }
 }
