@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 public class HomeUIManager : MonoBehaviour
 {
+    [Header("SaveFile")]
+    public SaveData saveData;
+
     [Header("Panels")]
     public GameObject mainMenuPanel;
     public GameObject stageSelectPanel;
@@ -12,6 +15,11 @@ public class HomeUIManager : MonoBehaviour
     public Button continueGameButton;
     public Button backToMenu;
     public Button quitGame;
+
+    private void Awake()
+    {
+        saveData = SaveData.instance;
+    }
 
     void Start()
     {
@@ -32,22 +40,33 @@ public class HomeUIManager : MonoBehaviour
 
     void OnNewGameClicked()
     {
-        ShowStageSelect();
+        if(saveData != null)
+        {
+            saveData.CreateNewGame();
+        }
 
-        // To do: Savefile 생성
+        ShowStageSelect();
     }
 
     void OnContinueGameClicked()
     {
-        ShowStageSelect();
+        GameData data = saveData.LoadGame();
+        Debug.Log($"Load Scuccess 도달 스테이지: {data.clearStage} ");
 
-        // To do: Savefile 불러오기
+        ShowStageSelect();
     }
 
     void ShowStageSelect()
     {
         mainMenuPanel.SetActive(false);
         stageSelectPanel.SetActive(true);
+
+        StageSelectManager stageSelectManager = GetComponent<StageSelectManager>();
+        if(stageSelectManager != null )
+        {
+            // stageSelectManager.GenerateStageButtons();
+            // To do: 필요하면 추가
+        }
     }
 
     void QuitGame()

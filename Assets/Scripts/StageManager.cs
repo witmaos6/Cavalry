@@ -31,4 +31,20 @@ public class StageInfo
 public class StageManager : MonoBehaviour
 {
     public StageInfo[] stageList;
+    private int currentStageNum = 0;
+
+    private void Awake()
+    {
+        SaveData saveData = SaveData.instance;
+        if(saveData != null )
+        {
+            currentStageNum = saveData.stageNum;
+        }
+    }
+
+    public StageInfo GetCurrentStage()
+    {
+        Debug.Log($"{currentStageNum} Start");
+        return stageList[currentStageNum - 1];
+    }
 }

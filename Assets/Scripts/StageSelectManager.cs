@@ -16,7 +16,7 @@ public class StageSelectManager : MonoBehaviour
         GenerateStageButtons();
     }
 
-    void GenerateStageButtons()
+    public void GenerateStageButtons()
     {
         foreach(Transform child in contentTransform)
         {
@@ -24,7 +24,7 @@ public class StageSelectManager : MonoBehaviour
         }
 
         GameData data = saveDataProcessor.LoadGame();
-        int availableStages = Mathf.Min(data.ClearStage + 1, maxTotalStage);
+        int availableStages = 20;//Mathf.Min(data.clearStage + 1, maxTotalStage);
 
         for(int i = availableStages; i >= 1; i--)
         {
@@ -48,6 +48,15 @@ public class StageSelectManager : MonoBehaviour
 
     void OnStageButtonClicked(int stageNum)
     {
-        SceneManager.LoadScene("Main");
+        SaveData saveData = SaveData.instance;
+        if (saveData != null)
+        {
+            saveData.stageNum = stageNum;
+            SceneManager.LoadScene("Main");
+        }
+        else
+        {
+            Debug.Log("SaveData is null");
+        }
     }
 }

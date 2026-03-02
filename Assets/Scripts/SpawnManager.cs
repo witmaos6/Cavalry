@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour
     private StageManager stageManager;
     private StageInfo currentStage;
 
-    public int stageWave = 0;
+    public int waveNum = 0;
     private int currentSpawnEnemy = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,8 +23,7 @@ public class SpawnManager : MonoBehaviour
         stageManager = GetComponent<StageManager>();
         if(stageManager != null)
         {
-            // To do: 스테이지 선택하면 그 스테이지 정보를 가져오는 것으로 변경
-            currentStage = stageManager.stageList[stageWave];
+            currentStage = stageManager.GetCurrentStage();
         }
 
         if(currentStage != null)
@@ -47,17 +46,27 @@ public class SpawnManager : MonoBehaviour
         {
             yield return new WaitForSeconds(spawnRate);
 
-            if(currentSpawnEnemy < currentStage.waveDatas[stageWave].nrToSpawn)
+            if(currentSpawnEnemy < currentStage.waveDatas[waveNum].nrToSpawn)
             {
                 int currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-                if (currentEnemyCount < currentStage.waveDatas[stageWave].spawnLimit)
+                if (currentEnemyCount < currentStage.waveDatas[waveNum].spawnLimit)
                 {
                     SpawnEnemy();
                 }
             }
             else
             {
-                break;
+                waveNum++;
+                if (currentStage.waveDatas.Length > waveNum)
+                {
+                    Debug.Log($"{waveNum} wave clear");
+                    // wave를 명확히 분리해야 한다면 추가 로직 필요
+                }
+                else
+                {
+                    StageSpawnEnd();
+                    break;
+                }
             }
         }
     }
@@ -101,6 +110,32 @@ public class SpawnManager : MonoBehaviour
         {
             Instantiate(selectedEnemy, spawnPos, Quaternion.identity);
             currentSpawnEnemy++;
+        }
+    }
+
+    void StageSpawnEnd()
+    {
+        InvokeRepeating("StageClearCheck", 1.0f, 1f);
+    }
+
+    void StageClearCheck()
+    {
+        int currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        if(currentEnemyCount == 0)
+        {
+            SaveData saveData = SaveData.instance;
+            if (saveData != null)
+            {
+                GameData gameData = saveData.LoadGame();
+                if (gameData != null)
+                {
+                    gameData.clearStage++;
+                    saveData.SaveGame(gameData);
+                }
+            }
+            // To do: 스테이지 클리어 UI 출력
+
+            CancelInvoke("StageClearCheck");
         }
     }
 }
