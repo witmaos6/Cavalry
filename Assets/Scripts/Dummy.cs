@@ -36,7 +36,10 @@ public class Dummy : MonoBehaviour
 
         foreach(Enemy enemy in enemies)
         {
-            enemy.SetTargetTransform(owner.transform);
+            if(enemy != null)
+            {
+                enemy.SetTargetTransform(owner.transform);
+            }
         }
 
         Destroy(gameObject);

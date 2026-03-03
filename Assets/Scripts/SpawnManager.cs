@@ -129,8 +129,11 @@ public class SpawnManager : MonoBehaviour
                 GameData gameData = saveData.LoadGame();
                 if (gameData != null)
                 {
-                    gameData.clearStage++;
-                    saveData.SaveGame(gameData);
+                    if(gameData.clearStage == saveData.stageNum - 1)
+                    {
+                        gameData.clearStage++;
+                        saveData.SaveGame(gameData);
+                    }
                 }
             }
             GameManager gameManager = GameManager.Instance;

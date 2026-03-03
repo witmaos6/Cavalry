@@ -96,14 +96,17 @@ public class GameManager : MonoBehaviour
 
     public void NextStage()
     {
-        Debug.Log("다음 스테이지로");
-        // To do: 다음스테이지를 시작하는 기능 구현
+        SaveData saveData = SaveData.instance;
+        if(saveData != null )
+        {
+            saveData.stageNum++;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     public void StageSelect()
     {
-        Debug.Log("스테이지 선택 화면으로 가는 기능 구현");
-        // To do: 스테이지 선택 화면으로 가는 기능 구현
+        SceneManager.LoadScene("Home");
+        // To do: 임시로 홈으로 가는 기능 설정, 이후에 스테이지 선택 화면으로 가는 기능 구현
     }
-
 }

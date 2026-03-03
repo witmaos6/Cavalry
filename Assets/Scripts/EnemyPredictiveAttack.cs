@@ -37,13 +37,16 @@ public class EnemyPredictiveAttack : EnemyAttackBase
         yield return new WaitForSeconds(preDelay);
         //activateState = false;
 
-        Vector2 playerDirection = player.transform.up;
+        if(player != null)
+        {
+            Vector2 playerDirection = player.transform.up;
 
-        Vector3 predictedPosition = player.position + (Vector3)(playerDirection * leadDistance);
-        Vector2 shootDirection = (predictedPosition - transform.position).normalized;
+            Vector3 predictedPosition = player.position + (Vector3)(playerDirection * leadDistance);
+            Vector2 shootDirection = (predictedPosition - transform.position).normalized;
 
-        float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(shootDirection.y, shootDirection.x) * Mathf.Rad2Deg;
 
-        Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, angle - 90.0f));
+            Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, angle - 90.0f));
+        }
     }
 }
