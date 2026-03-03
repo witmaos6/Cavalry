@@ -1298,15 +1298,11 @@ MonoBehaviour:
     - nrToSpawn: 10
       spawnLimit: 3
   - enemySpawnDatas:
-    - enemyPrefab: {fileID: 903235414405071913, guid: 455b06447c8ddb94ba23772a6376157c, type: 3}
-      weight: 1
-    - enemyPrefab: {fileID: 1881503341338650333, guid: 895cc34e6cd84bf429da39faf8307b8b, type: 3}
+    - enemyPrefab: {fileID: 1881503341338650333, guid: b455f9d206e6c6443a1a98d3c8e5d8fb, type: 3}
       weight: 1
     waveDatas:
-    - nrToSpawn: 20
-      spawnLimit: 5
-    - nrToSpawn: 10
-      spawnLimit: 3
+    - nrToSpawn: 1
+      spawnLimit: 1
   - enemySpawnDatas:
     - enemyPrefab: {fileID: 903235414405071913, guid: fbe7e097898c3374c9d9cdd7da1f4bf5, type: 3}
       weight: 1

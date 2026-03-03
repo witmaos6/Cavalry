@@ -23,7 +23,9 @@ public class Enemy : MonoBehaviour
     private bool canAttack = true;
 
     private EnemyAttackBase[] attackList;
+    private EnemyUtilityBase[] utilityList;
     private float attackTotalRate = 0f;
+    private bool runningUtility = false;
 
     private void Awake()
     {
@@ -36,18 +38,30 @@ public class Enemy : MonoBehaviour
         originHP = (int)hp;
 
         attackList = GetComponentsInChildren<EnemyAttackBase>();
-
         foreach (EnemyAttackBase attack in attackList)
         {
             attackTotalRate += attack.weight;
         }
+
+        utilityList = GetComponentsInChildren<EnemyUtilityBase>();
+
+        InvokeRepeating("UtilityCheck", 0.5f, 0.5f);
     }
 
-    // Update is called once per frame
-    void Update()
+    void UtilityCheck()
     {
-        
+        foreach (EnemyUtilityBase utility in utilityList)
+        { 
+            if(utility.ActivateCondition())
+            {
+                utility.Activate();
+                runningUtility = true;
+                // To do: EnemyUtilityBase에서 runningUtility 복원 시키는 기능 추가
+                break;
+            }
+        }
     }
+
     private void FixedUpdate()
     {
         if (isDead || player == null)
@@ -59,7 +73,10 @@ public class Enemy : MonoBehaviour
 
         if (distance > attackRange)
         {
-            MoveToPlayer();
+            if(!runningUtility)
+            {
+                MoveToPlayer();
+            }
         }
         else
         {
@@ -122,6 +139,7 @@ public class Enemy : MonoBehaviour
                 GameManager.Instance.AddScore(originHP);
             }
 
+            CancelInvoke("UtilityCheck");
             Destroy(gameObject);
         }
     }

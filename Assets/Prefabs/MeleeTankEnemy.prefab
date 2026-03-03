@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2625987940437518536}
   - component: {fileID: -2793487238189260315}
   - component: {fileID: 1676747668213342699}
+  - component: {fileID: 4753790621683661096}
+  - component: {fileID: 1495792791475760797}
   m_Layer: 6
   m_Name: MeleeTankEnemy
   m_TagString: Enemy
@@ -144,7 +146,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -173,7 +175,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 1
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -186,7 +188,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1676747668213342699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,6 +206,32 @@ MonoBehaviour:
   weaponTransform: {fileID: 3135919421786545076}
   stabDistance: 1
   stabSpeed: 10
+--- !u!114 &4753790621683661096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881503341338650333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97917daec8f63b4b8d42847cb51e0dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyRush
+  rushDistance: 30
+--- !u!114 &1495792791475760797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881503341338650333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00b4623e92102342aa7a7c7cc88ee27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyEvasion
+  evasionDistance: 30
 --- !u!1 &5597000408630790583
 GameObject:
   m_ObjectHideFlags: 0
