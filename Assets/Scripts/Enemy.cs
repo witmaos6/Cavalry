@@ -1,13 +1,11 @@
 using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public enum AttackType { Melee, Range } // To do: 삭제 예정
-
     [Header("Enemy Settings")]
-    public AttackType type = AttackType.Melee;
     public float hp = 10;
     private int originHP;
     public float moveSpeed = 3.0f;
@@ -23,7 +21,7 @@ public class Enemy : MonoBehaviour
     private bool canAttack = true;
 
     private EnemyAttackBase[] attackList;
-    private EnemyUtilityBase[] utilityList;
+    private List<EnemyUtilityBase> sensorUtility = new List<EnemyUtilityBase>();
     private float attackTotalRate = 0f;
     private bool runningUtility = false;
 
@@ -31,7 +29,6 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.Find("Player").transform;
@@ -43,23 +40,41 @@ public class Enemy : MonoBehaviour
             attackTotalRate += attack.weight;
         }
 
-        utilityList = GetComponentsInChildren<EnemyUtilityBase>();
+        EnemyUtilityBase[] utilityList = GetComponentsInChildren<EnemyUtilityBase>();
+        foreach(EnemyUtilityBase utility in utilityList)
+        {
+            if(utility.utilityType == EnemyUtilityBase.UtilityType.Sensor)
+            {
+                sensorUtility.Add(utility);
+            }
+        }
 
         InvokeRepeating("UtilityCheck", 0.5f, 0.5f);
     }
 
     void UtilityCheck()
     {
-        foreach (EnemyUtilityBase utility in utilityList)
+        foreach (EnemyUtilityBase utility in sensorUtility)
         { 
             if(utility.ActivateCondition())
             {
                 utility.Activate();
-                runningUtility = true;
-                // To do: EnemyUtilityBase에서 runningUtility 복원 시키는 기능 추가
+                StartCoroutine(ResetUtility());
                 break;
             }
         }
+    }
+
+    public void CalledRunningUtility()
+    {
+        StartCoroutine(ResetUtility());
+    }
+
+    IEnumerator ResetUtility()
+    {
+        runningUtility = true;
+        yield return new WaitForSeconds(0.3f);
+        runningUtility = false;
     }
 
     private void FixedUpdate()

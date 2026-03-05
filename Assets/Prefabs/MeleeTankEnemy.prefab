@@ -146,7 +146,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -218,7 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97917daec8f63b4b8d42847cb51e0dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRush
-  rushDistance: 30
+  utilityType: 0
+  rushDistance: 20
 --- !u!114 &1495792791475760797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,7 +232,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b00b4623e92102342aa7a7c7cc88ee27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyEvasion
-  evasionDistance: 30
+  utilityType: 1
+  evasionDistance: 20
 --- !u!1 &5597000408630790583
 GameObject:
   m_ObjectHideFlags: 0

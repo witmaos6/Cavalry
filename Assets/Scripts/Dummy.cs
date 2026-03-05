@@ -20,11 +20,6 @@ public class Dummy : MonoBehaviour
         InvokeRepeating("Skill", 0.0f, skillCoolTime);
     }
 
-    void Update()
-    {
-        
-    }
-
     public void SetOwner(GameObject inOwner)
     {
         owner = inOwner;

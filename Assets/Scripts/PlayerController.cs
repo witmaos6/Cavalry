@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    public delegate void ShotArrow();
+    public ShotArrow shotArrow;
     public enum HwandoType {Guard, Reflection }
 
     [Header("Movement Settings")]
@@ -138,6 +140,8 @@ public class PlayerController : MonoBehaviour
 
     void Fire(bool isFull)
     {
+        shotArrow();
+
         GameObject arrow = Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
 
         Arrow arrowScript = arrow.GetComponent<Arrow>();
@@ -174,13 +178,11 @@ public class PlayerController : MonoBehaviour
     {
         float originDamping = rb.linearDamping;
         rb.linearDamping = 10.0f;
-
         canDash = false;
 
         yield return new WaitForSeconds(dashCooldown);
 
         canDash = true;
-
         rb.linearDamping = originDamping;
     }
 
