@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1676747668213342699}
   - component: {fileID: 4753790621683661096}
   - component: {fileID: 1495792791475760797}
+  - component: {fileID: 5356560454947732794}
   m_Layer: 6
   m_Name: MeleeTankEnemy
   m_TagString: Enemy
@@ -110,11 +111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b810f062659fe534399cda5298f382d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rjsgml_Enemy
-  type: 0
   hp: 30
   moveSpeed: 4
-  attackRange: 2
-  attackRate: 1
+  attackRate: 2
   damage: 1
 --- !u!61 &2625987940437518536
 BoxCollider2D:
@@ -203,6 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMeleeAttack
   weight: 1
   damage: 1
+  attackDistance: 2
   weaponTransform: {fileID: 3135919421786545076}
   stabDistance: 1
   stabSpeed: 10
@@ -219,7 +219,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRush
   utilityType: 0
-  rushDistance: 20
+  coolDown: 4
+  rushDistance: 10
 --- !u!114 &1495792791475760797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,7 +234,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyEvasion
   utilityType: 1
-  evasionDistance: 20
+  coolDown: 5
+  evasionDistance: 10
+--- !u!114 &5356560454947732794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881503341338650333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56c87d25d675d34aa4e26c98510d729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPredictiveAttack
+  weight: 1
+  damage: 1
+  attackDistance: 10
+  leadDistance: 5
+  bulletPrefab: {fileID: 6754999010799585638, guid: 7a9c14d566b384c49947d8ce47ed609b, type: 3}
+  preDelay: 1
 --- !u!1 &5597000408630790583
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class EnemyEvasion : EnemyUtilityBase
 {
-    public float evasionDistance = 10f;
+    public float evasionDistance = 5f;
 
     private void Awake()
     {
         PlayerController playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         if (playerController != null)
         {
-            playerController.shotArrow += Activate;
+            playerController.shotArrow += ActivateWithPrediction;
         }
     }
 
@@ -22,26 +22,32 @@ public class EnemyEvasion : EnemyUtilityBase
 
         return true;
     }
-    public override void Activate()
+    public override void Activate() { }
+
+    public void ActivateWithPrediction(Vector2 arrowPos, Vector2 arrowDir)
     {
-        if(!ActivateCondition())
-        {
+        if (!ActivateCondition())
             return;
-        }
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb == null)
             return;
 
-        // To do: 피하는 방향 감지 추가
-        Vector3 rushDir = transform.right;
-        Vector2 rushVelocity = rushDir * evasionDistance;
-        rb.AddForce(rushVelocity, ForceMode2D.Impulse);
+        Vector2 perpendicularLeft = new Vector2(-arrowDir.y, arrowDir.x);
+        Vector2 perpendicularRight = new Vector2(arrowDir.y, arrowDir.x);
+
+        Vector2 toEnemy = (Vector2)transform.position - arrowPos;
+        float crossProduct = (arrowDir.x * toEnemy.y) - (arrowDir.y * toEnemy.x);
+
+        Vector2 dodgeDir = (crossProduct > 0) ? perpendicularLeft : perpendicularRight;
+
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(dodgeDir * evasionDistance, ForceMode2D.Impulse);
 
         StartCoroutine(CoolDown());
-        
+
         Enemy enemy = GetComponent<Enemy>();
-        if(enemy != null)
+        if (enemy != null)
         {
             enemy.CalledRunningUtility();
         }

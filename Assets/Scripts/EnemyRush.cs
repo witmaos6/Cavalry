@@ -21,9 +21,10 @@ public class EnemyRush : EnemyUtilityBase
         if (rb == null)
             return;
 
-        Debug.Log("Rush");
         Vector3 rushDir = transform.up;
         Vector2 rushVelocity = rushDir * rushDistance;
+
+        rb.linearVelocity = Vector2.zero;
         rb.AddForce(transform.up * rushDistance, ForceMode2D.Impulse);
 
         StartCoroutine(CoolDown());

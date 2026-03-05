@@ -4,6 +4,7 @@ public abstract class EnemyAttackBase : MonoBehaviour
 {
     public float weight = 1f;
     public float damage = 1f;
+    public float attackDistance = 2f;
     protected Transform player;
 
     public abstract void Attack();

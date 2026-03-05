@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public delegate void ShotArrow();
+    public delegate void ShotArrow(Vector2 position, Vector2 direction);
     public ShotArrow shotArrow;
     public enum HwandoType {Guard, Reflection }
 
@@ -140,9 +140,8 @@ public class PlayerController : MonoBehaviour
 
     void Fire(bool isFull)
     {
-        shotArrow();
-
         GameObject arrow = Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
+        shotArrow.Invoke(firePoint.position, firePoint.up);
 
         Arrow arrowScript = arrow.GetComponent<Arrow>();
         if (arrowScript != null)

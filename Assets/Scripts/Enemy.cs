@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     public float hp = 10;
     private int originHP;
     public float moveSpeed = 3.0f;
-    public float attackRange = 1.5f;
     public float attackRate = 1.0f;
     public float damage = 1.0f;
 
@@ -80,27 +79,20 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate()
     {
         if (isDead || player == null)
-            return;
-
-        float distance = Vector2.Distance(transform.position, player.position);
+            return;        
 
         RotateToPlayer();
 
-        if (distance > attackRange)
+        if (!runningUtility)
         {
-            if(!runningUtility)
-            {
-                MoveToPlayer();
-            }
+            MoveToPlayer();
         }
-        else
+        
+        if(canAttack)
         {
             rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, 0.1f);
 
-            if (canAttack)
-            {
-                Attack();
-            }
+            Attack();
         }
     }
 
@@ -119,13 +111,15 @@ public class Enemy : MonoBehaviour
 
     void Attack()
     {
+        float distance = Vector2.Distance(transform.position, player.position);
+
         float randomAttackValue = Random.Range(0f, attackTotalRate);
         float currentSum = 0;
 
         foreach (EnemyAttackBase attack in attackList)
         {
             currentSum += attack.weight;
-            if(randomAttackValue <= currentSum)
+            if(randomAttackValue <= currentSum && distance <= attack.attackDistance)
             {
                 attack.Attack();
                 break;

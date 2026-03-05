@@ -6,10 +6,10 @@ public abstract class EnemyUtilityBase : MonoBehaviour
     public enum UtilityType { Sensor, Response }
 
     protected Transform player;
-    protected float coolDown = 4.0f;
     protected bool canAcitavte = true;
     public UtilityType utilityType = UtilityType.Sensor;
-    
+    public float coolDown = 4.0f;
+
 
     public abstract bool ActivateCondition();
     public abstract void Activate();

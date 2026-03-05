@@ -6,7 +6,6 @@ public class EnemyMeleeAttack : EnemyAttackBase
     public Transform weaponTransform;
     public float stabDistance = 0.5f;
     public float stabSpeed = 10f;
-    private float attackRange = 1.5f;
 
     public override void Attack()
     {
@@ -14,7 +13,6 @@ public class EnemyMeleeAttack : EnemyAttackBase
         player = GetPlayerTarget();
         if (enemy != null && player != null)
         {
-            attackRange = enemy.attackRange;
             StartCoroutine(StabRoutine());
         }
     }
@@ -35,7 +33,7 @@ public class EnemyMeleeAttack : EnemyAttackBase
         if (player != null)
         {
             float distance = Vector2.Distance(transform.position, player.position);
-            if (distance <= attackRange + stabDistance)
+            if (distance <= attackDistance + stabDistance)
             {
                 PlayerController playerController = player.GetComponent<PlayerController>();
                 if (playerController != null)
