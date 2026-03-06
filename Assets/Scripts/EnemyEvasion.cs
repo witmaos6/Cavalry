@@ -5,12 +5,22 @@ public class EnemyEvasion : EnemyUtilityBase
 {
     public float evasionDistance = 5f;
 
-    private void Awake()
+    private void Start()
     {
-        PlayerController playerController = GameObject.Find("Player").GetComponent<PlayerController>();
-        if (playerController != null)
+        player = GetPlayerTarget();
+        if (player != null)
         {
-            playerController.shotArrow += ActivateWithPrediction;
+            PlayerController playerController = player.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.shotArrow += ActivateWithPrediction;
+            }
+        }
+
+        Enemy enemy = GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.dead += Dead;
         }
     }
 
@@ -58,5 +68,14 @@ public class EnemyEvasion : EnemyUtilityBase
         canAcitavte = false;
         yield return new WaitForSeconds(coolDown);
         canAcitavte = true;
+    }
+
+    void Dead()
+    {
+        PlayerController playerController = player.GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.shotArrow -= ActivateWithPrediction;
+        }
     }
 }

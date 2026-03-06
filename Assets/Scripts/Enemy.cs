@@ -24,6 +24,9 @@ public class Enemy : MonoBehaviour
     private float attackTotalRate = 0f;
     private bool runningUtility = false;
 
+    public delegate void Dead();
+    public Dead dead;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -149,6 +152,11 @@ public class Enemy : MonoBehaviour
             }
 
             CancelInvoke("UtilityCheck");
+            if(dead != null)
+            {
+                dead.Invoke();
+                dead = null;
+            }
             Destroy(gameObject);
         }
     }

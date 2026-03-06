@@ -108,10 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b810f062659fe534399cda5298f382d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rjsgml_Enemy
-  type: 1
   hp: 10
   moveSpeed: 6
-  attackRange: 7
   attackRate: 2
   damage: 1
 --- !u!61 &1885517594142106264
@@ -201,6 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyScatterAttack
   weight: 1
   damage: 1
+  attackDistance: 10
   bulletPrefab: {fileID: 6754999010799585638, guid: 7a9c14d566b384c49947d8ce47ed609b, type: 3}
   bulletCount: 2
   spreadAngle: 30

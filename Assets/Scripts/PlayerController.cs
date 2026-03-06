@@ -128,12 +128,11 @@ public class PlayerController : MonoBehaviour
             if(Input.GetMouseButtonUp(1))
             {
                 Fire(chargeTimer >= maxChargeTime);
+                StartCoroutine(AttackCooldownTimer(chargeTimer >= maxChargeTime));
                 isCharging = false;
                 chargeTimer = 0f;
 
                 pointer.SetCooldown(true);
-
-                StartCoroutine(AttackCooldownTimer());
             }
         }
     }
@@ -141,7 +140,10 @@ public class PlayerController : MonoBehaviour
     void Fire(bool isFull)
     {
         GameObject arrow = Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
-        shotArrow.Invoke(firePoint.position, firePoint.up);
+        if(shotArrow != null)
+        {
+            shotArrow.Invoke(firePoint.position, firePoint.up);
+        }
 
         Arrow arrowScript = arrow.GetComponent<Arrow>();
         if (arrowScript != null)
@@ -150,11 +152,12 @@ public class PlayerController : MonoBehaviour
             arrowScript.Setup(isFull, power);
         }
     }
-    IEnumerator AttackCooldownTimer()
+    IEnumerator AttackCooldownTimer(bool isFull)
     {
         canAttack = false;
 
-        yield return new WaitForSeconds(fireRate);
+        float coolDown = isFull ? fireRate : fireRate / 2;
+        yield return new WaitForSeconds(coolDown);
 
         canAttack = true;
         pointer.SetCooldown(false);

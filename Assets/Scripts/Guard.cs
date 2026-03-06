@@ -12,10 +12,6 @@ public class Guard : MonoBehaviour
 
     private GameObject currentShield;
 
-    void Start()
-    {
-    }
-
     void Update()
     {
         if (currentShield != null)
