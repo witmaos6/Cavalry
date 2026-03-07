@@ -70,5 +70,12 @@ public class Arrow : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        else if(collision.CompareTag("EnemyShield"))
+        {
+            if(!isFullCharge)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
