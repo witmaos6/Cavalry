@@ -9,6 +9,7 @@ public class EnemyShield : EnemyUtilityBase
     public float shieldDuration = 0.5f;
     public float protectRange = 10f;
     Rigidbody2D rb;
+    // To do : 기획 변경 필요할 수 있음
 
     private void Start()
     {

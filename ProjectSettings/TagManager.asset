@@ -8,6 +8,7 @@ TagManager:
   - EnemyBullet
   - Shield
   - Hwando
+  - EnemyShield
   layers:
   - Default
   - TransparentFX
