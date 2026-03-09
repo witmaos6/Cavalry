@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameReadyPanel;
     public GameObject gameOverPanel;
     public GameObject gameClearPanel;
+    public GameObject nextStageButton;
 
     [Header("Score Settings")]
     public TextMeshProUGUI scoreText;
@@ -63,6 +64,15 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         Cursor.visible = true;
         gameClearPanel.gameObject.SetActive(true);
+
+        StageManager stageManager = StageManager.instance;
+        if(stageManager != null)
+        {
+            if(stageManager.GetCurrentStageNum() >= 20)
+            {
+                nextStageButton.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void RestartGame()

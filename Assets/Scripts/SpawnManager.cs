@@ -131,7 +131,10 @@ public class SpawnManager : MonoBehaviour
                 {
                     if(gameData.clearStage == saveData.stageNum - 1)
                     {
-                        gameData.clearStage++;
+                        if(gameData.clearStage < 20)
+                        {
+                            gameData.clearStage++;
+                        }
                         saveData.SaveGame(gameData);
                     }
                 }

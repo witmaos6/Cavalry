@@ -30,11 +30,18 @@ public class StageInfo
 
 public class StageManager : MonoBehaviour
 {
+    public static StageManager instance;
     public StageInfo[] stageList;
     private int currentStageNum = 0;
+    public int testStage = 0;
 
     private void Awake()
     {
+        if(instance == null)
+        {
+            instance = GetComponent<StageManager>();
+        }
+
         SaveData saveData = SaveData.instance;
         if(saveData != null )
         {
@@ -47,9 +54,17 @@ public class StageManager : MonoBehaviour
         Debug.Log($"{currentStageNum} Stage Start");
         if(currentStageNum == 0)
         {
-            // 임시 기능
-            return stageList[0];
+            return stageList[testStage - 1];
         }
         return stageList[currentStageNum - 1];
+    }
+
+    public int GetCurrentStageNum()
+    {
+        if(currentStageNum == 0)
+        {
+            return testStage;
+        }
+        return currentStageNum;
     }
 }

@@ -637,6 +637,7 @@ MonoBehaviour:
   gameReadyPanel: {fileID: 1288730493}
   gameOverPanel: {fileID: 3747648}
   gameClearPanel: {fileID: 175978658}
+  nextStageButton: {fileID: 1390268209}
   scoreText: {fileID: 947572109}
   isGameActive: 0
 --- !u!4 &160271011
@@ -1433,6 +1434,7 @@ MonoBehaviour:
     waveDatas:
     - nrToSpawn: 1
       spawnLimit: 1
+  testStage: 20
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
