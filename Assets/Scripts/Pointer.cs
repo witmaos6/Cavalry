@@ -25,11 +25,16 @@ public class Pointer : MonoBehaviour
         if (!GameManager.Instance.isGameActive)
             return;
 
-        Vector3 mouseScreenPos = Input.mousePosition;
-        mouseScreenPos.z = 10f;
+        Camera cam = Camera.main;
+        if (cam == null)
+            return;
 
-        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
-        mouseWorldPos.z = -0.1f;
+        Vector3 mouseScreenPos = Input.mousePosition;
+        float distanceFromCamera = Mathf.Abs(cam.transform.position.z);
+        mouseScreenPos.z = distanceFromCamera;
+
+        Vector3 mouseWorldPos = cam.ScreenToWorldPoint(mouseScreenPos);
+        mouseWorldPos.z = 0f;
         transform.position = mouseWorldPos;
     }
 
