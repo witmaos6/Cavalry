@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rjsgml_Enemy
   hp: 10
-  moveSpeed: 6
+  moveSpeed: 3
   attackRate: 2
   damage: 1
 --- !u!61 &1885517594142106264

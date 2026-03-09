@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rjsgml_Enemy
   hp: 10
-  moveSpeed: 6
+  moveSpeed: 2
   attackRate: 4
   damage: 1
 --- !u!61 &1885517594142106264
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRangeAttack
   weight: 1
   damage: 1
-  attackDistance: 10
+  attackDistance: 15
   bulletPrefabs: {fileID: 6754999010799585638, guid: fd2a2506d26dbf246a793550869a7680, type: 3}
 --- !u!1 &5074700735689249557
 GameObject:

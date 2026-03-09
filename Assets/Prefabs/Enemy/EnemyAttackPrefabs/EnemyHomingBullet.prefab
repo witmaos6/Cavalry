@@ -156,7 +156,7 @@ MonoBehaviour:
   maxSpeed: 12
   acceleration: 2
   rotateSpeed: 300
-  lifeTime: 4
+  lifeTime: 3
   reflectionSpeed: 30
 --- !u!50 &4842331588790932900
 Rigidbody2D:
