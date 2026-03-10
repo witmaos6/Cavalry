@@ -7,13 +7,10 @@ public class FollowCamera : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = GameObject.Find("Player");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(player == null)
+        {
+            player = GameObject.Find("Player");
+        }
     }
 
     private void LateUpdate()

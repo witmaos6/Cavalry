@@ -15,11 +15,6 @@ public class Arrow : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-    }
-
     public void Setup(bool fullCharge, float powerMultiplier)
     {
         isFullCharge = fullCharge;
@@ -32,12 +27,6 @@ public class Arrow : MonoBehaviour
             float finalLifeTime = baseLifeTime * powerMultiplier;
             Destroy(gameObject, finalLifeTime);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

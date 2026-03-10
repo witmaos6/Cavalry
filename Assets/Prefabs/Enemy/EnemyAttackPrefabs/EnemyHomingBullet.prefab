@@ -152,9 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55890be34122d741a7d320f8f5acbca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HomingBullet
-  minSpeed: 5
-  maxSpeed: 12
-  acceleration: 2
+  minSpeed: 7
+  maxSpeed: 15
+  acceleration: 3
   rotateSpeed: 300
   lifeTime: 3
   reflectionSpeed: 30

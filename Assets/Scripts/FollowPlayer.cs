@@ -13,12 +13,6 @@ public class FollowPlayer : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void LateUpdate()
     {
         if (!GameManager.Instance.isGameActive)
