@@ -1,12 +1,17 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 [System.Serializable]
 public class GameData
 {
+    public enum SkillID { Guard, Reflection, Dummy, Dash }
+
     public int clearStage = 0;
-    // To do: 스킬 포인트
-    // To do: 스킬 포인트 분배 정보
+    public int totalSkillPoint = 3; // To do: 임시 포인트
+    public int allocatedPoint = 0;
+    public int remainPoint = 3;
+    public List<SkillID> skillSet = new List<SkillID>();
 }
 
 public class SaveData : MonoBehaviour

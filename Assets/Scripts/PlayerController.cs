@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameData;
 
 
 public class PlayerController : MonoBehaviour
@@ -13,8 +16,6 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     public float moveSpeed = 5.0f;
     private Vector2 lastMoveDir;
-
-    private Rigidbody2D rb;
 
     [Header("Attack Settings")]
     public GameObject arrowPrefab;
@@ -49,14 +50,34 @@ public class PlayerController : MonoBehaviour
     public Slider hpSlider;
 
     private bool isCharging = false;
+    private Rigidbody2D rb;
+    private Dictionary<SkillID, bool> skillUnlockStatus = new Dictionary<SkillID, bool>();
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         guard = GetComponent<Guard>();
         reflection = GetComponent<Reflection>();
+
+        InitSkillSet();
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    void InitSkillSet()
+    {
+        PlayerSkillManager skillManager = GetComponent<PlayerSkillManager>();
+        if (skillManager == null)
+            return;
+        
+        GameData gameData = skillManager.GetGameData();
+        if (gameData == null)
+            return;
+
+        foreach (SkillID skillId in Enum.GetValues(typeof(SkillID)))
+        {
+            skillUnlockStatus[skillId] = gameData.skillSet.Contains(skillId);
+        }
+    }
+    
     void Start()
     {
         if(hpSlider != null)
@@ -165,6 +186,9 @@ public class PlayerController : MonoBehaviour
 
     void Dash()
     {
+        if (!skillUnlockStatus[SkillID.Dash])
+            return;
+
         if (!canDash)
             return;
 
@@ -190,6 +214,9 @@ public class PlayerController : MonoBehaviour
 
     void SpawnDummy()
     {
+        if (!skillUnlockStatus[SkillID.Dummy])
+            return;
+
         if (!canDummy)
             return;
 
@@ -218,13 +245,16 @@ public class PlayerController : MonoBehaviour
 
     void ActivateHwando()
     {
+        if (!skillUnlockStatus[SkillID.Guard] && !skillUnlockStatus[SkillID.Reflection])
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
-            if (hwandoType == HwandoType.Guard)
+            if (skillUnlockStatus[SkillID.Guard])
             {
                 activateHwando = guard.ActivateGuard();
             }
-            else if (hwandoType == HwandoType.Reflection)
+            else if (skillUnlockStatus[SkillID.Reflection])
             {
                 activateHwando = reflection.ActivateReflection();
             }
@@ -249,5 +279,15 @@ public class PlayerController : MonoBehaviour
 
             GameManager.Instance.GameOver();
         }
+    }
+
+    public void SkillUnlock(SkillID skillID)
+    {
+        skillUnlockStatus[skillID] = true;
+    }
+
+    public void SkillLock(SkillID skillID)
+    {
+        skillUnlockStatus[skillID] = false;
     }
 }
