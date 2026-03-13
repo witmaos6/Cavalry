@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     private bool canDummy = true;
 
     [Header("Hwando Settings")]
-    public HwandoType hwandoType = HwandoType.Guard;
+    public HwandoType hwandoType = HwandoType.Guard; // To do: 삭제 예정
     private Guard guard;
     private Reflection reflection;
     private bool activateHwando = false;

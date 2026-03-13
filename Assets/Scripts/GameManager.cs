@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverPanel;
     public GameObject gameClearPanel;
     public GameObject nextStageButton;
+    public GameObject playerSkillPanel;
 
     [Header("Score Settings")]
     public TextMeshProUGUI scoreText;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
         isGameActive = true;
         Cursor.visible = false;
         gameReadyPanel.SetActive(false);
+        playerSkillPanel.SetActive(false);
 
         SpawnManager spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         if(spawnManager != null )
@@ -50,7 +52,8 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = false;
         Cursor.visible = true;
-        gameOverPanel.gameObject.SetActive(true);
+        gameOverPanel.SetActive(true);
+        playerSkillPanel.SetActive(true);
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach(GameObject enemy in enemies)
@@ -63,7 +66,8 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = false;
         Cursor.visible = true;
-        gameClearPanel.gameObject.SetActive(true);
+        gameClearPanel.SetActive(true);
+        playerSkillPanel.SetActive(true);
 
         StageManager stageManager = StageManager.instance;
         if(stageManager != null)

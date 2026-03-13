@@ -19,25 +19,33 @@ public class PlayerSkillManager : MonoBehaviour
     private void Awake()
     {
         SaveData saveData = SaveData.instance;
-        if(saveData != null )
+        if (saveData != null)
         {
             gameData = saveData.LoadGame();
         }
-
-        skillPanel.SetActive(false);
-
         guardSkill.onClick.AddListener(OnClickGuardSkill);
         reflectionSkill.onClick.AddListener(OnClickReflectionSkill);
         dummySkill.onClick.AddListener(OnClickDummySkill);
         dashSkill.onClick.AddListener(OnClickDashSkill);
-
-        InitSkillToggle();
     }
 
-    void InitSkillToggle()
+    private void Start()
     {
+        InitSkillSet();
+    }
+
+    void InitSkillSet()
+    {
+        PlayerController playerController = GetComponent<PlayerController>();
+        if(playerController == null)
+        {
+            return;
+        }
+
         foreach(SkillID skillId in gameData.skillSet)
         {
+            playerController.SkillUnlock(skillId);
+
             if(skillId == SkillID.Dummy)
             {
                 ToggleOn(dummySkill);
@@ -74,21 +82,6 @@ public class PlayerSkillManager : MonoBehaviour
             }
         }
         return gameData;
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            if(skillPanel.gameObject.activeSelf)
-            {
-                skillPanel.SetActive(false);
-            }
-            else
-            {
-                skillPanel.SetActive(true);
-            }
-        }
     }
 
     public void OnClickGuardSkill()
@@ -217,6 +210,7 @@ public class PlayerSkillManager : MonoBehaviour
             }
 
             SkillUnlock(skillID);
+            SaveSkillSet();
         }
         else
         {
@@ -226,7 +220,7 @@ public class PlayerSkillManager : MonoBehaviour
 
     void RefundSkillPoint(SkillID skillID)
     {
-        if(!gameData.skillSet.Contains(skillID))
+        if (!gameData.skillSet.Contains(skillID))
         {
             Debug.Log("It doesn't exist");
             return;
@@ -242,6 +236,7 @@ public class PlayerSkillManager : MonoBehaviour
         }
 
         SkillLock(skillID);
+        SaveSkillSet();
     }
 
     void SkillUnlock(SkillID skillID)
@@ -259,6 +254,15 @@ public class PlayerSkillManager : MonoBehaviour
         if (playerController != null)
         {
             playerController.SkillLock(skillID);
+        }
+    }
+
+    void SaveSkillSet()
+    {
+        SaveData saveData = SaveData.instance;
+        if (saveData != null)
+        {
+            saveData.SaveGame(gameData);
         }
     }
 }
