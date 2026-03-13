@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
         if(h != 0 || v != 0)
         {
             Vector2 targetDir = new Vector2(h, v).normalized;
-            lastMoveDir = Vector2.Lerp(lastMoveDir, targetDir, 0.5f);
+            lastMoveDir = Vector2.Lerp(lastMoveDir, targetDir, 0.1f);
 
             float angle = Mathf.Atan2(lastMoveDir.y, lastMoveDir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle - 90.0f);
