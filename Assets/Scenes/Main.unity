@@ -234,7 +234,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: -78}
+  m_AnchoredPosition: {x: 150, y: -75}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &27742770
@@ -777,7 +777,6 @@ MonoBehaviour:
   gameClearPanel: {fileID: 175978658}
   nextStageButton: {fileID: 1390268209}
   playerSkillPanel: {fileID: 1560404702}
-  scoreText: {fileID: 0}
   isGameActive: 0
 --- !u!4 &160271011
 Transform:
@@ -1874,7 +1873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 311.8955, y: 0.2444}
+  m_AnchoredPosition: {x: 149.51, y: -27.256}
   m_SizeDelta: {x: 459.0234, y: 24.5112}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &578473003
@@ -2396,7 +2395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: -23}
+  m_AnchoredPosition: {x: 150, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &799069918
@@ -2530,7 +2529,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 207.12, y: 0}
+  m_AnchoredPosition: {x: 47.116, y: -27.5}
   m_SizeDelta: {x: 254.2325, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &825318630
@@ -2667,7 +2666,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 210, y: 0}
+  m_AnchoredPosition: {x: 47.116, y: -27.5}
   m_SizeDelta: {x: 254.2325, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &825914896
@@ -3676,8 +3675,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 311.8955, y: 0}
-  m_SizeDelta: {x: 459.0234, y: 24.5112}
+  m_AnchoredPosition: {x: 36.86644, y: -27.902592}
+  m_SizeDelta: {x: 233.7363, y: 25.8043}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1112624407
 MonoBehaviour:
@@ -4302,7 +4301,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: 80}
+  m_AnchoredPosition: {x: 150, y: 150}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1412275906
@@ -5005,7 +5004,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 250, y: 30}
+  m_AnchoredPosition: {x: 150, y: 75}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1708052133
