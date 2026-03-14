@@ -14,10 +14,6 @@ public class GameManager : MonoBehaviour
     public GameObject nextStageButton;
     public GameObject playerSkillPanel;
 
-    [Header("Score Settings")]
-    public TextMeshProUGUI scoreText;
-    private int score;
-
     public bool isGameActive = false;
 
     private void Awake()
@@ -43,9 +39,6 @@ public class GameManager : MonoBehaviour
         {
             playerController.hpSlider.gameObject.SetActive(true);
         }
-
-        scoreText.gameObject.SetActive(true);
-        UpdateScoreUI();
     }
 
     public void GameOver()
@@ -90,22 +83,6 @@ public class GameManager : MonoBehaviour
         gameReadyPanel.gameObject.SetActive(true);
         gameOverPanel.gameObject.SetActive(false);
         gameClearPanel.gameObject.SetActive(false);
-        score = 0;
-        scoreText.gameObject.SetActive(false);        
-    }
-
-    public void AddScore(int amount)
-    {
-        score += amount;
-        UpdateScoreUI();
-    }
-
-    void UpdateScoreUI()
-    {
-        if(scoreText != null)
-        {
-            scoreText.text = "Score: " + score;
-        }
     }
 
     public void NextStage()

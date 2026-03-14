@@ -35,11 +35,6 @@ public class Arrow : MonoBehaviour
         {
             Destroy(collision.gameObject);
 
-            if (GameManager.Instance != null)
-            {
-                GameManager.Instance.AddScore(30);
-            }
-
             if (!isFullCharge)
             {
                 Destroy(gameObject);   

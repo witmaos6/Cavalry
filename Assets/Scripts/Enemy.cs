@@ -146,11 +146,6 @@ public class Enemy : MonoBehaviour
         {
             isDead = true;
 
-            if(GameManager.Instance != null)
-            {
-                GameManager.Instance.AddScore(originHP);
-            }
-
             CancelInvoke("UtilityCheck");
             if(dead != null)
             {
