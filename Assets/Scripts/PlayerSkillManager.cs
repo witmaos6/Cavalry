@@ -47,12 +47,12 @@ public class PlayerSkillManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.isGameActive)
+        if (!GameManager.instance.isSkillManagerActive)
             return;
 
         if(Input.GetKeyDown(KeyCode.M))
         {
-            GameManager.Instance.ToggleSkillPanel();
+            GameManager.instance.ToggleSkillPanel();
         }
     }
 

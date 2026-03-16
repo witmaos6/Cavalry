@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,20 +6,33 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager instance;
 
     [Header("UI Panels")]
+    public GameObject stageSelectPanel;
     public GameObject gameReadyPanel;
-    public GameObject gameOverPanel;
+    public GameObject gamelosePanel;
     public GameObject gameClearPanel;
     public GameObject nextStageButton;
     public GameObject playerSkillPanel;
 
     public bool isGameActive = false;
+    public bool isSkillManagerActive = false;
 
     private void Awake()
     {
-        Instance = this;
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        stageSelectPanel.SetActive(true);
+        gameReadyPanel.SetActive(false);
+        gamelosePanel.SetActive(false);
+        gameClearPanel.SetActive(false);
+        playerSkillPanel.SetActive(false);
     }
 
     public void StartGame()
@@ -28,9 +42,12 @@ public class GameManager : MonoBehaviour
         gameReadyPanel.SetActive(false);
         playerSkillPanel.SetActive(false);
 
+        isSkillManagerActive = false;
+
         SpawnManager spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         if(spawnManager != null )
         {
+            spawnManager.InitStageInfo();
             spawnManager.StartSpawning();
         }
 
@@ -45,7 +62,7 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = false;
         Cursor.visible = true;
-        gameOverPanel.SetActive(true);
+        gamelosePanel.SetActive(true);
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach(GameObject enemy in enemies)
@@ -72,16 +89,31 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        gameReadyPanel.SetActive(true);
-        gameOverPanel.SetActive(false);
-        gameClearPanel.SetActive(false);
-        playerSkillPanel.SetActive(false);
+        StartCoroutine(AutoStageSelect());
+    }
+
+    IEnumerator AutoStageSelect()
+    {
+        yield return new WaitForEndOfFrame();
+
+        StageSelectManager stageSelectManager = GetComponent<StageSelectManager>();
+        if (stageSelectManager != null)
+        {
+            SaveData saveData = SaveData.instance;
+            if (saveData != null)
+            {
+                stageSelectManager.OnStageButtonClicked(saveData.stageNum);
+            }
+        }
+
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     public void NextStage()
@@ -90,6 +122,8 @@ public class GameManager : MonoBehaviour
         if(saveData != null )
         {
             saveData.stageNum++;
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
@@ -108,9 +142,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void StageSelect()
+    public void GoToHome()
     {
         SceneManager.LoadScene("Home");
-        // To do: 임시로 홈으로 가는 기능 설정, 이후에 스테이지 선택 화면으로 가는 기능 구현
+    }
+
+    public void OpenStageSelectPanel()
+    {
+        gameReadyPanel.SetActive(false);
+        gamelosePanel.SetActive(false);
+        gameClearPanel.SetActive(false);
+        stageSelectPanel.SetActive(true);
+
+        isSkillManagerActive = false;
+    }
+
+    public void OpenGameReadyPanel()
+    {
+        gameReadyPanel.SetActive(true);
+        stageSelectPanel.SetActive(false);
+
+        isSkillManagerActive = true;
     }
 }

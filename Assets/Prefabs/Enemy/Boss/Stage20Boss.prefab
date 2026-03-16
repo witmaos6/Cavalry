@@ -256,11 +256,8 @@ MonoBehaviour:
   weight: 1
   damage: 1
   attackDistance: 13
-  warningPrefab: {fileID: 280639966482328847, guid: c28fca6a07cb0fc44a310e31ce555751, type: 3}
-  explosionPrefab: {fileID: 280639966482328847, guid: 8ba542a22b5d0fb44a917c71ac72b511, type: 3}
+  ArtilleryBullet: {fileID: 3638201243279558330, guid: d1d18c072cb9b1048801405e5e44f0f6, type: 3}
   targetRandomRadius: 2
-  delayTime: 1
-  explosionRadius: 1.5
 --- !u!114 &6028442476026876339
 MonoBehaviour:
   m_ObjectHideFlags: 0

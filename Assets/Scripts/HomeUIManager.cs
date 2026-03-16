@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HomeUIManager : MonoBehaviour
@@ -8,12 +9,10 @@ public class HomeUIManager : MonoBehaviour
 
     [Header("Panels")]
     public GameObject mainMenuPanel;
-    public GameObject stageSelectPanel;
 
     [Header("Buttons")]
     public Button newGameButton;
     public Button continueGameButton;
-    public Button backToMenu;
     public Button quitGame;
 
     private void Awake()
@@ -23,19 +22,12 @@ public class HomeUIManager : MonoBehaviour
 
     void Start()
     {
-        ShowMainMenu();
+        mainMenuPanel.SetActive(true);
 
         newGameButton.onClick.AddListener(OnNewGameClicked);
         continueGameButton.onClick.AddListener(OnContinueGameClicked);
 
-        backToMenu.onClick.AddListener(ShowMainMenu);
         quitGame.onClick.AddListener(QuitGame);
-    }
-
-    void ShowMainMenu()
-    {
-        mainMenuPanel.SetActive(true);
-        stageSelectPanel.SetActive(false);
     }
 
     void OnNewGameClicked()
@@ -45,7 +37,7 @@ public class HomeUIManager : MonoBehaviour
             saveData.CreateNewGame();
         }
 
-        ShowStageSelect();
+        ToMainLevel();
     }
 
     void OnContinueGameClicked()
@@ -53,20 +45,12 @@ public class HomeUIManager : MonoBehaviour
         GameData data = saveData.LoadGame();
         Debug.Log($"Load Scuccess 도달 스테이지: {data.clearStage} ");
 
-        ShowStageSelect();
+        ToMainLevel();
     }
 
-    void ShowStageSelect()
+    void ToMainLevel()
     {
-        mainMenuPanel.SetActive(false);
-        stageSelectPanel.SetActive(true);
-
-        StageSelectManager stageSelectManager = GetComponent<StageSelectManager>();
-        if(stageSelectManager != null )
-        {
-            // stageSelectManager.GenerateStageButtons();
-            // To do: 필요하면 추가
-        }
+        SceneManager.LoadScene("Main");
     }
 
     void QuitGame()

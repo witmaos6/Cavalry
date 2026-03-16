@@ -39,14 +39,13 @@ public class StageManager : MonoBehaviour
     {
         if(instance == null)
         {
-            instance = GetComponent<StageManager>();
-        }
+            instance = this;
+        }       
+    }
 
-        SaveData saveData = SaveData.instance;
-        if(saveData != null )
-        {
-            currentStageNum = saveData.stageNum;
-        }
+    public void SetStage(int stageNum)
+    {
+        currentStageNum = stageNum;
     }
 
     public StageInfo GetCurrentStage()

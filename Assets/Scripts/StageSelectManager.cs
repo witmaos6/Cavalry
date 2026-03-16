@@ -23,6 +23,8 @@ public class StageSelectManager : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        saveDataProcessor = SaveData.instance;
+
         GameData data = saveDataProcessor.LoadGame();
         int availableStages = Mathf.Min(data.clearStage + 1, maxTotalStage);
 
@@ -46,13 +48,24 @@ public class StageSelectManager : MonoBehaviour
         }
     }
 
-    void OnStageButtonClicked(int stageNum)
+    public void OnStageButtonClicked(int stageNum)
     {
         SaveData saveData = SaveData.instance;
         if (saveData != null)
         {
             saveData.stageNum = stageNum;
-            SceneManager.LoadScene("Main");
+
+            StageManager stageManager = StageManager.instance;
+            if(stageManager != null)
+            {
+                stageManager.SetStage(stageNum);
+            }
+
+            GameManager gameManager = GameManager.instance;
+            if (gameManager != null)
+            {
+                gameManager.OpenGameReadyPanel();
+            }
         }
         else
         {

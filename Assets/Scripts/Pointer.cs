@@ -17,7 +17,7 @@ public class Pointer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.isGameActive)
+        if (!GameManager.instance.isGameActive)
             return;
 
         Camera cam = Camera.main;

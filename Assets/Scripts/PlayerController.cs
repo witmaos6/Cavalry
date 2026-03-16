@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.isGameActive)
+        if (!GameManager.instance.isGameActive)
         {
             return;
         }
@@ -305,7 +305,7 @@ public class PlayerController : MonoBehaviour
         {
             isDead = true;
 
-            GameManager.Instance.GameOver();
+            GameManager.instance.GameOver();
         }
     }
 

@@ -17,16 +17,15 @@ public class SpawnManager : MonoBehaviour
     public int waveNum = 0;
     private int currentSpawnEnemy = 0;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void InitStageInfo()
     {
         stageManager = GetComponent<StageManager>();
-        if(stageManager != null)
+        if (stageManager != null)
         {
             currentStage = stageManager.GetCurrentStage();
         }
 
-        if(currentStage != null)
+        if (currentStage != null)
         {
             foreach (var data in currentStage.enemySpawnDatas)
             {
@@ -42,7 +41,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnRoutine()
     {
-        while(GameManager.Instance.isGameActive)
+        while(GameManager.instance.isGameActive)
         {
             yield return new WaitForSeconds(spawnRate);
 
@@ -76,7 +75,7 @@ public class SpawnManager : MonoBehaviour
         if (currentStage.enemySpawnDatas.Length == 0)
             return;
 
-        if (!GameManager.Instance.isGameActive)
+        if (!GameManager.instance.isGameActive)
             return;
 
         // 1. 가중치 기반으로 랜덤 인덱스 선택
@@ -139,7 +138,7 @@ public class SpawnManager : MonoBehaviour
                     }
                 }
             }
-            GameManager gameManager = GameManager.Instance;
+            GameManager gameManager = GameManager.instance;
             if (gameManager != null)
             {
                 gameManager.GameClear();

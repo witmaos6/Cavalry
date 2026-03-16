@@ -15,7 +15,7 @@ public class FollowPlayer : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!GameManager.Instance.isGameActive)
+        if (!GameManager.instance.isGameActive)
             return;
 
         transform.position = player.transform.position + offSet;
