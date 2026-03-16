@@ -68,12 +68,18 @@ public class EnemyShield : EnemyUtilityBase
     private Transform FindEndanger(Vector2 arrowPos, Vector2 arrowDir)
     {
         Collider2D[] Find = Physics2D.OverlapCircleAll(transform.position, protectRange, LayerMask.GetMask("Enemy"));
+        DrawDebugBoundary();
+        
         float minDot = float.MaxValue;
         Transform closestEndangerd = null;
 
         foreach (var enemy in Find)
         {
             if (enemy.gameObject == this.gameObject)
+                continue;
+
+            EnemyShield enemyShield = enemy.GetComponent<EnemyShield>();
+            if (enemyShield != null)
                 continue;
 
             Vector2 enemyPos = enemy.transform.position;
@@ -136,6 +142,16 @@ public class EnemyShield : EnemyUtilityBase
             {
                 playerController.shotArrow -= ActivateIntercept;
             }
+        }
+    }
+
+    void DrawDebugBoundary()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            float angle = i * 45f * Mathf.Deg2Rad;
+            Vector3 dir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
+            Debug.DrawRay(transform.position, dir * protectRange, Color.red, 0.5f);
         }
     }
 }
