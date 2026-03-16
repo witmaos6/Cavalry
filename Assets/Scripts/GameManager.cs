@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         Cursor.visible = true;
         gameOverPanel.SetActive(true);
-        playerSkillPanel.SetActive(true);
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach(GameObject enemy in enemies)
@@ -60,7 +59,6 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         Cursor.visible = true;
         gameClearPanel.SetActive(true);
-        playerSkillPanel.SetActive(true);
 
         StageManager stageManager = StageManager.instance;
         if(stageManager != null)
@@ -80,9 +78,10 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameReadyPanel.gameObject.SetActive(true);
-        gameOverPanel.gameObject.SetActive(false);
-        gameClearPanel.gameObject.SetActive(false);
+        gameReadyPanel.SetActive(true);
+        gameOverPanel.SetActive(false);
+        gameClearPanel.SetActive(false);
+        playerSkillPanel.SetActive(false);
     }
 
     public void NextStage()
@@ -92,6 +91,20 @@ public class GameManager : MonoBehaviour
         {
             saveData.stageNum++;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
+    public void ToggleSkillPanel()
+    {
+        if(gameReadyPanel.activeSelf)
+        {
+            gameReadyPanel.SetActive(false);
+            playerSkillPanel.SetActive(true);
+        }
+        else
+        {
+            gameReadyPanel.SetActive(true);
+            playerSkillPanel.SetActive(false);
         }
     }
 

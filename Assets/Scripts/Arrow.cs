@@ -3,20 +3,23 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     public float normalSpeed = 50.0f;
+    public float baseLifeTime = 1.5f;
 
     private Rigidbody2D rb;
     
     private bool isFullCharge = false;
 
-    public float baseLifeTime = 1.5f;
+    public GameObject owner;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void Setup(bool fullCharge, float powerMultiplier)
+    public void Setup(bool fullCharge, float powerMultiplier, GameObject inOwner)
     {
+        owner = inOwner;
+
         isFullCharge = fullCharge;
 
         float finalSpeed = normalSpeed * powerMultiplier;
@@ -33,11 +36,20 @@ public class Arrow : MonoBehaviour
     {
         if (collision.CompareTag("EnemyBullet"))
         {
+            PlayerController playerController = owner.GetComponent<PlayerController>();
+            if(playerController != null)
+            {
+                if(playerController.IsUnlockSkill(GameData.SkillID.OnemoreTimeShot))
+                {
+                    playerController.ResetAttackCoolDown();
+                }
+            }
+
             Destroy(collision.gameObject);
 
             if (!isFullCharge)
             {
-                Destroy(gameObject);   
+                Destroy(gameObject);
             }
         }
         else if(collision.CompareTag("Enemy"))

@@ -53,6 +53,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Dictionary<SkillID, bool> skillUnlockStatus = new Dictionary<SkillID, bool>();
 
+    Coroutine attackCoolDownCoroutine;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -149,7 +151,8 @@ public class PlayerController : MonoBehaviour
             if(Input.GetMouseButtonUp(1))
             {
                 Fire(chargeTimer >= maxChargeTime);
-                StartCoroutine(AttackCooldownTimer(chargeTimer >= maxChargeTime));
+                attackCoolDownCoroutine = StartCoroutine(AttackCooldownTimer(chargeTimer >= maxChargeTime));
+
                 isCharging = false;
                 chargeTimer = 0f;
 
@@ -160,19 +163,32 @@ public class PlayerController : MonoBehaviour
 
     void Fire(bool isFull)
     {
-        GameObject arrow = Instantiate(arrowPrefab, firePoint.position, firePoint.rotation);
-        if(shotArrow != null)
-        {
-            shotArrow.Invoke(firePoint.position, firePoint.up);
-        }
+        float power = Mathf.Clamp(chargeTimer, 0.5f, 1.5f);
 
+        CreateArrow(firePoint.rotation, isFull, power);
+
+        shotArrow?.Invoke(firePoint.position, firePoint.up);
+
+        if (skillUnlockStatus[SkillID.MultipleShot])
+        {
+            Quaternion leftRot = firePoint.rotation * Quaternion.Euler(0, 0, 30f);
+            CreateArrow(leftRot, isFull, power);
+
+            Quaternion rightRot = firePoint.rotation * Quaternion.Euler(0, 0, -30f);
+            CreateArrow(rightRot, isFull, power);
+        }
+    }
+
+    void CreateArrow(Quaternion rotation, bool isFull, float power)
+    {
+        GameObject arrow = Instantiate(arrowPrefab, firePoint.position, rotation);
         Arrow arrowScript = arrow.GetComponent<Arrow>();
         if (arrowScript != null)
         {
-            float power = Mathf.Clamp(chargeTimer, 0.5f, 1.5f);
-            arrowScript.Setup(isFull, power);
+            arrowScript.Setup(isFull, power, gameObject);
         }
     }
+
     IEnumerator AttackCooldownTimer(bool isFull)
     {
         canAttack = false;
@@ -182,6 +198,18 @@ public class PlayerController : MonoBehaviour
 
         canAttack = true;
         pointer.SetCooldown(false);
+    }
+
+    public void ResetAttackCoolDown()
+    {
+        if(attackCoolDownCoroutine != null)
+        {
+            StopCoroutine(attackCoolDownCoroutine);
+            attackCoolDownCoroutine = null;
+
+            canAttack = true;
+            pointer.SetCooldown(false);
+        }
     }
 
     void Dash()
@@ -279,6 +307,11 @@ public class PlayerController : MonoBehaviour
 
             GameManager.Instance.GameOver();
         }
+    }
+
+    public bool IsUnlockSkill(SkillID skillID)
+    {
+        return skillUnlockStatus[skillID];
     }
 
     public void SkillUnlock(SkillID skillID)

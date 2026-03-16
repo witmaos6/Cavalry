@@ -2,16 +2,23 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.Composites;
 using UnityEngine.UI;
 using static GameData;
 
 public class PlayerSkillManager : MonoBehaviour
 {
     public GameObject skillPanel;
+
+    [Header("Active Skill")]
     public Button guardSkill;
     public Button reflectionSkill;
     public Button dummySkill;
     public Button dashSkill;
+
+    [Header("Passive Skill")]
+    public Button multipleShotSkill;
+    public Button onemoreTimeSkill;
 
     private GameData gameData;
     // To do: 스킬 포인트 제한 추가
@@ -23,15 +30,30 @@ public class PlayerSkillManager : MonoBehaviour
         {
             gameData = saveData.LoadGame();
         }
+
         guardSkill.onClick.AddListener(OnClickGuardSkill);
         reflectionSkill.onClick.AddListener(OnClickReflectionSkill);
         dummySkill.onClick.AddListener(OnClickDummySkill);
         dashSkill.onClick.AddListener(OnClickDashSkill);
+
+        multipleShotSkill.onClick.AddListener(OnClickMultipleShotSkill);
+        onemoreTimeSkill.onClick.AddListener(OnClickOnemoreTimeShotSkill);
     }
 
     private void Start()
     {
         InitSkillSet();
+    }
+
+    private void Update()
+    {
+        if (GameManager.Instance.isGameActive)
+            return;
+
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            GameManager.Instance.ToggleSkillPanel();
+        }
     }
 
     void InitSkillSet()
@@ -61,6 +83,14 @@ public class PlayerSkillManager : MonoBehaviour
             else if(skillId == SkillID.Dash)
             {
                 ToggleOn(dashSkill);
+            }
+            else if(skillId == SkillID.MultipleShot)
+            {
+                ToggleOn(multipleShotSkill);
+            }
+            else if(skillId == SkillID.OnemoreTimeShot)
+            {
+                ToggleOn(onemoreTimeSkill);
             }
         }
     }
@@ -99,22 +129,7 @@ public class PlayerSkillManager : MonoBehaviour
             }
         }
 
-        if (guardSkill != null)
-        {
-            SkillToggleButton button = guardSkill.GetComponent<SkillToggleButton>();
-            if (button != null)
-            {
-                if(button.isActivated)
-                {
-                    RefundSkillPoint(SkillID.Guard);
-                }
-                else
-                {
-                    UseSkillPoint(SkillID.Guard);
-                }
-                button.ToggleSkill();
-            }
-        }
+        SkillButtonClick(guardSkill, SkillID.Guard);
     }
 
     public void OnClickReflectionSkill()
@@ -132,72 +147,60 @@ public class PlayerSkillManager : MonoBehaviour
             }
         }
 
-        if(reflectionSkill != null)
-        {
-            SkillToggleButton button = reflectionSkill.GetComponent<SkillToggleButton>();
-            if (button != null)
-            {
-                if(button.isActivated)
-                {
-                    RefundSkillPoint(SkillID.Reflection);
-                }
-                else
-                {
-                    UseSkillPoint(SkillID.Reflection);
-                }
-                button.ToggleSkill();
-            }
-        }
+        SkillButtonClick(reflectionSkill, SkillID.Reflection);
     }
 
     public void OnClickDummySkill()
     {
-        if (dummySkill == null)
-            return;
-
-        SkillToggleButton button = dummySkill.GetComponent<SkillToggleButton>();
-        if(button != null)
-        {
-            if (button.isActivated)
-            {
-                RefundSkillPoint(SkillID.Dummy);
-            }
-            else
-            {
-                UseSkillPoint(SkillID.Dummy);
-            }
-            button.ToggleSkill();
-        }
+        SkillButtonClick(dummySkill, SkillID.Dummy);
     }
 
     public void OnClickDashSkill()
     {
-        if (dashSkill == null)
+        SkillButtonClick(dashSkill, SkillID.Dash);
+    }
+
+    public void OnClickMultipleShotSkill()
+    {
+        SkillButtonClick(multipleShotSkill, SkillID.MultipleShot);
+    }
+
+    public void OnClickOnemoreTimeShotSkill()
+    {
+        SkillButtonClick(onemoreTimeSkill, SkillID.OnemoreTimeShot);
+    }
+
+    void SkillButtonClick(Button inButton, SkillID skillID)
+    {
+        if (inButton == null)
             return;
 
-        SkillToggleButton button = dashSkill.GetComponent<SkillToggleButton>();
-        if (button != null)
+        SkillToggleButton button = inButton.GetComponent<SkillToggleButton>();
+        if(button != null)
         {
-            if (button.isActivated)
+            if(button.isActivated)
             {
-                RefundSkillPoint(SkillID.Dash);
+                RefundSkillPoint(skillID);
+                button.ToggleSkill();
             }
             else
             {
-                UseSkillPoint(SkillID.Dash);
+                if(UseSkillPoint(skillID))
+                {
+                    button.ToggleSkill();
+                }
             }
-            button.ToggleSkill();
         }
     }
 
-    void UseSkillPoint(SkillID skillID)
+    bool UseSkillPoint(SkillID skillID)
     {
         if(gameData.remainPoint >= 1)
         {
             if(gameData.skillSet.Contains(skillID))
             {
                 Debug.Log("already exist");
-                return;
+                return false;
             }
             gameData.skillSet.Add(skillID);
             gameData.remainPoint--;
@@ -206,16 +209,15 @@ public class PlayerSkillManager : MonoBehaviour
             if (gameData.totalSkillPoint != gameData.remainPoint + gameData.allocatedPoint)
             {
                 Debug.Log("Skill Point Error");
-                return;
+                return false;
             }
 
             SkillUnlock(skillID);
             SaveSkillSet();
+            return true;
         }
-        else
-        {
-            Debug.Log("Not enough Skill Point");
-        }
+        Debug.Log("Not enough Skill Point");
+        return false;
     }
 
     void RefundSkillPoint(SkillID skillID)

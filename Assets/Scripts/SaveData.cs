@@ -5,7 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    public enum SkillID { Guard, Reflection, Dummy, Dash }
+    public enum SkillID { Guard, Reflection, Dummy, Dash, // Active
+    MultipleShot, OnemoreTimeShot} // Passive
 
     public int clearStage = 0;
     public int totalSkillPoint = 3; // To do: 임시 포인트
