@@ -278,6 +278,9 @@ public class PlayerController : MonoBehaviour
         if (!skillUnlockStatus[SkillID.Guard] && !skillUnlockStatus[SkillID.Reflection])
             return;
 
+        if (chargeTimer > 0.0f) // 활시위를 당기고 있을 때 환도 사용 불가
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
             if (skillUnlockStatus[SkillID.Guard])
