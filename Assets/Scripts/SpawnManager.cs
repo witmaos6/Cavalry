@@ -119,6 +119,16 @@ public class SpawnManager : MonoBehaviour
 
     void StageClearCheck()
     {
+        PlayerController playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            if(playerController.hp <= 0f)
+            {
+                CancelInvoke("StageClearCheck");
+                return;
+            }
+        }
+
         int currentEnemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
         if(currentEnemyCount == 0)
         {
