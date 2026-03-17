@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.UI;
 using static GameData;
 
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private bool canAttack = true;
     private float chargeTimer = 0;
     private float maxChargeTime = 1.5f;
+    public float attackPower = 2.0f;
 
     [Header("Dash Settings")]
     public float dashAmount = 10.0f;
@@ -322,5 +324,18 @@ public class PlayerController : MonoBehaviour
     public void SkillLock(SkillID skillID)
     {
         skillUnlockStatus[skillID] = false;
+    }
+
+    public void IncreaseAttackPowerBuff(float buffDurationTime, float amountAttackPower)
+    {
+        StartCoroutine(AttackPowerBuff(buffDurationTime, amountAttackPower));
+    }
+
+    IEnumerator AttackPowerBuff(float buffDurationTime, float amountAttackPower)
+    {
+        attackPower += amountAttackPower;
+        yield return new WaitForSeconds(buffDurationTime);
+
+        attackPower -= amountAttackPower;
     }
 }

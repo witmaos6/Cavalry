@@ -19,6 +19,8 @@ public class PlayerSkillManager : MonoBehaviour
     [Header("Passive Skill")]
     public Button multipleShotSkill;
     public Button onemoreTimeSkill;
+    public Button bigArrowSkill;
+    public Button multiKillSkill;
 
     private GameData gameData;
     // To do: 스킬 포인트 제한 추가
@@ -38,6 +40,8 @@ public class PlayerSkillManager : MonoBehaviour
 
         multipleShotSkill.onClick.AddListener(OnClickMultipleShotSkill);
         onemoreTimeSkill.onClick.AddListener(OnClickOnemoreTimeShotSkill);
+        bigArrowSkill.onClick.AddListener(OnClickBigArrowSkill);
+        multiKillSkill.onClick.AddListener(OnClickMultiKillSkill);
     }
 
     private void Start()
@@ -92,6 +96,14 @@ public class PlayerSkillManager : MonoBehaviour
             {
                 ToggleOn(onemoreTimeSkill);
             }
+            else if(skillId == SkillID.BigArrow)
+            {
+                ToggleOn(bigArrowSkill);
+            }
+            else if(skillId == SkillID.MultiKill)
+            {
+                ToggleOn(multiKillSkill);
+            }
         }
     }
 
@@ -116,36 +128,14 @@ public class PlayerSkillManager : MonoBehaviour
 
     public void OnClickGuardSkill()
     {
-        if (reflectionSkill != null)
-        {
-            SkillToggleButton toggle = reflectionSkill.GetComponent<SkillToggleButton>();
-            if (toggle != null)
-            {
-                if (toggle.isActivated)
-                {
-                    toggle.ToggleSkill();
-                    RefundSkillPoint(SkillID.Reflection);
-                }   
-            }
-        }
+        SkillLock(reflectionSkill, SkillID.Reflection);
 
         SkillButtonClick(guardSkill, SkillID.Guard);
     }
 
     public void OnClickReflectionSkill()
     {
-        if (guardSkill != null)
-        {
-            SkillToggleButton toggle = guardSkill.GetComponent<SkillToggleButton>();
-            if (toggle != null)
-            {
-                if (toggle.isActivated)
-                {
-                    toggle.ToggleSkill();
-                    RefundSkillPoint(SkillID.Guard);
-                }   
-            }
-        }
+        SkillLock(guardSkill, SkillID.Guard);
 
         SkillButtonClick(reflectionSkill, SkillID.Reflection);
     }
@@ -170,6 +160,16 @@ public class PlayerSkillManager : MonoBehaviour
         SkillButtonClick(onemoreTimeSkill, SkillID.OnemoreTimeShot);
     }
 
+    public void OnClickBigArrowSkill()
+    {
+        SkillButtonClick(bigArrowSkill, SkillID.BigArrow);
+    }
+
+    public void OnClickMultiKillSkill()
+    {
+        SkillButtonClick(multiKillSkill, SkillID.MultiKill);
+    }
+
     void SkillButtonClick(Button inButton, SkillID skillID)
     {
         if (inButton == null)
@@ -189,6 +189,22 @@ public class PlayerSkillManager : MonoBehaviour
                 {
                     button.ToggleSkill();
                 }
+            }
+        }
+    }
+
+    void SkillLock(Button inButton, SkillID skillID)
+    {
+        if (inButton == null)
+            return;
+
+        SkillToggleButton toggle = inButton.GetComponent<SkillToggleButton>();
+        if (toggle != null)
+        {
+            if (toggle.isActivated)
+            {
+                RefundSkillPoint(skillID);
+                toggle.ToggleSkill();
             }
         }
     }

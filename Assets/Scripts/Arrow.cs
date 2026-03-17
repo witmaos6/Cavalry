@@ -10,10 +10,26 @@ public class Arrow : MonoBehaviour
     private bool isFullCharge = false;
 
     public GameObject owner;
+    private PlayerController playerController;
+    private float ownerAttackPower = 0f;
+    private int hitCount = 0;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        playerController = owner.GetComponent<PlayerController>();
+        if(playerController != null)
+        {
+            playerController.IsUnlockSkill(GameData.SkillID.BigArrow);
+            {
+                transform.localScale = transform.localScale * 2f;
+            }
+            ownerAttackPower = playerController.attackPower;
+        }
     }
 
     public void Setup(bool fullCharge, float powerMultiplier, GameObject inOwner)
@@ -36,7 +52,6 @@ public class Arrow : MonoBehaviour
     {
         if (collision.CompareTag("EnemyBullet"))
         {
-            PlayerController playerController = owner.GetComponent<PlayerController>();
             if(playerController != null)
             {
                 if(playerController.IsUnlockSkill(GameData.SkillID.OnemoreTimeShot))
@@ -57,8 +72,23 @@ public class Arrow : MonoBehaviour
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if(enemy != null)
             {
-                float damage = isFullCharge ? 5 : 2;
+                float damage = ownerAttackPower;
+                if(isFullCharge)
+                {
+                    damage *= 2.5f;
+                }
                 enemy.TakeDamage(damage);
+            }
+
+            if(playerController.IsUnlockSkill(GameData.SkillID.MultiKill))
+            {
+                hitCount++;
+
+                if(hitCount >= 3)
+                {
+                    playerController.IncreaseAttackPowerBuff(5f, 2f);
+                    playerController.ResetAttackCoolDown();
+                }
             }
 
             if(!isFullCharge)

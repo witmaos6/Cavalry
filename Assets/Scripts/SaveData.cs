@@ -8,7 +8,7 @@ public class GameData
     public enum SkillID
     {
         Guard, Reflection, Dummy, Dash, // Active
-        MultipleShot, OnemoreTimeShot // Passive
+        MultipleShot, OnemoreTimeShot, BigArrow, MultiKill // Passive
     } 
 
     public int clearStage = 0;
