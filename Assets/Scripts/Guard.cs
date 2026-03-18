@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Guard : MonoBehaviour
 {
@@ -58,7 +59,7 @@ public class Guard : MonoBehaviour
         if (cam == null)
             return;
 
-        Vector3 mouseScreenPos = Input.mousePosition;
+        Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
         float distanceFromCamera = Mathf.Abs(cam.transform.position.z);
         mouseScreenPos.z = distanceFromCamera;
 

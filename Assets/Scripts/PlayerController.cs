@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.UI;
 using static GameData;
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Dictionary<SkillID, bool> skillUnlockStatus = new Dictionary<SkillID, bool>();
 
-    private PlayerControls controls;
+    PlayerControls controls;
 
     Coroutine attackCoolDownCoroutine;
 
@@ -65,31 +66,57 @@ public class PlayerController : MonoBehaviour
         guard = GetComponent<Guard>();
         reflection = GetComponent<Reflection>();
 
-        controls = new PlayerControls();
-
-        // InitInputSet(); // To do: 콜백 방식으로 변경 시 추가
+        InitInputSet();
 
         InitSkillSet();
     }
 
-    //void InitInputSet()
-    //{
-    //    controls.Player.ArrowCharge.started += ctx =>
-    //    {
-    //        if (canAttack)
-    //        {
-    //            isCharging = true;
-    //        }
-    //    };
+    void InitInputSet()
+    {
+        controls = InputManager.instance.controls;
+        // Shot Arrow
+        //controls.Player.ArrowCharge.started += ctx =>
+        //{
+        //    if (canAttack)
+        //    {
+        //        isCharging = true;
+        //    }
+        //};
 
-    //    controls.Player.ArrowCharge.canceled += ctx =>
-    //    {
-    //        if(isCharging)
-    //        {
-    //            //  To do: ExecuteAttack();으로 발사 로직 추가
-    //        }
-    //    }
-    //}
+        //controls.Player.ArrowCharge.canceled += ctx =>
+        //{
+        //    if (isCharging)
+        //    {
+        //        //  To do: ExecuteAttack();으로 발사 로직 추가
+        //    }
+        //}
+
+        controls.Player.Dummy.started += ctx =>
+        {
+            if (GameManager.instance.isGameActive)
+            {
+                SpawnDummy();
+            }
+        };
+
+        controls.Player.Dash.started += ctx =>
+        {
+            if(GameManager.instance.isGameActive)
+            {
+                Dash();
+            }
+        };
+
+        controls.Player.Hwando.started += ctx =>
+        {
+            if (GameManager.instance.isGameActive)
+            {
+                ActivateHwando();
+            }
+        };
+
+        controls.Enable();
+    }
 
     void InitSkillSet()
     {
@@ -106,18 +133,16 @@ public class PlayerController : MonoBehaviour
             skillUnlockStatus[skillId] = gameData.skillSet.Contains(skillId);
         }
     }
-    
+
     void Start()
     {
-        if(hpSlider != null)
+        if (hpSlider != null)
         {
             hpSlider.gameObject.SetActive(false);
             hpSlider.maxValue = hp;
             hpSlider.value = hp;
         }
     }
-    private void OnEnable() => controls.Enable();
-    private void OnDisable() => controls.Disable();
 
     // Update is called once per frame
     void Update()
@@ -134,12 +159,6 @@ public class PlayerController : MonoBehaviour
             {
                 Attack();
             }
-
-            Dash();
-
-            SpawnDummy();
-
-            ActivateHwando();
         }
     }
 
@@ -248,12 +267,9 @@ public class PlayerController : MonoBehaviour
         if (!canDash)
             return;
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.AddForce(transform.up * dashAmount, ForceMode2D.Impulse);
+        rb.AddForce(transform.up * dashAmount, ForceMode2D.Impulse);
 
-            StartCoroutine(DashCooldownTimer());
-        }
+        StartCoroutine(DashCooldownTimer());
     }
 
     IEnumerator DashCooldownTimer()
@@ -276,20 +292,17 @@ public class PlayerController : MonoBehaviour
         if (!canDummy)
             return;
 
-        if(Input.GetKeyDown(KeyCode.LeftShift))
+        GameObject spawnedDummy = Instantiate(dummy, pointer.transform.position, pointer.transform.rotation);
+        if (spawnedDummy != null)
         {
-            GameObject spawnedDummy = Instantiate(dummy, pointer.transform.position, pointer.transform.rotation);
-            if(spawnedDummy != null)
+            Dummy dummyComp = spawnedDummy.GetComponent<Dummy>();
+            if (dummyComp != null)
             {
-                Dummy dummyComp = spawnedDummy.GetComponent<Dummy>();
-                if(dummyComp != null)
-                {
-                    dummyComp.SetOwner(gameObject);
-                }
+                dummyComp.SetOwner(gameObject);
             }
-
-            StartCoroutine(DummyCoolDown());
         }
+
+        StartCoroutine(DummyCoolDown());
     }
 
     IEnumerator DummyCoolDown()
@@ -307,16 +320,13 @@ public class PlayerController : MonoBehaviour
         if (chargeTimer > 0.0f) // 활시위를 당기고 있을 때 환도 사용 불가
             return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (skillUnlockStatus[SkillID.Guard])
         {
-            if (skillUnlockStatus[SkillID.Guard])
-            {
-                activateHwando = guard.ActivateGuard();
-            }
-            else if (skillUnlockStatus[SkillID.Reflection])
-            {
-                activateHwando = reflection.ActivateReflection();
-            }
+            activateHwando = guard.ActivateGuard();
+        }
+        else if (skillUnlockStatus[SkillID.Reflection])
+        {
+            activateHwando = reflection.ActivateReflection();
         }
     }
 

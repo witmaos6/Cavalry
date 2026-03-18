@@ -9,10 +9,13 @@ public class HomeUIManager : MonoBehaviour
 
     [Header("Panels")]
     public GameObject mainMenuPanel;
+    public GameObject customKeyPanel;
 
     [Header("Buttons")]
     public Button newGameButton;
     public Button continueGameButton;
+    public Button keySettingButton;
+    public Button goToHome;
     public Button quitGame;
 
     private void Awake()
@@ -23,9 +26,12 @@ public class HomeUIManager : MonoBehaviour
     void Start()
     {
         mainMenuPanel.SetActive(true);
+        customKeyPanel.SetActive(false);
 
         newGameButton.onClick.AddListener(OnNewGameClicked);
         continueGameButton.onClick.AddListener(OnContinueGameClicked);
+        keySettingButton.onClick.AddListener(ToggleCustomKeyPanel);
+        goToHome.onClick.AddListener(ToggleMainMenuPanel);
 
         quitGame.onClick.AddListener(QuitGame);
     }
@@ -46,6 +52,18 @@ public class HomeUIManager : MonoBehaviour
         Debug.Log($"Load Scuccess 도달 스테이지: {data.clearStage} ");
 
         ToMainLevel();
+    }
+
+    void ToggleCustomKeyPanel()
+    {
+        mainMenuPanel.SetActive(false);
+        customKeyPanel.SetActive(true);
+    }
+
+    void ToggleMainMenuPanel()
+    {
+        mainMenuPanel.SetActive(true);
+        customKeyPanel.SetActive(false);
     }
 
     void ToMainLevel()

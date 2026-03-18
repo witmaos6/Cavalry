@@ -109,6 +109,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dummy"",
+                    ""type"": ""Button"",
+                    ""id"": ""e6ef2550-06d9-4a6b-b03f-f7e85f8e1aff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""db4e111a-237c-440a-a1d7-a563ab858ab9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Hwando"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c10db36-9185-40cd-8fed-cf3394f29920"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -177,6 +204,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""ArrowCharge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""38a5ffad-4fa6-4771-8809-2e77646f9989"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dummy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9cacea96-beb3-46ff-8dff-cbc6649497c7"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c47ce175-5566-4c38-b13a-abd059e43665"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hwando"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -187,6 +247,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_ArrowCharge = m_Player.FindAction("ArrowCharge", throwIfNotFound: true);
+        m_Player_Dummy = m_Player.FindAction("Dummy", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_Hwando = m_Player.FindAction("Hwando", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -269,6 +332,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_ArrowCharge;
+    private readonly InputAction m_Player_Dummy;
+    private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_Hwando;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -288,6 +354,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/ArrowCharge".
         /// </summary>
         public InputAction @ArrowCharge => m_Wrapper.m_Player_ArrowCharge;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Dummy".
+        /// </summary>
+        public InputAction @Dummy => m_Wrapper.m_Player_Dummy;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Dash".
+        /// </summary>
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Hwando".
+        /// </summary>
+        public InputAction @Hwando => m_Wrapper.m_Player_Hwando;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -320,6 +398,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ArrowCharge.started += instance.OnArrowCharge;
             @ArrowCharge.performed += instance.OnArrowCharge;
             @ArrowCharge.canceled += instance.OnArrowCharge;
+            @Dummy.started += instance.OnDummy;
+            @Dummy.performed += instance.OnDummy;
+            @Dummy.canceled += instance.OnDummy;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
+            @Hwando.started += instance.OnHwando;
+            @Hwando.performed += instance.OnHwando;
+            @Hwando.canceled += instance.OnHwando;
         }
 
         /// <summary>
@@ -337,6 +424,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @ArrowCharge.started -= instance.OnArrowCharge;
             @ArrowCharge.performed -= instance.OnArrowCharge;
             @ArrowCharge.canceled -= instance.OnArrowCharge;
+            @Dummy.started -= instance.OnDummy;
+            @Dummy.performed -= instance.OnDummy;
+            @Dummy.canceled -= instance.OnDummy;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
+            @Hwando.started -= instance.OnHwando;
+            @Hwando.performed -= instance.OnHwando;
+            @Hwando.canceled -= instance.OnHwando;
         }
 
         /// <summary>
@@ -391,5 +487,26 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnArrowCharge(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Dummy" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDummy(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDash(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Hwando" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHwando(InputAction.CallbackContext context);
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Pointer : MonoBehaviour
 {
@@ -9,22 +10,31 @@ public class Pointer : MonoBehaviour
     public Color fullChargeColor = Color.red;
     public Color cooldownColor = Color.black;
 
+    private Camera cam;
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
+    {
+        cam = Camera.main;
+    }
+
+    void LateUpdate()
     {
         if (!GameManager.instance.isGameActive)
             return;
-
-        Camera cam = Camera.main;
+        
         if (cam == null)
             return;
 
-        Vector3 mouseScreenPos = Input.mousePosition;
+        if (Mouse.current == null)
+            return;
+
+        Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
+
         float distanceFromCamera = Mathf.Abs(cam.transform.position.z);
         mouseScreenPos.z = distanceFromCamera;
 
