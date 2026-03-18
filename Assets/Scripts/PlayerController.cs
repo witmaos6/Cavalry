@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Dictionary<SkillID, bool> skillUnlockStatus = new Dictionary<SkillID, bool>();
 
+    private PlayerControls controls;
+
     Coroutine attackCoolDownCoroutine;
 
     private void Awake()
@@ -63,8 +65,31 @@ public class PlayerController : MonoBehaviour
         guard = GetComponent<Guard>();
         reflection = GetComponent<Reflection>();
 
+        controls = new PlayerControls();
+
+        // InitInputSet(); // To do: 콜백 방식으로 변경 시 추가
+
         InitSkillSet();
     }
+
+    //void InitInputSet()
+    //{
+    //    controls.Player.ArrowCharge.started += ctx =>
+    //    {
+    //        if (canAttack)
+    //        {
+    //            isCharging = true;
+    //        }
+    //    };
+
+    //    controls.Player.ArrowCharge.canceled += ctx =>
+    //    {
+    //        if(isCharging)
+    //        {
+    //            //  To do: ExecuteAttack();으로 발사 로직 추가
+    //        }
+    //    }
+    //}
 
     void InitSkillSet()
     {
@@ -91,6 +116,8 @@ public class PlayerController : MonoBehaviour
             hpSlider.value = hp;
         }
     }
+    private void OnEnable() => controls.Enable();
+    private void OnDisable() => controls.Disable();
 
     // Update is called once per frame
     void Update()
@@ -118,12 +145,11 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        Vector2 inputVec = controls.Player.Move.ReadValue<Vector2>();
 
-        if(h != 0 || v != 0)
+        if(inputVec.sqrMagnitude > 0)
         {
-            Vector2 targetDir = new Vector2(h, v).normalized;
+            Vector2 targetDir = inputVec.normalized;
             lastMoveDir = Vector2.Lerp(lastMoveDir, targetDir, 0.1f);
 
             float angle = Mathf.Atan2(lastMoveDir.y, lastMoveDir.x) * Mathf.Rad2Deg;
@@ -139,7 +165,7 @@ public class PlayerController : MonoBehaviour
         if (!canAttack)
             return;
 
-        if(Input.GetMouseButtonDown(1))
+        if(controls.Player.ArrowCharge.WasPressedThisFrame())
         {
             isCharging = true;
         }
@@ -150,7 +176,7 @@ public class PlayerController : MonoBehaviour
             float ratio = Mathf.Clamp01(chargeTimer / maxChargeTime);
             pointer.SetColor(ratio, chargeTimer >= maxChargeTime);
 
-            if(Input.GetMouseButtonUp(1))
+            if(controls.Player.ArrowCharge.WasReleasedThisFrame())
             {
                 Fire(chargeTimer >= maxChargeTime);
                 attackCoolDownCoroutine = StartCoroutine(AttackCooldownTimer(chargeTimer >= maxChargeTime));
@@ -338,7 +364,6 @@ public class PlayerController : MonoBehaviour
     {
         attackPower += amountAttackPower;
         yield return new WaitForSeconds(buffDurationTime);
-
         attackPower -= amountAttackPower;
     }
 }
