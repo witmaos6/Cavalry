@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,6 +6,7 @@ using UnityEngine.InputSystem;
 public class KeyRebindUI : MonoBehaviour
 {
     [SerializeField] private InputActionReference actionReference;
+
     [SerializeField] private TMP_Text settingKeyText;
     [SerializeField] private TMP_Text descriptionText;
 
@@ -35,7 +37,6 @@ public class KeyRebindUI : MonoBehaviour
     private void UpdateDisplay()
     {
         var action = InputManager.instance.controls.asset.FindAction(actionReference.action.id);
-        
         settingKeyText.text = action.GetBindingDisplayString();
     }
 
@@ -49,19 +50,18 @@ public class KeyRebindUI : MonoBehaviour
             descriptionText.gameObject.SetActive(true);
         }
 
-        rebindingOperation = targetAction.PerformInteractiveRebinding()
-            .WithControlsExcluding("<Mouse>/leftButton")
+        var rebind = targetAction.PerformInteractiveRebinding()
             .WithCancelingThrough("<Keyboard>/escape")
-            .OnMatchWaitForAnother(0.1f)
+            .WithControlsExcluding("<Mouse>")
+            .OnMatchWaitForAnother(0.1f);
+
+        rebindingOperation = rebind
             .OnComplete(operation => FinishRebinding(targetAction))
             .OnCancel(operation => FinishRebinding(targetAction))
             .Start();
     }
 
-    public void CancelRebinding()
-    {
-        rebindingOperation?.Cancel();
-    }
+    public void CancelRebinding() => rebindingOperation?.Cancel();
 
     private void FinishRebinding(InputAction action)
     {

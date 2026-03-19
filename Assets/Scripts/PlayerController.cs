@@ -74,48 +74,27 @@ public class PlayerController : MonoBehaviour
     void InitInputSet()
     {
         controls = InputManager.instance.controls;
-        // Shot Arrow
-        //controls.Player.ArrowCharge.started += ctx =>
-        //{
-        //    if (canAttack)
-        //    {
-        //        isCharging = true;
-        //    }
-        //};
-
-        //controls.Player.ArrowCharge.canceled += ctx =>
-        //{
-        //    if (isCharging)
-        //    {
-        //        //  To do: ExecuteAttack();으로 발사 로직 추가
-        //    }
-        //}
-
-        controls.Player.Dummy.started += ctx =>
-        {
-            if (GameManager.instance.isGameActive)
-            {
-                SpawnDummy();
-            }
-        };
-
-        controls.Player.Dash.started += ctx =>
-        {
-            if(GameManager.instance.isGameActive)
-            {
-                Dash();
-            }
-        };
-
-        controls.Player.Hwando.started += ctx =>
-        {
-            if (GameManager.instance.isGameActive)
-            {
-                ActivateHwando();
-            }
-        };
 
         controls.Enable();
+    }
+
+    private void OnEnable()
+    {
+        InputManager.instance.controls.Player.ArrowCharge.started += OnArrowStarted;
+        InputManager.instance.controls.Player.ArrowCharge.canceled += OnArrowCanceled;
+        InputManager.instance.controls.Player.Hwando.started += OnHwandoStarted;
+        InputManager.instance.controls.Player.Dummy.started += OnDummyStarted;
+        InputManager.instance.controls.Player.Dash.started += OnDashStarted;
+        
+    }
+
+    private void OnDisable()
+    {
+        InputManager.instance.controls.Player.ArrowCharge.started -= OnArrowStarted;
+        InputManager.instance.controls.Player.ArrowCharge.canceled -= OnArrowCanceled;
+        InputManager.instance.controls.Player.Hwando.started -= OnHwandoStarted;
+        InputManager.instance.controls.Player.Dummy.started -= OnDummyStarted;
+        InputManager.instance.controls.Player.Dash.started -= OnDashStarted;
     }
 
     void InitSkillSet()
@@ -131,6 +110,52 @@ public class PlayerController : MonoBehaviour
         foreach (SkillID skillId in Enum.GetValues(typeof(SkillID)))
         {
             skillUnlockStatus[skillId] = gameData.skillSet.Contains(skillId);
+        }
+    }
+
+    void OnArrowStarted(InputAction.CallbackContext context)
+    {
+        if (!GameManager.instance.isGameActive)
+            return;
+
+        if (canAttack && !activateHwando)
+        {
+            isCharging = true;
+        }
+    }
+
+    void OnArrowCanceled(InputAction.CallbackContext context)
+    {
+        if (!GameManager.instance.isGameActive)
+            return;
+
+        if (isCharging)
+        {
+            AttackArrow();
+        }
+    }
+
+    void OnHwandoStarted(InputAction.CallbackContext context)
+    {
+        if (GameManager.instance.isGameActive)
+        {
+            ActivateHwando();
+        }
+    }
+
+    void OnDummyStarted(InputAction.CallbackContext context)
+    {
+        if (GameManager.instance.isGameActive)
+        {
+            SpawnDummy();
+        }
+    }
+
+    void OnDashStarted(InputAction.CallbackContext context)
+    {
+        if (GameManager.instance.isGameActive)
+        {
+            Dash();
         }
     }
 
@@ -155,10 +180,7 @@ public class PlayerController : MonoBehaviour
         {
             Movement();
 
-            if (!activateHwando)
-            {
-                Attack();
-            }
+            ChargeArrow();   
         }
     }
 
@@ -179,38 +201,25 @@ public class PlayerController : MonoBehaviour
         transform.position = nextPosition;
     }
 
-    void Attack()
+    void ChargeArrow()
     {
-        if (!canAttack)
-            return;
-
-        if(controls.Player.ArrowCharge.WasPressedThisFrame())
-        {
-            isCharging = true;
-        }
-
-        if(isCharging)
+        if (isCharging && chargeTimer <= maxChargeTime)
         {
             chargeTimer += Time.deltaTime;
             float ratio = Mathf.Clamp01(chargeTimer / maxChargeTime);
             pointer.SetColor(ratio, chargeTimer >= maxChargeTime);
-
-            if(controls.Player.ArrowCharge.WasReleasedThisFrame())
-            {
-                Fire(chargeTimer >= maxChargeTime);
-                attackCoolDownCoroutine = StartCoroutine(AttackCooldownTimer(chargeTimer >= maxChargeTime));
-
-                isCharging = false;
-                chargeTimer = 0f;
-
-                pointer.SetCooldown(true);
-            }
         }
     }
 
-    void Fire(bool isFull)
+    void AttackArrow()
     {
+        bool isFull = chargeTimer >= maxChargeTime;
         float power = Mathf.Clamp(chargeTimer, 0.5f, 1.5f);
+        attackCoolDownCoroutine = StartCoroutine(AttackCooldownTimer(isFull));
+
+        isCharging = false;
+        chargeTimer = 0f;
+        pointer.SetCooldown(true);        
 
         CreateArrow(firePoint.rotation, isFull, power);
 

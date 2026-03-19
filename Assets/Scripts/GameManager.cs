@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         Cursor.visible = true;
         gameClearPanel.SetActive(true);
+        // To do: 스테이지 선택으로 이동할 때 스테이지 정보 갱신 수정필요
 
         StageManager stageManager = StageManager.instance;
         if(stageManager != null)
