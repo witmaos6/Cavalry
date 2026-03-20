@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
     Coroutine attackCoolDownCoroutine;
     Coroutine attackPowerBuffCoroutine;
+    Transform startTransform;
 
     private void Awake()
     {
@@ -164,12 +165,23 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        startTransform = transform;
+
+        StartSet();
+    }
+
+    public void StartSet()
+    {
         if (hpSlider != null)
         {
             hpSlider.gameObject.SetActive(false);
             hpSlider.maxValue = hp;
             hpSlider.value = hp;
         }
+
+        transform.position = startTransform.position;
+        transform.rotation = startTransform.rotation;
+        transform.localScale = startTransform.localScale;
     }
 
     // Update is called once per frame

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public bool isGameActive = false;
     public bool isSkillManagerActive = false;
+    private bool isGameOver = false;
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         isGameActive = true;
+        isGameOver = false;
         Cursor.visible = false;
         gameReadyPanel.SetActive(false);
         playerSkillPanel.SetActive(false);
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameActive = false;
+        isGameOver = true;
         Cursor.visible = true;
         gamelosePanel.SetActive(true);
 
@@ -74,6 +77,7 @@ public class GameManager : MonoBehaviour
     public void GameClear()
     {
         isGameActive = false;
+        isGameOver = true;
         Cursor.visible = true;
         gameClearPanel.SetActive(true);
 
@@ -149,18 +153,25 @@ public class GameManager : MonoBehaviour
 
     public void OpenStageSelectPanel()
     {
-        gameReadyPanel.SetActive(false);
-        gamelosePanel.SetActive(false);
-        gameClearPanel.SetActive(false);
-        stageSelectPanel.SetActive(true);
-
-        StageSelectManager stageSelectManager = GetComponent<StageSelectManager>();
-        if(stageSelectManager != null)
+        if(isGameOver)
         {
-            stageSelectManager.GenerateStageButtons();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        else
+        {
+            gameReadyPanel.SetActive(false);
+            gamelosePanel.SetActive(false);
+            gameClearPanel.SetActive(false);
+            stageSelectPanel.SetActive(true);
 
-        isSkillManagerActive = false;
+            StageSelectManager stageSelectManager = GetComponent<StageSelectManager>();
+            if (stageSelectManager != null)
+            {
+                stageSelectManager.GenerateStageButtons();
+            }
+
+            isSkillManagerActive = false;
+        }
     }
 
     public void OpenGameReadyPanel()
