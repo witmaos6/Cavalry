@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Composites;
 using UnityEngine.UI;
 using static GameData;
@@ -22,6 +23,8 @@ public class PlayerSkillManager : MonoBehaviour
     public Button bigArrowSkill;
     public Button multiKillSkill;
 
+    PlayerControls controls;
+
     private GameData gameData;
     // To do: 스킬 포인트 제한 추가
 
@@ -32,6 +35,8 @@ public class PlayerSkillManager : MonoBehaviour
         {
             gameData = saveData.LoadGame();
         }
+
+        controls = InputManager.instance.controls;
 
         guardSkill.onClick.AddListener(OnClickGuardSkill);
         reflectionSkill.onClick.AddListener(OnClickReflectionSkill);
@@ -49,15 +54,22 @@ public class PlayerSkillManager : MonoBehaviour
         InitSkillSet();
     }
 
-    private void Update()
+    private void OnEnable()
+    {
+        controls.Player.SkillManager.started += OnSkillPanel;
+    }
+
+    private void OnDisable()
+    {
+        controls.Player.SkillManager.canceled -= OnSkillPanel;
+    }
+
+    void OnSkillPanel(InputAction.CallbackContext context)
     {
         if (!GameManager.instance.isSkillManagerActive)
             return;
 
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            GameManager.instance.ToggleSkillPanel();
-        }
+        GameManager.instance.ToggleSkillPanel();
     }
 
     void InitSkillSet()
