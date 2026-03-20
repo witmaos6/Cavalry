@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -22,6 +23,8 @@ public class PlayerSkillManager : MonoBehaviour
     public Button onemoreTimeSkill;
     public Button bigArrowSkill;
     public Button multiKillSkill;
+
+    public TMP_Text remainSkillPoint;
 
     PlayerControls controls;
 
@@ -52,6 +55,10 @@ public class PlayerSkillManager : MonoBehaviour
     private void Start()
     {
         InitSkillSet();
+        if(remainSkillPoint != null)
+        {
+            remainSkillPoint.text = "Remain Point: " + gameData.remainPoint;
+        }
     }
 
     private void OnEnable()
@@ -61,15 +68,16 @@ public class PlayerSkillManager : MonoBehaviour
 
     private void OnDisable()
     {
-        controls.Player.SkillManager.canceled -= OnSkillPanel;
+        controls.Player.SkillManager.started -= OnSkillPanel;
     }
 
     void OnSkillPanel(InputAction.CallbackContext context)
     {
-        if (!GameManager.instance.isSkillManagerActive)
-            return;
-
-        GameManager.instance.ToggleSkillPanel();
+        GameManager gameManager = GameManager.instance;
+        if (gameManager.gameReadyPanel.activeSelf || gameManager.playerSkillPanel.activeSelf)
+        {
+            gameManager.ToggleSkillPanel();
+        }
     }
 
     void InitSkillSet()
@@ -242,6 +250,7 @@ public class PlayerSkillManager : MonoBehaviour
 
             SkillUnlock(skillID);
             SaveSkillSet();
+            UpdateRemainSkillPoint();
             return true;
         }
         Debug.Log("Not enough Skill Point");
@@ -267,6 +276,7 @@ public class PlayerSkillManager : MonoBehaviour
 
         SkillLock(skillID);
         SaveSkillSet();
+        UpdateRemainSkillPoint();
     }
 
     void SkillUnlock(SkillID skillID)
@@ -293,6 +303,14 @@ public class PlayerSkillManager : MonoBehaviour
         if (saveData != null)
         {
             saveData.SaveGame(gameData);
+        }
+    }
+
+    void UpdateRemainSkillPoint()
+    {
+        if(remainSkillPoint != null)
+        {
+            remainSkillPoint.text = "Remain Point: " + gameData.remainPoint;
         }
     }
 }

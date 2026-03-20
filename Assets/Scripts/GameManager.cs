@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     public GameObject playerSkillPanel;
 
     public bool isGameActive = false;
-    public bool isSkillManagerActive = false;
     private bool isGameOver = false;
 
     private void Awake()
@@ -43,8 +42,6 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         gameReadyPanel.SetActive(false);
         playerSkillPanel.SetActive(false);
-
-        isSkillManagerActive = false;
 
         SpawnManager spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         if(spawnManager != null )
@@ -169,8 +166,6 @@ public class GameManager : MonoBehaviour
             {
                 stageSelectManager.GenerateStageButtons();
             }
-
-            isSkillManagerActive = false;
         }
     }
 
@@ -178,7 +173,5 @@ public class GameManager : MonoBehaviour
     {
         gameReadyPanel.SetActive(true);
         stageSelectPanel.SetActive(false);
-
-        isSkillManagerActive = true;
     }
 }

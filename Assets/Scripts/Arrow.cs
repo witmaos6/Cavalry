@@ -24,7 +24,7 @@ public class Arrow : MonoBehaviour
         playerController = owner.GetComponent<PlayerController>();
         if(playerController != null)
         {
-            playerController.IsUnlockSkill(GameData.SkillID.BigArrow);
+            if(playerController.IsUnlockSkill(GameData.SkillID.BigArrow))
             {
                 transform.localScale = transform.localScale * 2f;
             }
