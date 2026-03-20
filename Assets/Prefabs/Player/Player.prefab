@@ -254,9 +254,10 @@ MonoBehaviour:
   pointer: {fileID: 2518798885748959915}
   fireRate: 1
   attackPower: 2
+  attackBuffPrefab: {fileID: 5096172610396817856, guid: a0450cd2f2fd9d343bd189a4f3caa8cd, type: 3}
   dashAmount: 30
   dashCooldown: 1
-  dummyCooldown: 1
+  dummyCooldown: 3
   dummy: {fileID: 1660226635801135379, guid: 09ba8a9f28e757b4fae35a566a19c6cf, type: 3}
   hwandoType: 1
   hp: 10

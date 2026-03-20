@@ -2827,9 +2827,9 @@ MonoBehaviour:
       weight: 1
     waveDatas:
     - nrToSpawn: 20
-      spawnLimit: 5
-    - nrToSpawn: 10
-      spawnLimit: 3
+      spawnLimit: 10
+    - nrToSpawn: 20
+      spawnLimit: 10
   - enemySpawnDatas:
     - enemyPrefab: {fileID: 1881503341338650333, guid: b455f9d206e6c6443a1a98d3c8e5d8fb, type: 3}
       weight: 1
@@ -6280,8 +6280,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -9202,10 +9202,6 @@ PrefabInstance:
       propertyPath: firePoint
       value: 
       objectReference: {fileID: 118166892}
-    - target: {fileID: 8155115686759669510, guid: 2f66ba510c3151543bf54dc6ef2f6b19, type: 3}
-      propertyPath: dummyCooldown
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8457604372772355773, guid: 2f66ba510c3151543bf54dc6ef2f6b19, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

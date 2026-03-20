@@ -19,6 +19,10 @@ public class SpawnManager : MonoBehaviour
 
     public void InitStageInfo()
     {
+        waveNum = 0;
+        currentSpawnEnemy = 0;
+        totalWeight = 0;
+
         stageManager = GetComponent<StageManager>();
         if (stageManager != null)
         {

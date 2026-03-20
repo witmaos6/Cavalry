@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private float chargeTimer = 0;
     private float maxChargeTime = 1.5f;
     public float attackPower = 2.0f;
+    public GameObject attackBuffPrefab;
+    private GameObject attackBuffInstance;
 
     [Header("Dash Settings")]
     public float dashAmount = 10.0f;
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour
     PlayerControls controls;
 
     Coroutine attackCoolDownCoroutine;
+    Coroutine attackPowerBuffCoroutine;
 
     private void Awake()
     {
@@ -376,13 +379,33 @@ public class PlayerController : MonoBehaviour
 
     public void IncreaseAttackPowerBuff(float buffDurationTime, float amountAttackPower)
     {
-        StartCoroutine(AttackPowerBuff(buffDurationTime, amountAttackPower));
+        if(attackPowerBuffCoroutine != null)
+        {
+            StopCoroutine(attackPowerBuffCoroutine);
+            attackPowerBuffCoroutine = null;
+        }
+        attackPowerBuffCoroutine = StartCoroutine(AttackPowerBuff(buffDurationTime, amountAttackPower));
     }
 
     IEnumerator AttackPowerBuff(float buffDurationTime, float amountAttackPower)
     {
         attackPower += amountAttackPower;
+        if(attackBuffPrefab != null && attackBuffInstance == null)
+        {
+            attackBuffInstance = Instantiate(attackBuffPrefab, transform.position, transform.rotation);
+            if (attackBuffInstance != null)
+            {
+                attackBuffInstance.transform.SetParent(transform, true);
+                attackBuffInstance.transform.position = new Vector3(attackBuffInstance.transform.position.x, attackBuffInstance.transform.position.y, attackBuffInstance.transform.position.z - 0.2f);
+            }
+        }
+
         yield return new WaitForSeconds(buffDurationTime);
         attackPower -= amountAttackPower;
+
+        if(attackBuffInstance != null)
+        {
+            Destroy(attackBuffInstance);
+        }
     }
 }
