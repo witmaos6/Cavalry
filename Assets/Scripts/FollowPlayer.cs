@@ -1,16 +1,19 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class FollowPlayer : MonoBehaviour
 {
     public GameObject player;
     public Vector3 offSet = new Vector3(0, 0, -0.1f);
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private Camera cam;
     void Start()
     {
         if(player == null)
         {
             player = GameObject.Find("Player");
         }
+        cam = Camera.main;
     }
 
     private void LateUpdate()
@@ -18,9 +21,16 @@ public class FollowPlayer : MonoBehaviour
         if (!GameManager.instance.isGameActive)
             return;
 
+        if (cam == null)
+            return;
+
         transform.position = player.transform.position + offSet;
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
+        Vector3 mouseScreenPos = Mouse.current.position.ReadValue();
+        float distanceFormCamera = Mathf.Abs(cam.transform.position.z);
+        mouseScreenPos.z = distanceFormCamera;
+
+        Vector3 mousePos = cam.ScreenToWorldPoint(mouseScreenPos);
         Vector2 lookDir = (Vector2)mousePos - (Vector2)transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 
