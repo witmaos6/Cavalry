@@ -391,9 +391,16 @@ public class PlayerController : MonoBehaviour
 
     public void IncreaseAttackPowerBuff(float buffDurationTime, float amountAttackPower)
     {
-        if(attackPowerBuffCoroutine != null)
+        if (attackPowerBuffCoroutine != null)
         {
             StopCoroutine(attackPowerBuffCoroutine);
+
+            SetAttackPower(attackPower - amountAttackPower);
+            if(attackBuffInstance != null)
+            {
+                Destroy(attackBuffInstance);
+            }
+
             attackPowerBuffCoroutine = null;
         }
         attackPowerBuffCoroutine = StartCoroutine(AttackPowerBuff(buffDurationTime, amountAttackPower));
@@ -401,7 +408,8 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator AttackPowerBuff(float buffDurationTime, float amountAttackPower)
     {
-        attackPower += amountAttackPower;
+        SetAttackPower(attackPower + amountAttackPower);
+        
         if(attackBuffPrefab != null && attackBuffInstance == null)
         {
             attackBuffInstance = Instantiate(attackBuffPrefab, transform.position, transform.rotation);
@@ -413,11 +421,17 @@ public class PlayerController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(buffDurationTime);
-        attackPower -= amountAttackPower;
+        SetAttackPower(attackPower - amountAttackPower);
 
         if(attackBuffInstance != null)
         {
             Destroy(attackBuffInstance);
         }
+        attackPowerBuffCoroutine = null;
+    }
+
+    void SetAttackPower(float inAttackPower)
+    {
+        attackPower = inAttackPower;
     }
 }
