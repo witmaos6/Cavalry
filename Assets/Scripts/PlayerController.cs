@@ -395,13 +395,7 @@ public class PlayerController : MonoBehaviour
         {
             StopCoroutine(attackPowerBuffCoroutine);
 
-            SetAttackPower(attackPower - amountAttackPower);
-            if(attackBuffInstance != null)
-            {
-                Destroy(attackBuffInstance);
-            }
-
-            attackPowerBuffCoroutine = null;
+            ResetAttackPowerBuff(amountAttackPower); 
         }
         attackPowerBuffCoroutine = StartCoroutine(AttackPowerBuff(buffDurationTime, amountAttackPower));
     }
@@ -421,11 +415,17 @@ public class PlayerController : MonoBehaviour
         }
 
         yield return new WaitForSeconds(buffDurationTime);
+        ResetAttackPowerBuff(amountAttackPower);
+    }
+
+    void ResetAttackPowerBuff(float amountAttackPower)
+    {
         SetAttackPower(attackPower - amountAttackPower);
 
-        if(attackBuffInstance != null)
+        if (attackBuffInstance != null)
         {
             Destroy(attackBuffInstance);
+            attackBuffInstance = null;
         }
         attackPowerBuffCoroutine = null;
     }
