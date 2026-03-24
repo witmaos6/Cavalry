@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     public float moveSpeed = 5.0f;
     private Vector2 lastMoveDir;
+    private float currentSpeed = 0f;
 
     [Header("Attack Settings")]
     public GameObject arrowPrefab;
@@ -206,14 +208,33 @@ public class PlayerController : MonoBehaviour
         if(inputVec.sqrMagnitude > 0)
         {
             Vector2 targetDir = inputVec.normalized;
+            float dot = Vector2.Dot(lastMoveDir.normalized, targetDir);
+
+            float penalty = TurningPanelty(dot);
+
+            currentSpeed = moveSpeed * penalty;
+
             lastMoveDir = Vector2.Lerp(lastMoveDir, targetDir, 0.1f);
-
             float angle = Mathf.Atan2(lastMoveDir.y, lastMoveDir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle - 90.0f);
-        }
-        Vector3 nextPosition = transform.position + (Vector3)(lastMoveDir * moveSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
 
+            // To do: 입력 방향과 lastMoveDir 일치 시 가속 적용
+        }
+        else
+        {
+            currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, Time.deltaTime * 2.0f);
+        }
+        Vector3 nextPosition = transform.position + (Vector3)(lastMoveDir * currentSpeed * Time.deltaTime);
         transform.position = nextPosition;
+    }
+
+    float TurningPanelty(float dot)
+    {
+        if (dot >= 0)
+        {
+            Mathf.Lerp(0.5f, 1.0f, dot);
+        }
+        return Mathf.Lerp(0.1f, 0.5f, dot + 1.0f);
     }
 
     void ChargeArrow()
