@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Movement Settings")]
     public float moveSpeed = 5.0f;
-    private Vector2 lastMoveDir;
+    public float acceleration = 10f;
+    private Vector2 lastMoveDir = Vector2.up;
     private float currentSpeed = 0f;
 
     [Header("Attack Settings")]
@@ -208,33 +209,39 @@ public class PlayerController : MonoBehaviour
         if(inputVec.sqrMagnitude > 0)
         {
             Vector2 targetDir = inputVec.normalized;
-            float dot = Vector2.Dot(lastMoveDir.normalized, targetDir);
+            float angleDiff = Vector2.Angle(lastMoveDir.normalized, targetDir);
 
-            float penalty = TurningPanelty(dot);
+            float penalty = TurningPanelty(angleDiff);
+            float penelizedSpeed = moveSpeed * penalty;
+            if(currentSpeed > penelizedSpeed)
+            {
+                currentSpeed = penelizedSpeed;
+            }
 
-            currentSpeed = moveSpeed * penalty;
-
-            lastMoveDir = Vector2.Lerp(lastMoveDir, targetDir, 0.1f);
-            float angle = Mathf.Atan2(lastMoveDir.y, lastMoveDir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
-
-            // To do: 입력 방향과 lastMoveDir 일치 시 가속 적용
+            lastMoveDir = Vector2.Lerp(lastMoveDir, targetDir, 0.15f);
         }
-        else
-        {
-            currentSpeed = Mathf.Lerp(currentSpeed, moveSpeed, Time.deltaTime * 2.0f);
-        }
-        Vector3 nextPosition = transform.position + (Vector3)(lastMoveDir * currentSpeed * Time.deltaTime);
-        transform.position = nextPosition;
+
+        currentSpeed = Mathf.MoveTowards(currentSpeed, moveSpeed, acceleration * Time.deltaTime);
+
+        float rotationAngle = Mathf.Atan2(lastMoveDir.y, lastMoveDir.x) * Mathf.Rad2Deg;
+
+        transform.rotation = Quaternion.Euler(0, 0, rotationAngle - 90f);
+        transform.position += (Vector3)(lastMoveDir.normalized * currentSpeed * Time.deltaTime);
     }
 
-    float TurningPanelty(float dot)
+    float TurningPanelty(float angleDiff)
     {
-        if (dot >= 0)
+        if (angleDiff <= 10f)
         {
-            Mathf.Lerp(0.5f, 1.0f, dot);
+            return 1f;
         }
-        return Mathf.Lerp(0.1f, 0.5f, dot + 1.0f);
+        else if (angleDiff <= 90f)
+        {
+            float t = (angleDiff - 10f) / (90f - 10f);
+            return Mathf.Lerp(1.0f, 0.5f, t);
+        }
+        float temp = (angleDiff - 90f) / (180f - 90f);
+        return Mathf.Lerp(0.5f, 0.1f, temp);
     }
 
     void ChargeArrow()
