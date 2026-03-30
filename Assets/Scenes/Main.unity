@@ -9331,9 +9331,17 @@ PrefabInstance:
       propertyPath: multipleShotSkill
       value: 
       objectReference: {fileID: 1646060236}
+    - target: {fileID: 1372999773106731439, guid: 2f66ba510c3151543bf54dc6ef2f6b19, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6132010367879559845, guid: 2f66ba510c3151543bf54dc6ef2f6b19, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6574573541445433445, guid: 2f66ba510c3151543bf54dc6ef2f6b19, type: 3}
+      propertyPath: animSpeedKey
+      value: AnimSpeed
       objectReference: {fileID: 0}
     - target: {fileID: 8155115686759669510, guid: 2f66ba510c3151543bf54dc6ef2f6b19, type: 3}
       propertyPath: hpSlider
@@ -9383,7 +9391,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 595129455275152737, guid: 2f66ba510c3151543bf54dc6ef2f6b19, type: 3}
+    - {fileID: 6574573541445433445, guid: 2f66ba510c3151543bf54dc6ef2f6b19, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -9396,28 +9406,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5146376875878812223, guid: 2f66ba510c3151543bf54dc6ef2f6b19, type: 3}
   m_PrefabInstance: {fileID: 8685930955622755296}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &8685930955622755298
-Animator:
-  serializedVersion: 7
+--- !u!114 &8685930955622755298
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8685930955622755297}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1fdaa0ac87137e644acd65626ce5ed05, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0efac17ce5fd6c4e8ff3912ba00c246, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HorseAnimation
+  animSpeedKey: AnimSpeed
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

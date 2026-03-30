@@ -462,4 +462,9 @@ public class PlayerController : MonoBehaviour
     {
         attackPower = inAttackPower;
     }
+
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
 }
