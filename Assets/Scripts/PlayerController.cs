@@ -267,6 +267,7 @@ public class PlayerController : MonoBehaviour
         CreateArrow(firePoint.rotation, isFull, power);
 
         shotArrow?.Invoke(firePoint.position, firePoint.up);
+        // To do: 발사 방향 수정 필요
 
         if (skillUnlockStatus[SkillID.MultipleShot])
         {
@@ -466,5 +467,10 @@ public class PlayerController : MonoBehaviour
     public float GetCurrentSpeed()
     {
         return currentSpeed;
+    }
+
+    public bool IsCharging()
+    {
+        return isCharging;
     }
 }
