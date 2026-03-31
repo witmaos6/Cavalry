@@ -11,7 +11,7 @@ public class FollowPlayer : MonoBehaviour
     {
         if(player == null)
         {
-            player = GameObject.Find("Player");
+            player = transform.parent.gameObject;
         }
         cam = Camera.main;
     }
