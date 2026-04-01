@@ -5,6 +5,7 @@ public class FollowPlayer : MonoBehaviour
 {
     public GameObject player;
     public Vector3 offSet = new Vector3(0, 0, -0.1f);
+    public float zAngle = 90f;
 
     private Camera cam;
     void Start()
@@ -34,6 +35,6 @@ public class FollowPlayer : MonoBehaviour
         Vector2 lookDir = (Vector2)mousePos - (Vector2)transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
 
-        transform.rotation = Quaternion.Euler(0, 0, angle - 90.0f);
+        transform.rotation = Quaternion.Euler(0, 0, angle - zAngle);
     }
 }

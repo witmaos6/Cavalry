@@ -262,19 +262,22 @@ public class PlayerController : MonoBehaviour
 
         isCharging = false;
         chargeTimer = 0f;
-        pointer.SetCooldown(true);        
+        pointer.SetCooldown(true);
 
-        CreateArrow(firePoint.rotation, isFull, power);
+        Vector3 dir = (pointer.transform.position - firePoint.position);
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Quaternion rot = Quaternion.Euler(0, 0, angle - 90f);
+
+        CreateArrow(rot, isFull, power);
 
         shotArrow?.Invoke(firePoint.position, firePoint.up);
-        // To do: 발사 방향 수정 필요
 
         if (skillUnlockStatus[SkillID.MultipleShot])
         {
-            Quaternion leftRot = firePoint.rotation * Quaternion.Euler(0, 0, 30f);
+            Quaternion leftRot = rot * Quaternion.Euler(0, 0, 30f);
             CreateArrow(leftRot, isFull, power);
 
-            Quaternion rightRot = firePoint.rotation * Quaternion.Euler(0, 0, -30f);
+            Quaternion rightRot = rot * Quaternion.Euler(0, 0, -30f);
             CreateArrow(rightRot, isFull, power);
         }
     }
@@ -370,7 +373,7 @@ public class PlayerController : MonoBehaviour
         if (!skillUnlockStatus[SkillID.Guard] && !skillUnlockStatus[SkillID.Reflection])
             return;
 
-        if (chargeTimer > 0.0f) // 활시위를 당기고 있을 때 환도 사용 불가
+        if (isCharging)
             return;
 
         if (skillUnlockStatus[SkillID.Guard])
