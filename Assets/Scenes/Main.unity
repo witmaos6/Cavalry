@@ -9069,6 +9069,10 @@ PrefabInstance:
       propertyPath: multipleShotSkill
       value: 
       objectReference: {fileID: 1646060236}
+    - target: {fileID: 4833450818480321483, guid: 2f66ba510c3151543bf54dc6ef2f6b19, type: 3}
+      propertyPath: zAngle
+      value: 145
+      objectReference: {fileID: 0}
     - target: {fileID: 6132010367879559845, guid: 2f66ba510c3151543bf54dc6ef2f6b19, type: 3}
       propertyPath: m_Name
       value: Player

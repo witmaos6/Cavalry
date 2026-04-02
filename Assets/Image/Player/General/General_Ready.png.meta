@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 67b543702d43c9342b9a9702b547977e
+guid: 1c487357f049b5142b5399cf9e2b6655
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: General_ReadyShotArrow-Photoroom_0
+      name: General_Ready_0
       rect:
         serializedVersion: 2
         x: 0
         y: 840
         width: 268
-        height: 270
+        height: 264
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,20 +112,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1977596f66bccbf44813726f3640c1f8
-      internalID: -1457362212
+      spriteID: c0192ee9f22072443be8fb209ae02398
+      internalID: 1319438717
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: General_ReadyShotArrow-Photoroom_1
+      name: General_Ready_1
       rect:
         serializedVersion: 2
         x: 268
         y: 840
         width: 268
-        height: 270
+        height: 264
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,20 +134,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e4f46a533c883544a122b27b0ef2a91
-      internalID: -1689825448
+      spriteID: 6eb106bffff89d64992f8b2efeebf789
+      internalID: 611781595
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: General_ReadyShotArrow-Photoroom_2
+      name: General_Ready_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 520
+        y: 522
         width: 268
-        height: 270
+        height: 264
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db6daffcf78b790478dbf712172037be
-      internalID: 1739629668
+      spriteID: 653af8676bef78f4d94e321536758ac9
+      internalID: -168377422
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: General_ReadyShotArrow-Photoroom_3
+      name: General_Ready_3
       rect:
         serializedVersion: 2
         x: 268
-        y: 520
+        y: 522
         width: 268
-        height: 270
+        height: 264
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,42 +178,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 276d5b5c223d37e409525d1dedb69bd6
-      internalID: 872522406
+      spriteID: 4fd32bc7d967ee040856125ff4109bea
+      internalID: -998404946
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: General_ReadyShotArrow-Photoroom_4
+      name: General_Ready_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 178
-        width: 268
-        height: 270
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dbf55275f343b474a897b3a7ca9dd817
-      internalID: 1890215864
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: General_ReadyShotArrow-Photoroom_5
-      rect:
-        serializedVersion: 2
-        x: 268
         y: 180
         width: 268
-        height: 270
+        height: 264
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,8 +200,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0370c6760d86d184599b3ad502b80127
-      internalID: 884317073
+      spriteID: d1639c3563cb5f0438bf3336838260da
+      internalID: -74321224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: General_Ready_5
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 180
+        width: 268
+        height: 264
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3ac88b95478fa3459865023d3e26588
+      internalID: -814212357
       vertices: []
       indices: 
       edges: []
@@ -232,7 +232,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 45f8f56629b46244caa2b6185f71399d
+    spriteID: d7a8eff961440214589584fa5eb28253
     internalID: 0
     vertices: []
     indices: 
@@ -242,14 +242,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":3.0},"gridSpriteSize":{"x":269.0,"y":426.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":3.0},"gridSpriteSize":{"x":268.0,"y":198.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":343.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      General_ReadyShotArrow-Photoroom_0: -1457362212
-      General_ReadyShotArrow-Photoroom_1: -1689825448
-      General_ReadyShotArrow-Photoroom_2: 1739629668
-      General_ReadyShotArrow-Photoroom_3: 872522406
-      General_ReadyShotArrow-Photoroom_4: 1890215864
-      General_ReadyShotArrow-Photoroom_5: 884317073
+      General_Ready_0: 1319438717
+      General_Ready_1: 611781595
+      General_Ready_2: -168377422
+      General_Ready_3: -998404946
+      General_Ready_4: -74321224
+      General_Ready_5: -814212357
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
