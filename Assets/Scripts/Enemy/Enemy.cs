@@ -7,10 +7,10 @@ public class Enemy : MonoBehaviour
 {
     [Header("Enemy Settings")]
     public float hp = 10;
-    private int originHP;
     public float moveSpeed = 3.0f;
     public float attackRate = 1.0f;
     public float damage = 1.0f;
+    public float angleOffset = 90f;
 
     private Rigidbody2D rb;
 
@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
 
     private bool isDead = false;
     private bool canAttack = true;
+    private bool isAttacking = false;
 
     private EnemyAttackBase[] attackList;
     private List<EnemyUtilityBase> sensorUtility = new List<EnemyUtilityBase>();
@@ -34,7 +35,6 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").transform;
-        originHP = (int)hp;
 
         attackList = GetComponentsInChildren<EnemyAttackBase>();
         foreach (EnemyAttackBase attack in attackList)
@@ -102,14 +102,21 @@ public class Enemy : MonoBehaviour
     void MoveToPlayer()
     {
         Vector2 direction = (player.position - transform.position).normalized;
-        rb.linearVelocity = direction * moveSpeed;
+        if(isAttacking)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+        else
+        {
+            rb.linearVelocity = direction * moveSpeed;
+        }
     }
 
     void RotateToPlayer()
     {
         Vector2 direction = (player.position - transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+        transform.rotation = Quaternion.Euler(0, 0, angle - angleOffset);
     }
 
     void Attack()
@@ -164,5 +171,10 @@ public class Enemy : MonoBehaviour
     public void SetTargetTransform(Transform newTargetTransform)
     {
         player = newTargetTransform;
+    }
+
+    public void SetAttacking(bool setAttacking)
+    {
+        isAttacking = setAttacking;
     }
 }

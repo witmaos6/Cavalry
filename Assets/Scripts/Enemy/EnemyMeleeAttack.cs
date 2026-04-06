@@ -3,17 +3,32 @@ using UnityEngine;
 
 public class EnemyMeleeAttack : EnemyAttackBase
 {
+    // temp logic
+    // To do: 추후에 완전히 애니메이션 재생 로직으로 바꿀 때 수정 필요
     public Transform weaponTransform;
     public float stabDistance = 0.5f;
     public float stabSpeed = 10f;
+    public bool playAnimation = false;
 
     public override void Attack()
     {
-        Enemy enemy = GetComponent<Enemy>();
+        enemy = GetComponent<Enemy>();
         player = GetPlayerTarget();
         if (enemy != null && player != null)
         {
-            StartCoroutine(StabRoutine());
+            if(!playAnimation)
+            {
+                StartCoroutine(StabRoutine());
+                StartAttack(1.0f);
+            }
+            else
+            {
+                Animator animator = enemy.GetComponent<Animator>();
+                if(animator != null )
+                {
+                    animator.CrossFade("Attack", 0.1f);
+                }
+            }
         }
     }
 
@@ -52,5 +67,21 @@ public class EnemyMeleeAttack : EnemyAttackBase
         }
 
         weaponTransform.localPosition = originalPos;
+    }
+
+    public void HitAttack()
+    {
+        if (player != null)
+        {
+            float distance = Vector2.Distance(transform.position, player.position);
+            if (distance <= attackDistance + stabDistance)
+            {
+                PlayerController playerController = player.GetComponent<PlayerController>();
+                if (playerController != null)
+                {
+                    playerController.TakeDamage(1);
+                }
+            }
+        }
     }
 }
