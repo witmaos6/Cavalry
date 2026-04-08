@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
   stageList:
   - enemySpawnDatas:
-    - enemyPrefab: {fileID: 903235414405071913, guid: 455b06447c8ddb94ba23772a6376157c, type: 3}
+    - enemyPrefab: {fileID: 903235414405071913, guid: 03115787592c1604399e5ddd6ece096c, type: 3}
       weight: 1
     - enemyPrefab: {fileID: 1881503341338650333, guid: 609e3b5118e5c5748bdeec63ad6459ea, type: 3}
       weight: 1

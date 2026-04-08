@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     public float angleOffset = 90f;
 
     private Rigidbody2D rb;
+    private Animator animator;
 
     private Transform player;
 
@@ -31,6 +32,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
     void Start()
     {
@@ -110,6 +112,8 @@ public class Enemy : MonoBehaviour
         {
             rb.linearVelocity = direction * moveSpeed;
         }
+        bool isWalking = rb.linearVelocity != Vector2.zero;
+        animator.SetBool("IsWalking", isWalking);
     }
 
     void RotateToPlayer()
