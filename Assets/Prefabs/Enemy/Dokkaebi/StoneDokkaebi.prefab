@@ -141,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyRangeAttack
   weight: 1
   damage: 1
-  attackDistance: 8
+  attackDistance: 12
   attackStateName: Attack
   bulletPrefabs: {fileID: 6754999010799585638, guid: 7a9c14d566b384c49947d8ce47ed609b, type: 3}
   playAnimation: 1
