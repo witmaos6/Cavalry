@@ -112,8 +112,12 @@ public class Enemy : MonoBehaviour
         {
             rb.linearVelocity = direction * moveSpeed;
         }
-        bool isWalking = rb.linearVelocity != Vector2.zero;
-        animator.SetBool("IsWalking", isWalking);
+
+        if(animator != null)
+        {
+            bool isWalking = rb.linearVelocity != Vector2.zero;
+            animator.SetBool("IsWalking", isWalking);
+        }
     }
 
     void RotateToPlayer()
