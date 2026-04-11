@@ -72,7 +72,7 @@ MonoBehaviour:
     - nrToSpawn: 10
       spawnLimit: 3
   - enemySpawnDatas:
-    - enemyPrefab: {fileID: 903235414405071913, guid: 455b06447c8ddb94ba23772a6376157c, type: 3}
+    - enemyPrefab: {fileID: 903235414405071913, guid: 03115787592c1604399e5ddd6ece096c, type: 3}
       weight: 1
     - enemyPrefab: {fileID: 1881503341338650333, guid: 609e3b5118e5c5748bdeec63ad6459ea, type: 3}
       weight: 1
@@ -82,7 +82,7 @@ MonoBehaviour:
     - nrToSpawn: 10
       spawnLimit: 3
   - enemySpawnDatas:
-    - enemyPrefab: {fileID: 903235414405071913, guid: 455b06447c8ddb94ba23772a6376157c, type: 3}
+    - enemyPrefab: {fileID: 903235414405071913, guid: 03115787592c1604399e5ddd6ece096c, type: 3}
       weight: 1
     - enemyPrefab: {fileID: 1881503341338650333, guid: 609e3b5118e5c5748bdeec63ad6459ea, type: 3}
       weight: 1
@@ -92,7 +92,7 @@ MonoBehaviour:
     - nrToSpawn: 10
       spawnLimit: 3
   - enemySpawnDatas:
-    - enemyPrefab: {fileID: 903235414405071913, guid: 455b06447c8ddb94ba23772a6376157c, type: 3}
+    - enemyPrefab: {fileID: 903235414405071913, guid: 03115787592c1604399e5ddd6ece096c, type: 3}
       weight: 1
     - enemyPrefab: {fileID: 1881503341338650333, guid: 609e3b5118e5c5748bdeec63ad6459ea, type: 3}
       weight: 1
@@ -114,7 +114,7 @@ MonoBehaviour:
       weight: 2
     - enemyPrefab: {fileID: 1881503341338650333, guid: 609e3b5118e5c5748bdeec63ad6459ea, type: 3}
       weight: 1
-    - enemyPrefab: {fileID: 903235414405071913, guid: 455b06447c8ddb94ba23772a6376157c, type: 3}
+    - enemyPrefab: {fileID: 903235414405071913, guid: 03115787592c1604399e5ddd6ece096c, type: 3}
       weight: 1
     waveDatas:
     - nrToSpawn: 20
@@ -126,9 +126,9 @@ MonoBehaviour:
       weight: 2
     - enemyPrefab: {fileID: 903235414405071913, guid: 6fbe12cc9a991154b82b60ad0e5599be, type: 3}
       weight: 2
-    - enemyPrefab: {fileID: 903235414405071913, guid: 455b06447c8ddb94ba23772a6376157c, type: 3}
+    - enemyPrefab: {fileID: 903235414405071913, guid: 03115787592c1604399e5ddd6ece096c, type: 3}
       weight: 2
-    - enemyPrefab: {fileID: 1881503341338650333, guid: 895cc34e6cd84bf429da39faf8307b8b, type: 3}
+    - enemyPrefab: {fileID: 1881503341338650333, guid: 609e3b5118e5c5748bdeec63ad6459ea, type: 3}
       weight: 2
     waveDatas:
     - nrToSpawn: 20

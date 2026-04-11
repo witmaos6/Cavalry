@@ -6,6 +6,9 @@ public class EnemyPredictiveAttack : EnemyAttackBase
     public float leadDistance = 2.0f;
     public GameObject bulletPrefab;
     public float preDelay = 1.0f;
+
+    public bool playAnimation = false;
+
     //private bool activateState = false;
 
     //void Update() // To do: 추후에 인디케이터로 구현
@@ -27,8 +30,19 @@ public class EnemyPredictiveAttack : EnemyAttackBase
         player = GetPlayerTarget();
         if(player != null)
         {
-            //activateState = true;
-            StartCoroutine(Shot());
+            if(!playAnimation)
+            {
+                //activateState = true;
+                StartCoroutine(Shot());
+            }
+            else
+            {
+                Animator animator = enemy.GetComponent<Animator>();
+                if (animator != null)
+                {
+                    animator.CrossFade("Attack", 0.1f);
+                }
+            }
         }
     }
 
@@ -48,5 +62,10 @@ public class EnemyPredictiveAttack : EnemyAttackBase
 
             Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, angle - 90.0f));
         }
+    }
+
+    public void ShotObject()
+    {
+        StartCoroutine(Shot());
     }
 }
