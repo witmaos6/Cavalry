@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8755d26b60435954097b9b24f777771a
+guid: 2da80d12a5c3e564e93311e3be6d2cc8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RockDokkaebi_Throw_0
+      name: FireDokkaebi_Walk_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 794
-        width: 293
-        height: 396
+        y: 893
+        width: 440
+        height: 297
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -112,20 +112,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bce43259c3ac8c04c91119aa5113cb34
-      internalID: -277429670
+      spriteID: 1208a6dcb87799f4199108a516387b0a
+      internalID: -1718680558
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockDokkaebi_Throw_1
+      name: FireDokkaebi_Walk_1
       rect:
         serializedVersion: 2
-        x: 293
-        y: 794
-        width: 293
-        height: 396
+        x: 440
+        y: 893
+        width: 440
+        height: 297
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,42 +134,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54d7fbc860fa8b94e8ef6e8e030b9f91
-      internalID: -1659801887
+      spriteID: 301b33ebb8d0abe459713dd6a728780b
+      internalID: 317133679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockDokkaebi_Throw_2
-      rect:
-        serializedVersion: 2
-        x: 586
-        y: 794
-        width: 293
-        height: 396
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e556c769e2aa28d42b5a620494440c80
-      internalID: -1257018501
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RockDokkaebi_Throw_3
+      name: FireDokkaebi_Walk_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 398
-        width: 293
-        height: 396
+        y: 596
+        width: 440
+        height: 297
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5005d5f905c35e647ab12834d8978f18
-      internalID: -1963247425
+      spriteID: efa108299fc38e9419a1aea65be4bfe1
+      internalID: -1597093841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockDokkaebi_Throw_4
+      name: FireDokkaebi_Walk_3
       rect:
         serializedVersion: 2
-        x: 293
-        y: 398
-        width: 293
-        height: 396
+        x: 440
+        y: 596
+        width: 440
+        height: 297
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +178,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81e81962dab6d02478e4c07bd83355f4
-      internalID: 1811652115
+      spriteID: a40713d8eff67af4d8a48bc68bdec63c
+      internalID: -1671165515
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockDokkaebi_Throw_5
+      name: FireDokkaebi_Walk_4
       rect:
         serializedVersion: 2
-        x: 586
-        y: 398
-        width: 293
-        height: 396
+        x: 0
+        y: 299
+        width: 440
+        height: 297
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,20 +200,42 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d5ab959604f707246ba7adb6ba35582a
-      internalID: -1767481124
+      spriteID: c2631833d0fe87c48bf56ba09f90974b
+      internalID: -284625928
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockDokkaebi_Throw_6
+      name: FireDokkaebi_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 299
+        width: 440
+        height: 297
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39abf9a3be7a3dc48a8f28a8305a7e05
+      internalID: 690781687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireDokkaebi_Walk_6
       rect:
         serializedVersion: 2
         x: 0
         y: 2
-        width: 293
-        height: 396
+        width: 440
+        height: 297
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,20 +244,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53ccceb738b46f543ab5184fb5b41b29
-      internalID: -1099180210
+      spriteID: bbb20b8e74fc83e488a92973bd946bfe
+      internalID: -1174098613
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockDokkaebi_Throw_7
+      name: FireDokkaebi_Walk_7
       rect:
         serializedVersion: 2
-        x: 293
+        x: 440
         y: 2
-        width: 293
-        height: 396
+        width: 440
+        height: 297
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,30 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce7975a8c1138cc44853e949926bb163
-      internalID: -939993923
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RockDokkaebi_Throw_8
-      rect:
-        serializedVersion: 2
-        x: 586
-        y: 2
-        width: 293
-        height: 396
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: db6a2d7baf36439408bcc5d102c79a08
-      internalID: 1197706363
+      spriteID: 0fc36756cc5a5b14584eaeae608a946e
+      internalID: 1995419699
       vertices: []
       indices: 
       edges: []
@@ -298,7 +276,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 174d4caedba66304eacb96b159c75d4e
+    spriteID: a8f9121a3403b5041a1da03a9eb67058
     internalID: 0
     vertices: []
     indices: 
@@ -308,17 +286,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":3.0,"y":3.0},"gridSpriteSize":{"x":293.0,"y":396.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":4.0},"gridSpriteSize":{"x":440.0,"y":297.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      RockDokkaebi_Throw_0: -277429670
-      RockDokkaebi_Throw_1: -1659801887
-      RockDokkaebi_Throw_2: -1257018501
-      RockDokkaebi_Throw_3: -1963247425
-      RockDokkaebi_Throw_4: 1811652115
-      RockDokkaebi_Throw_5: -1767481124
-      RockDokkaebi_Throw_6: -1099180210
-      RockDokkaebi_Throw_7: -939993923
-      RockDokkaebi_Throw_8: 1197706363
+      FireDokkaebi_Walk_0: -1718680558
+      FireDokkaebi_Walk_1: 317133679
+      FireDokkaebi_Walk_2: -1597093841
+      FireDokkaebi_Walk_3: -1671165515
+      FireDokkaebi_Walk_4: -284625928
+      FireDokkaebi_Walk_5: 690781687
+      FireDokkaebi_Walk_6: -1174098613
+      FireDokkaebi_Walk_7: 1995419699
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
