@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
 {
     public delegate void ShotArrow(Vector2 position, Vector2 direction);
     public ShotArrow shotArrow;
-    public enum HwandoType {Guard, Reflection }
 
     [Header("Movement Settings")]
     public float moveSpeed = 5.0f;
@@ -45,7 +44,6 @@ public class PlayerController : MonoBehaviour
     private bool canDummy = true;
 
     [Header("Hwando Settings")]
-    public HwandoType hwandoType = HwandoType.Guard; // To do: 삭제 예정
     private Guard guard;
     private Reflection reflection;
     private bool activateHwando = false;
@@ -81,27 +79,26 @@ public class PlayerController : MonoBehaviour
     void InitInputSet()
     {
         controls = InputManager.instance.controls;
-
         controls.Enable();
     }
 
     private void OnEnable()
     {
-        InputManager.instance.controls.Player.ArrowCharge.started += OnArrowStarted;
-        InputManager.instance.controls.Player.ArrowCharge.canceled += OnArrowCanceled;
-        InputManager.instance.controls.Player.Hwando.started += OnHwandoStarted;
-        InputManager.instance.controls.Player.Dummy.started += OnDummyStarted;
-        InputManager.instance.controls.Player.Dash.started += OnDashStarted;
+        controls.Player.ArrowCharge.started += OnArrowStarted;
+        controls.Player.ArrowCharge.canceled += OnArrowCanceled;
+        controls.Player.Hwando.started += OnHwandoStarted;
+        controls.Player.Dummy.started += OnDummyStarted;
+        controls.Player.Dash.started += OnDashStarted;
         
     }
 
     private void OnDisable()
     {
-        InputManager.instance.controls.Player.ArrowCharge.started -= OnArrowStarted;
-        InputManager.instance.controls.Player.ArrowCharge.canceled -= OnArrowCanceled;
-        InputManager.instance.controls.Player.Hwando.started -= OnHwandoStarted;
-        InputManager.instance.controls.Player.Dummy.started -= OnDummyStarted;
-        InputManager.instance.controls.Player.Dash.started -= OnDashStarted;
+        controls.Player.ArrowCharge.started -= OnArrowStarted;
+        controls.Player.ArrowCharge.canceled -= OnArrowCanceled;
+        controls.Player.Hwando.started -= OnHwandoStarted;
+        controls.Player.Dummy.started -= OnDummyStarted;
+        controls.Player.Dash.started -= OnDashStarted;
     }
 
     void InitSkillSet()

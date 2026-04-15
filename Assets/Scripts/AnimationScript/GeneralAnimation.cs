@@ -13,9 +13,30 @@ public class GeneralAnimation : MonoBehaviour
         controller = parentObject.GetComponent<PlayerController>();
 
         animator = GetComponent<Animator>();
+
+        if (animator != null && controller != null)
+        {
+            Reflection reflection = controller.GetComponent<Reflection>();
+            if (reflection != null)
+            {
+                reflection.activateReflection += PlayReflectionAnimation;
+            }
+        }
     }
 
-    
+    private void OnDisable()
+    {
+        if (animator != null && controller != null)
+        {
+            Reflection reflection = controller.GetComponent<Reflection>();
+            if (reflection != null)
+            {
+                reflection.activateReflection -= PlayReflectionAnimation;
+            }
+        }
+    }
+
+
     void Update()
     {
         if (!GameManager.instance.isGameActive)
@@ -28,6 +49,14 @@ public class GeneralAnimation : MonoBehaviour
         else
         {
             animator.SetBool(animArrowKey, false);
+        }
+    }
+
+    void PlayReflectionAnimation()
+    {
+        if(animator != null)
+        {
+            animator.CrossFade("Reflection", 0.1f);
         }
     }
 }
