@@ -7,10 +7,28 @@ public class EnemyScatterAttack : EnemyAttackBase
     public int bulletCount = 2;
     public float spreadAngle = 45f;
 
+    public bool playAnimation = false;
+
     public override void Attack()
     {
         player = GetPlayerTarget();
 
+        if (!playAnimation)
+        {
+            SpwanObject();
+        }
+        else
+        {
+            Animator animator = enemy.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.CrossFade("Attack", 0.1f);
+            }
+        }
+    }
+
+    public void SpwanObject()
+    {
         if (player != null)
         {
             Vector2 dirToPlayer = (player.position - transform.position).normalized;
