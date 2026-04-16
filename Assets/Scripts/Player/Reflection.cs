@@ -19,6 +19,8 @@ public class Reflection : MonoBehaviour
             return false;
 
         currentHwando = Instantiate(hwando, transform.position, transform.rotation);
+        currentHwando.transform.SetParent(transform, true);
+
         activateReflection?.Invoke();
 
         StartCoroutine(Slash());

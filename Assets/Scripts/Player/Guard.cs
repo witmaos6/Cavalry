@@ -4,7 +4,9 @@ using UnityEngine.InputSystem;
 
 public class Guard : MonoBehaviour
 {
-    // Use Player and Enemy
+    public delegate void Activate(bool isActive);
+    public Activate activateGuard;
+
     public GameObject shield;
     public float guardTime = 0.5f;
     public float offset = 1.0f;
@@ -43,6 +45,8 @@ public class Guard : MonoBehaviour
 
     IEnumerator ShieldLifetime()
     {
+        activateGuard?.Invoke(true);
+
         yield return new WaitForSeconds(guardTime);
         Destroy(currentShield);
 
@@ -51,6 +55,7 @@ public class Guard : MonoBehaviour
         {
             playerController.ResetActivateHwando();
         }
+        activateGuard?.Invoke(false);
     }
 
     void RotateShieldTowardMouse()

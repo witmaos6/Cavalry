@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5883763922886387835
 Transform:
   m_ObjectHideFlags: 0
@@ -361,7 +361,6 @@ MonoBehaviour:
   dashCooldown: 1
   dummyCooldown: 3
   dummy: {fileID: 1660226635801135379, guid: 09ba8a9f28e757b4fae35a566a19c6cf, type: 3}
-  hwandoType: 1
   hp: 10
   hpSlider: {fileID: 0}
 --- !u!50 &7325898536455073328
@@ -405,7 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Guard
   shield: {fileID: 3707197127480617344, guid: 7a8f0308c7bb60840ab3dee568208b29, type: 3}
   guardTime: 1
-  offset: 2
+  offset: 1
   guardCoolDown: 3
 --- !u!114 &7939222261751852942
 MonoBehaviour:

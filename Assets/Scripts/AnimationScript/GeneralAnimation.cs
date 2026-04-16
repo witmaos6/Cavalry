@@ -21,6 +21,12 @@ public class GeneralAnimation : MonoBehaviour
             {
                 reflection.activateReflection += PlayReflectionAnimation;
             }
+
+            Guard guard = controller.GetComponent<Guard>();
+            if(guard != null)
+            {
+                guard.activateGuard += PlayGuardAnimation;
+            }
         }
     }
 
@@ -32,6 +38,12 @@ public class GeneralAnimation : MonoBehaviour
             if (reflection != null)
             {
                 reflection.activateReflection -= PlayReflectionAnimation;
+            }
+
+            Guard guard = controller.GetComponent<Guard>();
+            if (guard != null)
+            {
+                guard.activateGuard -= PlayGuardAnimation;
             }
         }
     }
@@ -57,6 +69,14 @@ public class GeneralAnimation : MonoBehaviour
         if(animator != null)
         {
             animator.CrossFade("Reflection", 0.1f);
+        }
+    }
+
+    void PlayGuardAnimation(bool isActive)
+    {
+        if(animator != null)
+        {
+            animator.SetBool("Guard", isActive);
         }
     }
 }
