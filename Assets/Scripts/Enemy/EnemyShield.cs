@@ -11,6 +11,8 @@ public class EnemyShield : EnemyUtilityBase
     Rigidbody2D rb;
     // To do : 기획 변경 필요할 수 있음
 
+    public bool playAnimation = false;
+
     private void Start()
     {
         player = GetPlayerTarget();
@@ -107,6 +109,16 @@ public class EnemyShield : EnemyUtilityBase
 
         Vector2 dir = (movePoint - (Vector2)transform.position).normalized;
         rb.AddForce(dir * interceptSpeed, ForceMode2D.Impulse);
+
+        Enemy enemy = GetComponent<Enemy>();
+        if(enemy != null)
+        {
+            Animator animator = enemy.GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.CrossFade("Guard", 0.1f);
+            }
+        }
 
         yield return new WaitForSeconds(0.15f);
         rb.linearVelocity *= 0.1f;

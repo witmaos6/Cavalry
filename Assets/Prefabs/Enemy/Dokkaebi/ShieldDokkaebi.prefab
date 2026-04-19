@@ -15,8 +15,9 @@ GameObject:
   - component: {fileID: -4130517008043816102}
   - component: {fileID: -8365548945884156807}
   - component: {fileID: 7123539451819455055}
+  - component: {fileID: -8882212523236932071}
   m_Layer: 6
-  m_Name: GuardianEnemy
+  m_Name: ShieldDokkaebi
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +66,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2b304efc30f0def44bc1e284be0b658f, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,7 +89,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 379375187, guid: 7069a7918a9b124409687c2ac379c4c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,6 +115,7 @@ MonoBehaviour:
   moveSpeed: 6
   attackRate: 1
   damage: 1
+  angleOffset: -90
 --- !u!61 &3155647267867605682
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -148,17 +150,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.01179862, y: 0.25072157}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 4.4, y: 2.97}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.1326714, y: 1.607631}
   m_EdgeRadius: 0
 --- !u!50 &-4130517008043816102
 Rigidbody2D:
@@ -202,9 +204,11 @@ MonoBehaviour:
   weight: 1
   damage: 1
   attackDistance: 2
+  attackStateName: Attack
   weaponTransform: {fileID: 3135919421786545076}
   stabDistance: 1
   stabSpeed: 10
+  playAnimation: 0
 --- !u!114 &7123539451819455055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +227,29 @@ MonoBehaviour:
   interceptSpeed: 15
   shieldDuration: 0.5
   protectRange: 10
+  playAnimation: 1
+--- !u!95 &-8882212523236932071
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1881503341338650333}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4adca6af6bb6a9148985e5fd454b206f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4782864919307818174
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +277,7 @@ Transform:
   m_GameObject: {fileID: 4782864919307818174}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.015, y: 1.059, z: 0}
+  m_LocalPosition: {x: -0.032, y: -1.112, z: 0}
   m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -387,7 +414,7 @@ Transform:
   m_GameObject: {fileID: 5597000408630790583}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.58, y: 0.4, z: 0}
+  m_LocalPosition: {x: 0.946, y: -0.78, z: 0}
   m_LocalScale: {x: 0.3, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
