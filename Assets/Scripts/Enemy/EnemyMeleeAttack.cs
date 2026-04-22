@@ -26,7 +26,7 @@ public class EnemyMeleeAttack : EnemyAttackBase
                 Animator animator = enemy.GetComponent<Animator>();
                 if(animator != null )
                 {
-                    animator.CrossFade("Attack", 0.1f);
+                    animator.CrossFade("MeleeAttack", 0.1f);
                 }
             }
         }

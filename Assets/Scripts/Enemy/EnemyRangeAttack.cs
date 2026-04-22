@@ -20,7 +20,7 @@ public class EnemyRangeAttack : EnemyAttackBase
                 Animator animator = enemy.GetComponent<Animator>();
                 if (animator != null)
                 {
-                    animator.CrossFade("Attack", 0.1f);
+                    animator.CrossFade("RangeAttack", 0.1f);
                 }
             }
         }

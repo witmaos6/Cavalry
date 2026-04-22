@@ -5,6 +5,8 @@ public class EnemyEvasion : EnemyUtilityBase
 {
     public float evasionDistance = 5f;
 
+    public bool playAnimation = false;
+
     private void Start()
     {
         player = GetPlayerTarget();
@@ -43,6 +45,18 @@ public class EnemyEvasion : EnemyUtilityBase
         if (rb == null)
             return;
 
+        Enemy enemy = GetComponent<Enemy>();
+        if (enemy != null && enemy.IsAttacking())
+        {
+            return;
+        }
+
+        Animator animator = GetComponent<Animator>();
+        if (animator != null)
+        {    
+            animator.CrossFade("Evasion", 0.1f);
+        }
+
         Vector2 perpendicularLeft = new Vector2(-arrowDir.y, arrowDir.x);
         Vector2 perpendicularRight = new Vector2(arrowDir.y, arrowDir.x);
 
@@ -56,7 +70,6 @@ public class EnemyEvasion : EnemyUtilityBase
 
         StartCoroutine(CoolDown());
 
-        Enemy enemy = GetComponent<Enemy>();
         if (enemy != null)
         {
             enemy.CalledRunningUtility();

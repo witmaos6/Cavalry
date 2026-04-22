@@ -22,7 +22,7 @@ public class EnemyScatterAttack : EnemyAttackBase
             Animator animator = enemy.GetComponent<Animator>();
             if (animator != null)
             {
-                animator.CrossFade("Attack", 0.1f);
+                animator.CrossFade("ScatterAttack", 0.1f);
             }
         }
     }

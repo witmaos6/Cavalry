@@ -185,4 +185,9 @@ public class Enemy : MonoBehaviour
     {
         isAttacking = setAttacking;
     }
+
+    public bool IsAttacking()
+    {
+        return isAttacking;
+    }
 }

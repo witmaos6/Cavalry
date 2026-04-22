@@ -21,7 +21,11 @@ public class HorseAnimation : MonoBehaviour
     void Update()
     {
         if (!GameManager.instance.isGameActive)
+        {
+            animator.SetFloat(animSpeedKey, 0f);
             return;
+        }
+            
 
         float currentSpeed = controller.GetCurrentSpeed();
         animator.SetFloat(animSpeedKey, currentSpeed / maxSpeed);
