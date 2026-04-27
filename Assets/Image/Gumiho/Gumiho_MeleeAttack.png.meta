@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3eb1b20bb499fb74ca0b3202b1426fd9
+guid: 88cd1d26be5e5d94b991b674074433d8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,101 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gumiho_RangeAttack_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 376
-        width: 345
-        height: 376
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8b77be65f74a6e94e9208f71ae790a79
-      internalID: -1297882421
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gumiho_RangeAttack_1
-      rect:
-        serializedVersion: 2
-        x: 345
-        y: 376
-        width: 345
-        height: 376
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0683ecf1091b0054aa4c0b6aa5bed727
-      internalID: 592873736
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gumiho_RangeAttack_2
-      rect:
-        serializedVersion: 2
-        x: 690
-        y: 376
-        width: 345
-        height: 376
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8f287077b5c3a874886c2d2063f3630b
-      internalID: 1069792149
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gumiho_RangeAttack_3
-      rect:
-        serializedVersion: 2
-        x: 1035
-        y: 376
-        width: 345
-        height: 376
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ec30fb5929e65a441979fd51d1fd712c
-      internalID: 433427164
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gumiho_RangeAttack_4
+      name: Gumiho_MeleeAttack_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 345
-        height: 376
+        width: 300
+        height: 752
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +112,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a401a6dd32cef9540a6c75f0d6be7fbd
-      internalID: 1462317060
+      spriteID: 30371b2e450e4ea4ea41415087d7e574
+      internalID: -619298851
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gumiho_RangeAttack_5
+      name: Gumiho_MeleeAttack_1
       rect:
         serializedVersion: 2
-        x: 345
+        x: 298
         y: 0
-        width: 345
-        height: 376
+        width: 298
+        height: 752
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,20 +134,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba14fd5ade755834b82af02ae87f4674
-      internalID: 1142762259
+      spriteID: e8077532b3a7c904dae98e9066216811
+      internalID: 410483410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gumiho_RangeAttack_6
+      name: Gumiho_MeleeAttack_2
       rect:
         serializedVersion: 2
-        x: 690
+        x: 588
         y: 0
-        width: 345
-        height: 376
+        width: 229
+        height: 752
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,20 +156,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ca8c96d2d90b7d46b7da34d5808af99
-      internalID: -1379029929
+      spriteID: 15b23063b7205514bb36b4a05648e536
+      internalID: 798892532
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gumiho_RangeAttack_7
+      name: Gumiho_MeleeAttack_3
       rect:
         serializedVersion: 2
-        x: 1035
+        x: 841
         y: 0
-        width: 345
-        height: 376
+        width: 222
+        height: 752
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,8 +178,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2602a4e8b7ce2b140ba27412db7a223f
-      internalID: -193255004
+      spriteID: a2d70a59cb293fb41884942d93178565
+      internalID: -506162334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gumiho_MeleeAttack_4
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 0
+        width: 305
+        height: 752
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71b837592b67dab44810eded91a66b4b
+      internalID: -987158060
       vertices: []
       indices: 
       edges: []
@@ -276,7 +210,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b3e9e9c7b1b3a6446adcea2650ed69eb
+    spriteID: a5b48d191c7f75c4bae6b7eaf618483f
     internalID: 0
     vertices: []
     indices: 
@@ -286,16 +220,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":2.0},"gridSpriteSize":{"x":345.0,"y":376.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":5.0,"y":1.0},"gridSpriteSize":{"x":276.0,"y":752.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Gumiho_RangeAttack_0: -1297882421
-      Gumiho_RangeAttack_1: 592873736
-      Gumiho_RangeAttack_2: 1069792149
-      Gumiho_RangeAttack_3: 433427164
-      Gumiho_RangeAttack_4: 1462317060
-      Gumiho_RangeAttack_5: 1142762259
-      Gumiho_RangeAttack_6: -1379029929
-      Gumiho_RangeAttack_7: -193255004
+      Gumiho_MeleeAttack_0: -619298851
+      Gumiho_MeleeAttack_1: 410483410
+      Gumiho_MeleeAttack_2: 798892532
+      Gumiho_MeleeAttack_3: -506162334
+      Gumiho_MeleeAttack_4: -987158060
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

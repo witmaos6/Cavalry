@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Gumiho_RangeAttack
+  m_Name: Gumiho_PredictiveAttack
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -22,8 +22,12 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: -1168712198, guid: 5ebc2e3d6ecc4ac4d8b6e6d47bd62ec4, type: 3}
-    - time: 0.6666667
-      value: {fileID: -1168712198, guid: 5ebc2e3d6ecc4ac4d8b6e6d47bd62ec4, type: 3}
+    - time: 0.16666667
+      value: {fileID: 1069792149, guid: 3eb1b20bb499fb74ca0b3202b1426fd9, type: 3}
+    - time: 0.33333334
+      value: {fileID: 433427164, guid: 3eb1b20bb499fb74ca0b3202b1426fd9, type: 3}
+    - time: 0.5
+      value: {fileID: 433427164, guid: 3eb1b20bb499fb74ca0b3202b1426fd9, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -47,13 +51,15 @@ AnimationClip:
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
     - {fileID: -1168712198, guid: 5ebc2e3d6ecc4ac4d8b6e6d47bd62ec4, type: 3}
-    - {fileID: -1168712198, guid: 5ebc2e3d6ecc4ac4d8b6e6d47bd62ec4, type: 3}
+    - {fileID: 1069792149, guid: 3eb1b20bb499fb74ca0b3202b1426fd9, type: 3}
+    - {fileID: 433427164, guid: 3eb1b20bb499fb74ca0b3202b1426fd9, type: 3}
+    - {fileID: 433427164, guid: 3eb1b20bb499fb74ca0b3202b1426fd9, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.68333334
+    m_StopTime: 0.51666665
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
