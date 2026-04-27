@@ -51,9 +51,19 @@ public class EnemyArtilleryAttack : EnemyAttackBase
             Vector2 randomOffset = Random.insideUnitCircle * targetRandomRadius;
             Vector3 targetPosition = player.position + (Vector3)randomOffset;
 
+            if(warningInstance != null)
+            {
+                Destroy(warningInstance);
+            }
+
             warningInstance = Instantiate(warning, targetPosition, Quaternion.identity);
 
             warningInstance.transform.localScale = Vector3.one * explosionRadius * 2f;
+            
+            if(enemy != null)
+            {
+                enemy.dead += CompleteThrow;
+            }
         }
     }
 

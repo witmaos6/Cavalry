@@ -167,8 +167,15 @@ public class Enemy : MonoBehaviour
                 dead.Invoke();
                 dead = null;
             }
-            Destroy(gameObject);
+
+            StartCoroutine(Death());
         }
+    }
+
+    IEnumerator Death()
+    {
+        yield return null;
+        Destroy(gameObject);
     }
 
     public Transform GetCurrentTarget()
