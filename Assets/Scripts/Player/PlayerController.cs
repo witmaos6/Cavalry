@@ -1,11 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.UI;
 using static GameData;
 
@@ -68,6 +65,8 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+
         guard = GetComponent<Guard>();
         reflection = GetComponent<Reflection>();
 
@@ -193,13 +192,13 @@ public class PlayerController : MonoBehaviour
         }
         if (!isDead)
         {
-            Movement();
+            CalculateMovementLogic();
 
             ChargeArrow();   
         }
     }
 
-    void Movement()
+    void CalculateMovementLogic()
     {
         Vector2 inputVec = controls.Player.Move.ReadValue<Vector2>();
 
@@ -223,7 +222,11 @@ public class PlayerController : MonoBehaviour
         float rotationAngle = Mathf.Atan2(lastMoveDir.y, lastMoveDir.x) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.Euler(0, 0, rotationAngle - 90f);
-        transform.position += (Vector3)(lastMoveDir.normalized * currentSpeed * Time.deltaTime);
+    }
+
+    private void FixedUpdate()
+    {
+        rb.linearVelocity = lastMoveDir.normalized * currentSpeed;
     }
 
     float TurningPanelty(float angleDiff)

@@ -52,8 +52,9 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject hitParticleInstance = Instantiate(hitParticlePrefab, transform.position, Quaternion.identity);
-        if(hitParticleInstance != null)
+        Vector3 spawnPosition = new Vector3(collision.transform.position.x, collision.transform.position.y, collision.transform.position.z - 1.0f);
+        GameObject hitParticleInstance = Instantiate(hitParticlePrefab, spawnPosition, Quaternion.identity);
+        if (hitParticleInstance != null)
         {
             Destroy(hitParticleInstance, 0.5f);
         }
