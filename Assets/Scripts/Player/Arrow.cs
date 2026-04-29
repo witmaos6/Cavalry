@@ -14,6 +14,8 @@ public class Arrow : MonoBehaviour
     private float ownerAttackPower = 0f;
     private int hitCount = 0;
 
+    public GameObject hitParticlePrefab;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -50,6 +52,12 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        GameObject hitParticleInstance = Instantiate(hitParticlePrefab, transform.position, Quaternion.identity);
+        if(hitParticleInstance != null)
+        {
+            Destroy(hitParticleInstance, 0.5f);
+        }
+
         if (collision.CompareTag("EnemyBullet"))
         {
             if(playerController != null)
