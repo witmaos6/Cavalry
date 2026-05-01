@@ -21,11 +21,11 @@ public class EnemyRush : EnemyUtilityBase
         if (rb == null)
             return;
 
-        Vector3 rushDir = transform.up;
+        Vector3 rushDir = (player.transform.position - transform.position).normalized;
         Vector2 rushVelocity = rushDir * rushDistance;
 
         rb.linearVelocity = Vector2.zero;
-        rb.AddForce(transform.up * rushDistance, ForceMode2D.Impulse);
+        rb.AddForce(rushDir * rushDistance, ForceMode2D.Impulse);
 
         StartCoroutine(CoolDown());
     }

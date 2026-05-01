@@ -52,7 +52,7 @@ public class EnemyEvasion : EnemyUtilityBase
         }
 
         Animator animator = GetComponent<Animator>();
-        if (animator != null)
+        if (animator != null && playAnimation)
         {    
             animator.CrossFade("Evasion", 0.1f);
         }
