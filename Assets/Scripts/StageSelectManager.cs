@@ -35,7 +35,7 @@ public class StageSelectManager : MonoBehaviour
             TMP_Text buttonText = stageButton.GetComponentInChildren<TMP_Text>();
             if(buttonText != null )
             {
-                buttonText.text = $"STAGE {i}";
+                buttonText.text = $"스테이지 {i}";
             }
 
             int stageIndex = i;

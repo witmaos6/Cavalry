@@ -57,7 +57,7 @@ public class PlayerSkillManager : MonoBehaviour
         InitSkillSet();
         if(remainSkillPoint != null)
         {
-            remainSkillPoint.text = "Remain Point: " + gameData.remainPoint;
+            remainSkillPoint.text = "남은 스킬 포인트: " + gameData.remainPoint;
         }
     }
 
@@ -310,7 +310,7 @@ public class PlayerSkillManager : MonoBehaviour
     {
         if(remainSkillPoint != null)
         {
-            remainSkillPoint.text = "Remain Point: " + gameData.remainPoint;
+            remainSkillPoint.text = "남은 스킬 포인트: " + gameData.remainPoint;
         }
     }
 }
