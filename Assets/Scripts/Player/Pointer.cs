@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[DefaultExecutionOrder(100)]
 public class Pointer : MonoBehaviour
 {
     private SpriteRenderer sr;
@@ -22,13 +23,20 @@ public class Pointer : MonoBehaviour
         cam = Camera.main;
     }
 
+    private void OnRenderObject()
+    {
+        
+    }
+
     void LateUpdate()
     {
         if (!GameManager.instance.isGameActive)
             return;
-        
+
         if (cam == null)
-            return;
+        {
+            cam = Camera.main;
+        }
 
         if (Mouse.current == null)
             return;
@@ -40,7 +48,7 @@ public class Pointer : MonoBehaviour
 
         Vector3 mouseWorldPos = cam.ScreenToWorldPoint(mouseScreenPos);
         mouseWorldPos.z = 0f;
-        transform.position = mouseWorldPos;
+        transform.localPosition = transform.parent.InverseTransformPoint(mouseWorldPos);
     }
 
     public void SetColor(float chargeRatio, bool isFull)
