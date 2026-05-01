@@ -10,12 +10,15 @@ public class HomeUIManager : MonoBehaviour
     [Header("Panels")]
     public GameObject mainMenuPanel;
     public GameObject customKeyPanel;
+    public GameObject guidePanel;
 
     [Header("Buttons")]
+    public Button guideOpenButton;
     public Button newGameButton;
     public Button continueGameButton;
     public Button keySettingButton;
     public Button goToHome;
+    public Button goToHomeFromGuidePanel;
     public Button quitGame;
 
     private void Awake()
@@ -27,13 +30,22 @@ public class HomeUIManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(true);
         customKeyPanel.SetActive(false);
+        guidePanel.SetActive(false);
 
+        guideOpenButton.onClick.AddListener(OnGuideOpenClicked);
         newGameButton.onClick.AddListener(OnNewGameClicked);
         continueGameButton.onClick.AddListener(OnContinueGameClicked);
         keySettingButton.onClick.AddListener(ToggleCustomKeyPanel);
         goToHome.onClick.AddListener(ToggleMainMenuPanel);
+        goToHomeFromGuidePanel.onClick.AddListener(ToggleMainMenuPanel);
 
         quitGame.onClick.AddListener(QuitGame);
+    }
+
+    void OnGuideOpenClicked()
+    {
+        mainMenuPanel.SetActive(false);
+        guidePanel.SetActive(true);
     }
 
     void OnNewGameClicked()
@@ -64,6 +76,7 @@ public class HomeUIManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(true);
         customKeyPanel.SetActive(false);
+        guidePanel.SetActive(false);
     }
 
     void ToMainLevel()
