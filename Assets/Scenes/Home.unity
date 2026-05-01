@@ -2295,8 +2295,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 150}
-  m_SizeDelta: {x: 714.392, y: 80.7717}
+  m_AnchoredPosition: {x: 0, y: 160}
+  m_SizeDelta: {x: 890.6556, y: 74.8568}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1289648690
 MonoBehaviour:
@@ -2318,12 +2318,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press the key you want to change.
-
-    ESC: Cancel'
+  m_text: "\uBC14\uAFB8\uACE0 \uC2F6\uC740 \uC2A4\uD0AC \uBC84\uD2BC\uC744 \uB204\uB978
+    \uB4A4 \uC6D0\uD558\uB294 \uD0A4\uB97C \uC785\uB825\uD558\uC138\uC694.\nESC:
+    Cancel"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 55005e72f2a23cb4ea7bb5386aa3123a, type: 2}
+  m_sharedMaterial: {fileID: 6697693728139046526, guid: 55005e72f2a23cb4ea7bb5386aa3123a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
