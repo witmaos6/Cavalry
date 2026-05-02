@@ -226,6 +226,11 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!GameManager.instance.isGameActive || isDead)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
         rb.linearVelocity = lastMoveDir.normalized * currentSpeed;
     }
 

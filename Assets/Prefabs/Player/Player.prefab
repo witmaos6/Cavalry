@@ -405,7 +405,7 @@ MonoBehaviour:
   shield: {fileID: 3707197127480617344, guid: 7a8f0308c7bb60840ab3dee568208b29, type: 3}
   guardTime: 1
   offset: 1
-  guardCoolDown: 3
+  guardCoolDown: 2
 --- !u!114 &7939222261751852942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reflection
   hwando: {fileID: 3707197127480617344, guid: 76f3859efa44fbd419dc02d048d8921e, type: 3}
-  reflectionCoolDown: 1
+  reflectionCoolDown: 2
   reflectionTime: 0.3
   offset: 2
 --- !u!114 &337531532672014946
@@ -669,7 +669,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
