@@ -353,7 +353,7 @@ public class PlayerController : MonoBehaviour
         if (!canDummy)
             return;
 
-        GameObject spawnedDummy = Instantiate(dummy, pointer.transform.position, pointer.transform.rotation);
+        GameObject spawnedDummy = Instantiate(dummy, pointer.transform.position, Quaternion.identity);
         if (spawnedDummy != null)
         {
             Dummy dummyComp = spawnedDummy.GetComponent<Dummy>();
