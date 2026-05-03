@@ -38,12 +38,14 @@ public class EnemyArtilleryShotBullet : MonoBehaviour
 
     void Move()
     {
-        transform.position += direction * speed * Time.deltaTime;
+        Vector3 moveStep = direction * speed * Time.deltaTime;
+        transform.position += moveStep;
 
-        // µµÂø ÆÇÁ¤
-        float distance = Vector3.Distance(transform.position, targetPosition);
-        if (distance <= arriveThreshold)
+        Vector3 toTarget = targetPosition - transform.position;
+        float dot = Vector3.Dot(direction, toTarget);
+        if (dot <= 0 || toTarget.magnitude <= arriveThreshold)
         {
+            transform.position = targetPosition;
             OnArrive();
         }
     }

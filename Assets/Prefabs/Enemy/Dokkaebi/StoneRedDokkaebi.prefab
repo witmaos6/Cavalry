@@ -206,6 +206,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 6754999010799585638, guid: 7a9c14d566b384c49947d8ce47ed609b, type: 3}
   preDelay: 0.1
   playAnimation: 1
+  indicator: {fileID: 1296778170677949213, guid: c6de8c0286fc7d64da9c33db2fe377ac, type: 3}
+  indicatorWidth: 0.1
+  indicatorUnitLength: 1
 --- !u!95 &4391240920268164235
 Animator:
   serializedVersion: 7

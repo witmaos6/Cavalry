@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class EnemyArtilleryAttack : EnemyAttackBase
@@ -7,6 +6,7 @@ public class EnemyArtilleryAttack : EnemyAttackBase
     
     public float targetRandomRadius = 2.0f;
     public float explosionRadius = 1.5f;
+    public float leadDistance = 2.0f;
 
     // 애니메이션 전용 멤버 변수
     public bool playAnimation = false;
@@ -48,8 +48,13 @@ public class EnemyArtilleryAttack : EnemyAttackBase
         player = GetPlayerTarget();
         if (player != null)
         {
+            Vector2 playerDirection = player.transform.up;
+            Vector3 predictedPosition = player.position + (Vector3)(playerDirection * leadDistance);
+
             Vector2 randomOffset = Random.insideUnitCircle * targetRandomRadius;
-            Vector3 targetPosition = player.position + (Vector3)randomOffset;
+            Vector3 targetPosition = predictedPosition + (Vector3)randomOffset;
+
+            Debug.DrawLine(transform.position, targetPosition, Color.red, 1.0f);
 
             if(warningInstance != null)
             {

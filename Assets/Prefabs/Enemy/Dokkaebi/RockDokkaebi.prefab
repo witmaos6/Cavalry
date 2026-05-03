@@ -151,7 +151,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.93, y: 3.96}
+    oldSize: {x: 3.9066668, y: 5.28}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -204,6 +204,8 @@ MonoBehaviour:
   attackStateName: Attack
   artilleryBullet: {fileID: 0}
   targetRandomRadius: 2
+  explosionRadius: 1.5
+  leadDistance: 5
   playAnimation: 1
   warning: {fileID: 280639966482328847, guid: c28fca6a07cb0fc44a310e31ce555751, type: 3}
   rock: {fileID: 1762050519403101565, guid: 596b30aff98700f49a59e5f55b9262a8, type: 3}
