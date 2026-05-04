@@ -32,8 +32,11 @@ public class PlayerController : MonoBehaviour
 
     [Header("Dash Settings")]
     public float dashAmount = 10.0f;
+    public float dashDuration = 0.12f;
     public float dashCooldown = 1.0f;
     private bool canDash = true;
+    private Vector2 dashVelocity = Vector2.zero;
+    private Coroutine dashMovementCoroutine;
 
     [Header("Dummy Settings")]
     public float dummyCooldown = 1.0f;
@@ -231,7 +234,7 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             return;
         }
-        rb.linearVelocity = lastMoveDir.normalized * currentSpeed;
+        rb.linearVelocity = lastMoveDir.normalized * currentSpeed + dashVelocity;
     }
 
     float TurningPanelty(float angleDiff)
@@ -328,9 +331,23 @@ public class PlayerController : MonoBehaviour
         if (!canDash)
             return;
 
-        rb.AddForce(transform.up * dashAmount, ForceMode2D.Impulse);
+        if (dashMovementCoroutine != null)
+        {
+            StopCoroutine(dashMovementCoroutine);
+            dashMovementCoroutine = null;
+        }
+
+        dashMovementCoroutine = StartCoroutine(DashMovement());
 
         StartCoroutine(DashCooldownTimer());
+    }
+
+    IEnumerator DashMovement()
+    {
+        dashVelocity = (Vector2)transform.up * dashAmount;
+        yield return new WaitForSeconds(dashDuration);
+        dashVelocity = Vector2.zero;
+        dashMovementCoroutine = null;
     }
 
     IEnumerator DashCooldownTimer()
