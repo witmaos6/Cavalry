@@ -39,8 +39,12 @@ public class SaveData : MonoBehaviour
     {
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(filePath, json);
-        Debug.Log("게임 저장 완료: " + json);
         // To do: 저장 완료 UI 생성
+    }
+
+    public bool ExistSaveFile()
+    {
+        return File.Exists(filePath);
     }
 
     public GameData LoadGame()
