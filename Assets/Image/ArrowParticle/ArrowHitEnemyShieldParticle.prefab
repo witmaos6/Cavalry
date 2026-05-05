@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9079983967813503695}
   - component: {fileID: 6391070240590641535}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: ArrowHitEnemyShieldParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4840,7 +4840,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2a5c9315897b207448aef1efb2ccec5c, type: 2}
+  - {fileID: 2100000, guid: 1e805218ed8a6e7419b461a765979340, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

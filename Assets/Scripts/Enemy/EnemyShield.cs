@@ -30,6 +30,11 @@ public class EnemyShield : EnemyUtilityBase
         {
             enemy.dead += Dead;
         }
+
+        if(shield != null)
+        {
+            shield.SetActive(false);
+        }
     }
     public override bool ActivateCondition()
     {

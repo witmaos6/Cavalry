@@ -15,6 +15,7 @@ public class Arrow : MonoBehaviour
     private int hitCount = 0;
 
     public GameObject hitParticlePrefab;
+    public GameObject blockParticlePrefab;
 
     private void Awake()
     {
@@ -52,15 +53,10 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Vector3 spawnPosition = new Vector3(collision.transform.position.x, collision.transform.position.y, collision.transform.position.z - 1.0f);
-        GameObject hitParticleInstance = Instantiate(hitParticlePrefab, spawnPosition, Quaternion.identity);
-        if (hitParticleInstance != null)
-        {
-            Destroy(hitParticleInstance, 0.5f);
-        }
-
         if (collision.CompareTag("EnemyBullet"))
         {
+            SpawnHitParticle(collision.transform.position);
+
             if(playerController != null)
             {
                 if(playerController.IsUnlockSkill(GameData.SkillID.OnemoreTimeShot))
@@ -78,6 +74,8 @@ public class Arrow : MonoBehaviour
         }
         else if(collision.CompareTag("Enemy"))
         {
+            SpawnHitParticle(collision.transform.position);
+
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if(enemy != null)
             {
@@ -107,10 +105,31 @@ public class Arrow : MonoBehaviour
         }
         else if(collision.CompareTag("EnemyShield"))
         {
-            if(!isFullCharge)
+            if (!isFullCharge)
             {
+                SpawnBlockParticle(collision.transform.position);
                 Destroy(gameObject);
             }
+        }
+    }
+
+    void SpawnHitParticle(Vector3 collisionPosition)
+    {
+        Vector3 spawnPosition = new Vector3(collisionPosition.x, collisionPosition.y, collisionPosition.z - 1.0f);
+        GameObject hitParticleInstance = Instantiate(hitParticlePrefab, spawnPosition, Quaternion.identity);
+        if (hitParticleInstance != null)
+        {
+            Destroy(hitParticleInstance, 0.5f);
+        }
+    }
+
+    void SpawnBlockParticle(Vector3 collisionPosition)
+    {
+        Vector3 spawnPosition = new Vector3(collisionPosition.x, collisionPosition.y, collisionPosition.z - 1.0f);
+        GameObject blockParticleInstance = Instantiate(blockParticlePrefab, spawnPosition, Quaternion.identity);
+        if (blockParticleInstance != null)
+        {
+            Destroy(blockParticleInstance, 0.5f);
         }
     }
 }

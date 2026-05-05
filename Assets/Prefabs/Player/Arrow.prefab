@@ -51,6 +51,7 @@ MonoBehaviour:
   baseLifeTime: 1
   owner: {fileID: 0}
   hitParticlePrefab: {fileID: 1669622433253185391, guid: 568f7ce031a750449a60043123038eb4, type: 3}
+  blockParticlePrefab: {fileID: 1669622433253185391, guid: a2895e327edb8664aa14eab812ac97ce, type: 3}
 --- !u!50 &-2426309684507030090
 Rigidbody2D:
   serializedVersion: 5
